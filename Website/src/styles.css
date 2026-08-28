@@ -1,0 +1,163 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Savour design system.
+ * Palette: crema base, warm espresso (Post-Coffee), deep matte burgundy
+ * (Post-Wine), charcoal contrast. All colors use oklch.
+ */
+
+@theme inline {
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-sans: "Karla", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-crema: var(--crema);
+  --color-espresso: var(--espresso);
+  --color-espresso-deep: var(--espresso-deep);
+  --color-wine: var(--wine);
+  --color-wine-deep: var(--wine-deep);
+  --color-charcoal: var(--charcoal);
+  --color-charcoal-soft: var(--charcoal-soft);
+  /* Ritual tokens — re-pointed by [data-variant] on the page wrapper */
+  --color-ritual: var(--ritual);
+  --color-ritual-deep: var(--ritual-deep);
+}
+
+:root {
+  --radius: 0.625rem;
+  /* Savour brand palette: light-brown tan base, deep maroon accent */
+  --crema: oklch(0.9 0.032 78);
+  --espresso: oklch(0.42 0.07 55);
+  --espresso-deep: oklch(0.32 0.055 50);
+  --wine: oklch(0.38 0.095 15);
+  --wine-deep: oklch(0.29 0.075 15);
+  --charcoal: oklch(0.22 0.012 50);
+  --charcoal-soft: oklch(0.3 0.014 50);
+  /* Semantic tokens */
+  --background: var(--crema);
+  --foreground: var(--charcoal);
+  --card: oklch(0.935 0.024 80);
+  --card-foreground: var(--charcoal);
+  --popover: oklch(0.935 0.024 80);
+  --popover-foreground: var(--charcoal);
+  --primary: var(--espresso);
+  --primary-foreground: var(--crema);
+  --secondary: oklch(0.855 0.036 76);
+  --secondary-foreground: var(--espresso-deep);
+  --muted: oklch(0.865 0.03 76);
+  --muted-foreground: oklch(0.46 0.028 55);
+  --accent: oklch(0.845 0.04 74);
+  --accent-foreground: var(--espresso-deep);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: var(--crema);
+  --border: oklch(0.775 0.038 72);
+  --input: oklch(0.775 0.038 72);
+  --ring: var(--espresso);
+  /* Ritual theming — neutral (charcoal) until a side is chosen */
+  --ritual: var(--charcoal);
+  --ritual-deep: oklch(0.17 0.01 50);
+}
+
+/* The whole page re-pours around the chosen ritual */
+[data-variant="coffee"] {
+  --ritual: var(--espresso);
+  --ritual-deep: var(--espresso-deep);
+}
+
+[data-variant="wine"] {
+  --ritual: var(--wine);
+  --ritual-deep: var(--wine-deep);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* Scroll-reveal primitives (toggled by useReveal) */
+@utility reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+@utility reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/*
+ * Hero seam mechanics. Both ritual photographs are fixed full-bleed layers;
+ * the top (coffee) layer is uncovered by a clip-path wipe — never resized.
+ * The reveal axis flips per breakpoint: vertical split on desktop (coffee
+ * left), horizontal split on mobile (coffee top).
+ */
+.seam-clip {
+  clip-path: inset(0 0 calc(100% - var(--split)) 0);
+  will-change: clip-path;
+}
+
+@media (min-width: 768px) {
+  .seam-clip {
+    clip-path: inset(0 calc(100% - var(--split)) 0 0);
+  }
+}
+
+/* Seam handle track — clamped so the grip never slides off-screen at rest
+   (mobile min clears the fixed header) */
+.seam-position {
+  top: clamp(6rem, var(--split), calc(100% - 2.5rem));
+}
+
+@media (min-width: 768px) {
+  .seam-position {
+    top: 0;
+    bottom: 0;
+    left: clamp(2.5rem, var(--split), calc(100% - 2.5rem));
+  }
+}
