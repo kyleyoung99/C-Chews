@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Savour — One chew after coffee and wine</title>
+<meta name="description" content="Savour is a swallowable chew taken in the thirty seconds after coffee or red wine. No rinse, no sink, one tin instead of a drawer full of workarounds.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../shared/base.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+
+  <!-- 1 ——————————————————————————— ANNOUNCEMENT BAR -->
+  <section class="announce" aria-label="Store announcements">
+    <div class="announce__inner">
+      <p class="announce__msg" data-announce-msg>Free shipping on orders over <span data-savour="freeShippingThreshold">&nbsp;</span>.</p>
+      <p class="announce__msg" data-announce-msg hidden><span data-savour="batchLabel">&nbsp;</span>: <span data-savour="priceLockCopy">&nbsp;</span></p>
+      <p class="announce__msg" data-announce-msg hidden><span data-savour="guaranteeDays">&nbsp;</span>-day money-back guarantee. Cancel anytime.</p>
+      <button type="button" class="announce__toggle" data-announce-toggle aria-pressed="false">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" data-announce-icon="pause"><path d="M10 5v14M14 5v14"/></svg>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" data-announce-icon="play" hidden><path d="M8 5l11 7-11 7V5z"/></svg>
+        <span class="sr-only" data-announce-toggle-label>Pause announcements</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- 2 ——————————————————————————— NAV (STICKY) -->
+  <section class="navbar" data-nav aria-label="Main navigation">
+    <nav class="navbar__inner">
+      <a class="wordmark" href="../../index.html">
+        <svg class="wordmark__mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v17"/></svg>
+        <span>Savour</span>
+      </a>
+
+      <ul class="navlinks" id="navlinks" data-navlinks>
+        <li><a href="#why">Why Savour</a></li>
+        <li><a href="#inside">What&rsquo;s Inside</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+
+      <div class="navbar__right">
+        <a class="btn btn--brand btn--sm" href="#pricing" data-waitlist-open>Subscribe &amp; Save</a>
+        <button type="button" class="navbar__menu" data-nav-toggle aria-expanded="false" aria-controls="navlinks">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <span class="sr-only">Menu</span>
+        </button>
+      </div>
+    </nav>
+  </section>
+
+</header>
+
+<main id="main">
+
+  <!-- 3 ——————————————————————————— HERO -->
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="wrap hero__grid">
+      <div class="hero__copy">
+        <p class="eyebrow">After coffee. After wine.</p>
+        <h1 id="hero-h">One chew after <em>coffee</em> and wine.</h1>
+        <p class="lede">A swallowable tablet, taken in the thirty seconds after your last sip, designed to help lift what coffee and wine leave behind.</p>
+        <p class="cta-row"><a class="btn btn--brand" href="#pricing" data-waitlist-open>Subscribe &amp; Save</a></p>
+        <p class="risk">Cancel anytime. <span data-savour="guaranteeDays">&nbsp;</span>-day money-back guarantee.</p>
+
+        <ul class="trust trust--compact">
+          <li class="trust__item">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3v11"/><path d="M8 10l4 4 4-4"/><path d="M5 18.5h14"/></svg>
+            <span>Swallowable</span>
+          </li>
+          <li class="trust__item">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3.5s5 5.4 5 8.9a5 5 0 0 1-10 0c0-3.5 5-8.9 5-8.9z"/><path d="M4 20L20 4"/></svg>
+            <span>No rinse</span>
+          </li>
+          <li class="trust__item">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2"/><path d="M9.5 2.5h5"/></svg>
+            <span>About 30 seconds</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- HERO IMAGE: the tin held between thumb and forefinger at a café table, warm morning light raking from the left, shallow depth of field, espresso cup soft in the background, studio-clean retouching, no hands beyond the wrist. -->
+      <figure class="hero__media">
+        <div class="media media--tin" role="img" aria-label="Illustration of the Savour pocket tin, open, with a single chew beside it.">
+          <svg viewBox="0 0 320 260" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <ellipse cx="150" cy="112" rx="86" ry="34"/>
+            <path d="M64 112v26c0 18.8 38.5 34 86 34s86-15.2 86-34v-26"/>
+            <ellipse cx="150" cy="112" rx="62" ry="24"/>
+            <path d="M150 88v48M126 112h48"/>
+            <circle cx="248" cy="176" r="22"/>
+            <path d="M240 176h16"/>
+            <path d="M60 196h200"/>
+          </svg>
+          <p class="media__note">Placeholder art — final hero is photography.</p>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 4 ——————————————————————————— TRUST STRIP -->
+  <section class="band band--sand strip" aria-label="Product basics">
+    <div class="wrap">
+      <ul class="trust">
+        <li class="trust__item">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3v11"/><path d="M8 10l4 4 4-4"/><path d="M5 18.5h14"/></svg>
+          <span>Swallowable</span>
+        </li>
+        <li class="trust__item">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3.5s5 5.4 5 8.9a5 5 0 0 1-10 0c0-3.5 5-8.9 5-8.9z"/><path d="M4 20L20 4"/></svg>
+          <span>No rinse</span>
+        </li>
+        <li class="trust__item">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2"/><path d="M9.5 2.5h5"/></svg>
+          <span>About 30 seconds</span>
+        </li>
+        <li class="trust__item">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="7.5" width="17" height="11" rx="3"/><path d="M8 7.5V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1.5"/></svg>
+          <span>Pocket tin</span>
+        </li>
+        <li class="trust__item">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 4c0 7-4 11-8.5 11S4 12 4 8"/><path d="M4 20c2-6 6-9 11-10"/></svg>
+          <span>Food-grade ingredients</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5 ——————————————————————————— ONE CHEW REPLACES THE DRAWER -->
+  <section class="pad" id="why" aria-labelledby="why-h">
+    <div class="wrap">
+      <p class="eyebrow">Why Savour</p>
+      <h2 id="why-h">One chew replaces the <em>drawer</em>.</h2>
+
+      <div class="why__grid">
+        <div class="why__copy">
+          <p>You have already solved this problem five times. Mints in every bag. Gum in the car. A whitening pen in a drawer you forget about. Mouthwash you cannot use without a sink.</p>
+          <p>None of it is one decision, and none of it travels together. Savour is designed to be the one thing you carry instead.</p>
+          <p>It is not a stronger mint. A mint covers the smell and leaves the residue where it is. Coffee oils and wine pigments bond to enamel within minutes, and volatile sulfur compounds cause the smell that lingers. <span class="src">[SOURCE NEEDED — dental/chemistry citation]</span></p>
+          <p class="cta-row"><a class="btn btn--brand" href="#pricing" data-waitlist-open>Subscribe &amp; Save</a></p>
+          <p class="risk">Cancel anytime. <span data-savour="guaranteeDays">&nbsp;</span>-day money-back guarantee.</p>
+        </div>
+
+        <!-- DRAWER COMPARISON ART: overhead flat-lay of the cluttered cluster — mint tin, gum pack, whitening pen, mouthwash bottle, travel toothbrush — on warm sand paper, hard top light, then the same frame with a single Savour tin. -->
+        <div class="scroll-x">
+          <table class="vs">
+            <caption class="sr-only">Your current routine compared with Savour</caption>
+            <thead>
+              <tr><th scope="col">Your drawer today</th><th scope="col">With Savour</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Mints in every bag</td><td><span class="tick" aria-hidden="true"></span>One tin</td></tr>
+              <tr><td>Gum in the car</td><td><span class="tick" aria-hidden="true"></span>One chew</td></tr>
+              <tr><td>A whitening pen you forget</td><td><span class="tick" aria-hidden="true"></span>About 30 seconds</td></tr>
+              <tr><td>Mouthwash that needs a sink</td><td><span class="tick" aria-hidden="true"></span>No rinse, no sink</td></tr>
+              <tr><td>A travel toothbrush</td><td><span class="tick" aria-hidden="true"></span>Fits a pocket</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <p class="pull">An eraser, not an air freshener.</p>
+    </div>
+  </section>
+
+  <!-- 6 ——————————————————————————— WHAT'S INSIDE -->
+  <section class="pad band--sand" id="inside" aria-labelledby="inside-h">
+    <div class="wrap">
+      <p class="eyebrow">What&rsquo;s inside</p>
+      <h2 id="inside-h">Three parts, one chew.</h2>
+      <p class="lede lede--narrow">The formula is short on purpose. Three jobs, one tablet, nothing you need a dictionary to read.</p>
+
+      <div class="grid grid--3">
+        <article class="card">
+          <svg class="ico ico--lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3v18M5 8l14 8M19 8L5 16"/><circle cx="12" cy="12" r="9"/></svg>
+          <h3>The cooling agent</h3>
+          <p class="card__sub">Erythritol</p>
+          <p>An endothermic melt cools the mouth and is designed to help close enamel&rsquo;s pores while residue is still fresh. <span class="src">[SOURCE NEEDED — dental/chemistry citation]</span></p>
+          <details class="disc">
+            <summary>Full ingredient detail</summary>
+            <p>Erythritol is a food-grade sugar alcohol used here for its cooling heat of solution rather than for sweetness. Amounts, sourcing, and the mechanism reference will be published in full before launch. <span class="src">[SOURCE NEEDED — dental/chemistry citation]</span></p>
+          </details>
+        </article>
+
+        <article class="card">
+          <svg class="ico ico--lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3.5s6 6.6 6 10.6a6 6 0 0 1-12 0C6 10.1 12 3.5 12 3.5z"/><path d="M9.5 13.5c0 1.7 1.1 2.8 2.5 3"/></svg>
+          <h3>The acid that washes</h3>
+          <p class="card__sub">Malic acid</p>
+          <p>Formulated to prompt a salivary flood that helps carry coffee oils and wine pigments away before they bond. Your own saliva is the delivery system, not a synthetic rinse. <span class="src">[SOURCE NEEDED — dental/chemistry citation]</span></p>
+          <details class="disc">
+            <summary>Full ingredient detail</summary>
+            <p>Malic acid occurs naturally in apples and is used at food-grade levels to stimulate salivary flow. Concentrations and the supporting chemistry will be cited here rather than paraphrased. <span class="src">[SOURCE NEEDED — dental/chemistry citation]</span></p>
+          </details>
+        </article>
+
+        <article class="card">
+          <svg class="ico ico--lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 4c0 7-4 11-8.5 11S4 12 4 8"/><path d="M4 20c2-6 6-9 11-10"/></svg>
+          <h3>The flavor system</h3>
+          <p class="card__sub">Matched to the drink</p>
+          <p>Cardamom and sweet cream after coffee. Dark cherry and sage after wine. Designed to sit with what you just drank instead of fighting it the way mint does.</p>
+          <details class="disc">
+            <summary>Full ingredient detail</summary>
+            <p>Flavors are built from food-grade natural flavor systems, with no added colors. The full declaration, including allergen statements, will appear on the tin and here before the first order ships.</p>
+          </details>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 ——————————————————————————— BENEFITS GRID -->
+  <section class="pad" aria-labelledby="benefits-h">
+    <div class="wrap">
+      <p class="eyebrow">What it&rsquo;s for</p>
+      <h2 id="benefits-h">Four things it is designed to do.</h2>
+
+      <div class="grid grid--4">
+        <article class="card">
+          <svg class="ico ico--lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 14c3-1 5-3 5-5.5A2.5 2.5 0 0 0 6.5 6"/><path d="M9 18c4.5 0 8-2.5 8-6.5S13.5 5 12 5"/><path d="M14 19.5c3.5 0 6-2 6-5"/></svg>
+          <h3>Fresher breath</h3>
+          <p>Formulated to help address the sulfur compounds behind coffee and wine breath, rather than covering them.</p>
+        </article>
+        <article class="card">
+          <svg class="ico ico--lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 4.5c2 0 2.5 1 5 1s3-1 5-1c1.7 0 2.5 1.4 2.5 3.5 0 4-1.5 11.5-3.5 11.5-1.6 0-1.6-4-4-4s-2.4 4-4 4C6 19.5 4.5 12 4.5 8c0-2.1.8-3.5 2.5-3.5z"/></svg>
+          <h3>Less fresh staining</h3>
+          <p>Designed to help lift new surface residue before it has time to set on enamel.</p>
+        </article>
+        <article class="card">
+          <svg class="ico ico--lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17"/><path d="M12 3.5c2.4 2.6 3.6 5.4 3.6 8.5S14.4 18.4 12 20.5c-2.4-2.1-3.6-5-3.6-8.5S9.6 6.1 12 3.5z"/></svg>
+          <h3>Works anywhere</h3>
+          <p>No sink, no rinse, no spitting. A car, a stairwell, and a client lobby all work.</p>
+        </article>
+        <article class="card">
+          <svg class="ico ico--lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+          <h3>No ritual to remember</h3>
+          <p>One chew after the last sip. There is no step two.</p>
+        </article>
+      </div>
+
+      <p class="cta-row cta-row--center"><a class="btn btn--brand" href="#pricing" data-waitlist-open>Subscribe &amp; Save</a></p>
+      <p class="risk risk--center">Cancel anytime. <span data-savour="guaranteeDays">&nbsp;</span>-day money-back guarantee.</p>
+    </div>
+  </section>
+
+  <!-- 8 ——————————————————————————— QUALITY AND TESTING -->
+  <section class="pad band--deep" aria-labelledby="quality-h">
+    <div class="wrap">
+      <p class="eyebrow">Standards</p>
+      <h2 id="quality-h">What we can and cannot say yet.</h2>
+      <p class="lede lede--narrow">Savour is made from food-grade ingredients in a facility that follows <span class="src">[MANUFACTURING STANDARD — confirm facility certifications]</span>. We would rather show you an empty line than fill it with something we have not earned.</p>
+
+      <div class="grid grid--3">
+        <article class="card card--onDeep">
+          <svg class="ico ico--lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7.5 3v6c0 4.4-3 7.6-7.5 9.5C7.5 19.6 4.5 16.4 4.5 12V6z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg>
+          <h3>Food-grade sourcing</h3>
+          <p>Every ingredient is food-grade and intended to be swallowed, which is why there is nothing to spit out.</p>
+        </article>
+        <article class="card card--onDeep">
+          <svg class="ico ico--lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9.5 3.5h5"/><path d="M10.5 3.5v6L6 17.5A2.5 2.5 0 0 0 8.2 21h7.6a2.5 2.5 0 0 0 2.2-3.5L13.5 9.5v-6"/><path d="M8 15h8"/></svg>
+          <h3>Third-party testing</h3>
+          <p><span class="src">[THIRD-PARTY TESTING — confirm before claiming]</span></p>
+        </article>
+        <article class="card card--onDeep">
+          <svg class="ico ico--lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M8 8h7M8 11.5h5"/></svg>
+          <h3>Published research</h3>
+          <p><span class="src">[RESEARCH CITATION SLOT]</span></p>
+        </article>
+      </div>
+
+      <p class="closing">This is a new product from a new brand. Read the guarantee before you read anything else.</p>
+    </div>
+  </section>
+
+  <!-- 9 ——————————————————————————— HOW IT WORKS -->
+  <section class="pad" id="how" aria-labelledby="how-h">
+    <div class="wrap">
+      <p class="eyebrow">How it works</p>
+      <h2 id="how-h">Snap, melt, wash.</h2>
+
+      <!-- DIAGRAM: hand-drawn clinical line diagram, three panels, single-weight stroke, no fills, no photography. -->
+      <ol class="steps" data-steps>
+        <li class="step" data-step>
+          <span class="step__num" aria-hidden="true">1</span>
+          <div class="step__art" role="img" aria-label="Diagram: a bite cracks the chew's shell.">
+            <svg viewBox="0 0 120 96" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <ellipse cx="60" cy="52" rx="30" ry="21"/>
+              <path d="M52 33l7 12-8 6 9 15"/>
+              <path d="M34 24l6 7M60 18v9M86 24l-6 7"/>
+            </svg>
+          </div>
+          <h3>Snap</h3>
+          <p>You bite once. The shell cracks and releases the actives while residue is freshest.</p>
+        </li>
+
+        <li class="step" data-step>
+          <span class="step__num" aria-hidden="true">2</span>
+          <div class="step__art" role="img" aria-label="Diagram: the chew melts and cools, with enamel pores closing.">
+            <svg viewBox="0 0 120 96" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <ellipse cx="60" cy="58" rx="26" ry="16"/>
+              <path d="M60 20v18M51 27l9-9 9 9"/>
+              <path d="M38 44c4-4 8-4 12 0M70 44c4-4 8-4 12 0"/>
+              <path d="M46 74h28"/>
+            </svg>
+          </div>
+          <h3>Melt</h3>
+          <p>The erythritol melt cools the mouth and is designed to help close enamel&rsquo;s pores. <span class="src">[SOURCE NEEDED — dental/chemistry citation]</span></p>
+        </li>
+
+        <li class="step" data-step>
+          <span class="step__num" aria-hidden="true">3</span>
+          <div class="step__art" role="img" aria-label="Diagram: saliva washes residue off a tooth, then is swallowed.">
+            <svg viewBox="0 0 120 96" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M42 22c3.5 0 4.5 1.6 9 1.6s5.5-1.6 9-1.6c3 0 4.5 2.3 4.5 5.8 0 6.6-2.7 19-6.3 19-2.9 0-2.9-6.6-7.2-6.6s-4.3 6.6-7.2 6.6c-3.6 0-6.3-12.4-6.3-19 0-3.5 1.5-5.8 4.5-5.8z"/>
+              <path d="M78 30c0 0 8 9 8 14a8 8 0 0 1-16 0c0-5 8-14 8-14z"/>
+              <path d="M34 64c10 8 42 8 52 0"/>
+              <path d="M56 78l4 5 4-5"/>
+            </svg>
+          </div>
+          <h3>Wash</h3>
+          <p>A malic-acid-driven salivary flood is formulated to help carry oils and pigments away, then you swallow it. <span class="src">[SOURCE NEEDED — dental/chemistry citation]</span></p>
+        </li>
+      </ol>
+
+      <p class="footnote">About thirty seconds, start to finish. Nothing to spit, no sink required.</p>
+    </div>
+  </section>
+
+  <!-- 10 ——————————————————————————— WHAT'S IN YOUR FIRST ORDER -->
+  <section class="pad band--sand" aria-labelledby="kit-h">
+    <div class="wrap">
+      <p class="eyebrow">Your first box</p>
+      <h2 id="kit-h">Here is the whole box.</h2>
+      <p class="lede lede--narrow">Two tins, because coffee and wine leave different things behind and the flavors are matched to each. That is the answer to &ldquo;why two products.&rdquo;</p>
+
+      <div class="grid grid--3">
+        <!-- KIT THUMB 1: Post-Coffee tin, three-quarter view on warm sand, single soft key light, lid resting behind. -->
+        <article class="card kit">
+          <span class="tag">Included</span>
+          <div class="media media--sq" role="img" aria-label="Illustration of the Post-Coffee tin.">
+            <svg viewBox="0 0 120 100" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><ellipse cx="60" cy="44" rx="38" ry="15"/><path d="M22 44v14c0 8.3 17 15 38 15s38-6.7 38-15V44"/><path d="M60 34v20M50 44h20"/></svg>
+          </div>
+          <h3 data-savour="variantCoffeeName">&nbsp;</h3>
+          <p class="card__sub" data-savour="variantCoffeeFlavor">&nbsp;</p>
+          <p><span data-savour="chewsPerTin">&nbsp;</span> chews. Taken right after the cup.</p>
+        </article>
+
+        <!-- KIT THUMB 2: Post-Wine tin, same setup, slightly cooler bounce to separate it from the coffee tin. -->
+        <article class="card kit">
+          <span class="tag">Included</span>
+          <div class="media media--sq" role="img" aria-label="Illustration of the Post-Wine tin.">
+            <svg viewBox="0 0 120 100" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><ellipse cx="60" cy="44" rx="38" ry="15"/><path d="M22 44v14c0 8.3 17 15 38 15s38-6.7 38-15V44"/><path d="M46 38c0 8 6 10 14 10s14-2 14-10"/></svg>
+          </div>
+          <h3 data-savour="variantWineName">&nbsp;</h3>
+          <p class="card__sub" data-savour="variantWineFlavor">&nbsp;</p>
+          <p><span data-savour="chewsPerTin">&nbsp;</span> chews. Taken right after the glass.</p>
+        </article>
+
+        <!-- KIT THUMB 3: gift item — art direction pending, do not shoot until the item is confirmed. -->
+        <article class="card kit kit--slot">
+          <span class="tag">Included</span>
+          <div class="media media--sq media--empty" role="img" aria-label="Placeholder for an undecided gift item.">
+            <svg viewBox="0 0 120 100" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="26" y="34" width="68" height="44" rx="6"/><path d="M60 34v44M26 50h68"/></svg>
+          </div>
+          <h3>Founders extra</h3>
+          <p><span class="src">[GIFT ITEM SLOT — confirm with client: pocket sleeve? refill card? Batch 001 card?]</span></p>
+        </article>
+      </div>
+
+      <p class="footnote"><span data-savour="batchLabel">&nbsp;</span> is limited to <span data-savour="foundersBatchUnits">&nbsp;</span> sets. That is the batch size, not a countdown.</p>
+    </div>
+  </section>
+
+  <!-- 11 ——————————————————————————— PRICING -->
+  <section class="pad" id="pricing" aria-labelledby="price-h">
+    <div class="wrap">
+      <p class="eyebrow">The offer</p>
+      <h2 id="price-h">One decision, priced plainly.</h2>
+
+      <ul class="trust trust--compact trust--center">
+        <li class="trust__item">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3v11"/><path d="M8 10l4 4 4-4"/><path d="M5 18.5h14"/></svg>
+          <span>Swallowable</span>
+        </li>
+        <li class="trust__item">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2"/><path d="M9.5 2.5h5"/></svg>
+          <span>About 30 seconds</span>
+        </li>
+        <li class="trust__item">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="7.5" width="17" height="11" rx="3"/><path d="M8 7.5V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1.5"/></svg>
+          <span>Pocket tin</span>
+        </li>
+      </ul>
+
+      <div class="price">
+        <div class="price__choices">
+          <fieldset class="plans">
+            <legend class="eyebrow">How you buy</legend>
+
+            <label class="plan plan--primary" for="plan-sub">
+              <input type="radio" name="savour-plan" id="plan-sub" value="subscribe" checked data-plan>
+              <span class="plan__body">
+                <span class="plan__title">Subscribe &amp; save <span data-savour="discountPercent">&nbsp;</span>%</span>
+                <span class="plan__meta">Ships <span data-savour="intervalLabel">&nbsp;</span>. Skip, change, or cancel anytime.</span>
+              </span>
+              <span class="plan__badge">Recommended</span>
+            </label>
+
+            <label class="plan" for="plan-once">
+              <input type="radio" name="savour-plan" id="plan-once" value="onetime" data-plan>
+              <span class="plan__body">
+                <span class="plan__title">One-time purchase</span>
+                <span class="plan__meta">No repeat order, no discount.</span>
+              </span>
+            </label>
+          </fieldset>
+
+          <fieldset class="bundles" data-bundles>
+            <legend class="eyebrow">How much</legend>
+            <!-- Bundle options are rendered from shared/config.js at runtime. -->
+          </fieldset>
+        </div>
+
+        <div class="price__panel">
+          <!-- PRICING THUMB: both tins stacked, straight-on, on plain white, no props. -->
+          <div class="media media--sq media--sm" role="img" aria-label="Illustration of two stacked Savour tins.">
+            <svg viewBox="0 0 120 100" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><ellipse cx="60" cy="34" rx="34" ry="13"/><path d="M26 34v10c0 7.2 15.2 13 34 13s34-5.8 34-13V34"/><path d="M26 52v10c0 7.2 15.2 13 34 13s34-5.8 34-13V52"/></svg>
+          </div>
+
+          <p class="price__label" data-price-label>&nbsp;</p>
+
+          <p class="price__now" data-price-now aria-live="polite">&nbsp;</p>
+          <p class="price__meta" data-price-meta>&nbsp;</p>
+          <p class="price__save" data-price-save hidden>&nbsp;</p>
+
+          <p class="numeral">
+            <span class="numeral__value" data-price-perchew>&nbsp;</span>
+            <span class="numeral__unit">per chew</span>
+          </p>
+
+          <p class="cta-row"><button type="button" class="btn btn--brand btn--wide" data-waitlist-open>Subscribe &amp; Save</button></p>
+          <p class="risk" data-price-micro>&nbsp;</p>
+          <p class="risk" data-price-ship>&nbsp;</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 ——————————————————————————— REVIEWS -->
+  <section class="pad band--sand" id="reviews" aria-labelledby="rev-h">
+    <div class="wrap">
+      <p class="eyebrow">Reviews</p>
+      <h2 id="rev-h">We have no reviews yet.</h2>
+      <p class="lede lede--narrow">Savour has not shipped. Rather than borrow proof from somewhere else, the review section is built and left empty until real customers fill it.</p>
+
+      <div class="widget">
+        <div class="widget__head">
+          <p class="widget__rating"><span class="src">[STAR RATING — pending launch]</span></p>
+          <p class="widget__count"><span class="src">[REVIEW COUNT — pending launch]</span></p>
+        </div>
+        <p class="widget__slot"><span class="src">[REVIEW WIDGET SLOT]</span></p>
+        <div class="grid grid--3">
+          <article class="card card--empty"><p><span class="src">[TESTIMONIAL SLOT — real customer quote pending launch]</span></p></article>
+          <article class="card card--empty"><p><span class="src">[TESTIMONIAL SLOT — real customer quote pending launch]</span></p></article>
+          <article class="card card--empty"><p><span class="src">[TESTIMONIAL SLOT — real customer quote pending launch]</span></p></article>
+        </div>
+      </div>
+
+      <h3 class="voc__h">What people told us</h3>
+      <p class="voc__label">Pre-launch customer research. Not product reviews. No names, no photos, no ratings.</p>
+      <div class="grid grid--2">
+        <blockquote class="voc"><p>&ldquo;Mints just mask it for a few minutes and then it&rsquo;s back.&rdquo;</p><footer>Research participant</footer></blockquote>
+        <blockquote class="voc"><p>&ldquo;I shouldn&rsquo;t have to choose between my coffee and feeling confident for the rest of the day.&rdquo;</p><footer>Research participant</footer></blockquote>
+        <blockquote class="voc"><p>&ldquo;I notice other people&rsquo;s coffee breath immediately, so I assume everyone notices mine.&rdquo;</p><footer>Research participant</footer></blockquote>
+        <blockquote class="voc"><p>&ldquo;I&rsquo;d pay more for something that actually solved this than for another tin of mints that does nothing.&rdquo;</p><footer>Research participant</footer></blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 ——————————————————————————— GUARANTEE -->
+  <section class="pad guarantee" aria-labelledby="gtee-h">
+    <div class="wrap wrap--narrow center">
+      <svg class="ico ico--xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7.5 3v6c0 4.4-3 7.6-7.5 9.5C7.5 19.6 4.5 16.4 4.5 12V6z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg>
+      <h2 id="gtee-h"><span data-savour="guaranteeDays">&nbsp;</span> days, no argument.</h2>
+      <p>Order a tin, use it after your coffee and your wine, and decide for yourself.</p>
+      <p>If it is not doing what you hoped, tell us within <span data-savour="guaranteeDays">&nbsp;</span> days and we refund it.</p>
+    </div>
+  </section>
+
+  <!-- 14 ——————————————————————————— FAQ -->
+  <section class="pad" id="faq" aria-labelledby="faq-h">
+    <div class="wrap wrap--narrow">
+      <p class="eyebrow">Questions</p>
+      <h2 id="faq-h">The questions we get asked.</h2>
+
+      <div class="faq" data-faq>
+        <div class="faq__row">
+          <h3 class="faq__q"><button type="button" class="faq__btn" id="faq-b1" aria-expanded="false" aria-controls="faq-p1">Is it actually safe to swallow every day?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg></button></h3>
+          <div class="faq__a" id="faq-p1" role="region" aria-labelledby="faq-b1" hidden>
+            <p>Every ingredient is food-grade and intended to be swallowed at the amounts used in a single chew. It is a food product, not a medicine, and it is not a replacement for brushing. If you are pregnant, nursing, or managing a medical condition, check with your clinician first.</p>
+          </div>
+        </div>
+
+        <div class="faq__row">
+          <h3 class="faq__q"><button type="button" class="faq__btn" id="faq-b2" aria-expanded="false" aria-controls="faq-p2">Isn&rsquo;t this just an expensive mint?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg></button></h3>
+          <div class="faq__a" id="faq-p2" role="region" aria-labelledby="faq-b2" hidden>
+            <p>A mint is designed to cover a smell. Savour is formulated to help wash residue off before it bonds, and then be swallowed. Different job, different chemistry. <span class="src">[SOURCE NEEDED — dental/chemistry citation]</span></p>
+          </div>
+        </div>
+
+        <div class="faq__row">
+          <h3 class="faq__q"><button type="button" class="faq__btn" id="faq-b3" aria-expanded="false" aria-controls="faq-p3">Will it work fast enough to matter mid-meeting?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg></button></h3>
+          <div class="faq__a" id="faq-p3" role="region" aria-labelledby="faq-b3" hidden>
+            <p>It takes about thirty seconds and needs no sink, so it fits between the last sip and the next room. There is nothing to rinse, spit, or carry away.</p>
+          </div>
+        </div>
+
+        <div class="faq__row">
+          <h3 class="faq__q"><button type="button" class="faq__btn" id="faq-b4" aria-expanded="false" aria-controls="faq-p4">Won&rsquo;t the flavor clash the way mint does?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg></button></h3>
+          <div class="faq__a" id="faq-p4" role="region" aria-labelledby="faq-b4" hidden>
+            <p>Each flavor is built for the drink it follows. Cardamom and sweet cream after coffee, dark cherry and sage after wine. That is why there are two tins rather than one mint.</p>
+          </div>
+        </div>
+
+        <div class="faq__row">
+          <h3 class="faq__q"><button type="button" class="faq__btn" id="faq-b5" aria-expanded="false" aria-controls="faq-p5">Is this backed by anything?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg></button></h3>
+          <div class="faq__a" id="faq-p5" role="region" aria-labelledby="faq-b5" hidden>
+            <p>The mechanism is grounded in published chemistry, and we will cite it here rather than paraphrase it. <span class="src">[SOURCE NEEDED — dental/chemistry citation]</span></p>
+            <p>We have no clinical trial of our own, and we will not claim one.</p>
+          </div>
+        </div>
+
+        <div class="faq__row">
+          <h3 class="faq__q"><button type="button" class="faq__btn" id="faq-b6" aria-expanded="false" aria-controls="faq-p6">Why two products instead of one?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg></button></h3>
+          <div class="faq__a" id="faq-p6" role="region" aria-labelledby="faq-b6" hidden>
+            <p>Coffee leaves oils, wine leaves pigments, and the flavor that works after one is wrong after the other. Two tins is the honest answer, so the pair ships together.</p>
+          </div>
+        </div>
+
+        <div class="faq__row">
+          <h3 class="faq__q"><button type="button" class="faq__btn" id="faq-b7" aria-expanded="false" aria-controls="faq-p7"><span data-savour="basePricePerTin">&nbsp;</span> feels expensive. Why not just buy gum?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg></button></h3>
+          <div class="faq__a" id="faq-p7" role="region" aria-labelledby="faq-b7" hidden>
+            <p data-faq-perchew>&nbsp;</p>
+            <p>Then compare it with what the mints, the gum, the pen, and the mouthwash cost together over a month, and with how much of the drawer you actually carry.</p>
+          </div>
+        </div>
+
+        <div class="faq__row">
+          <h3 class="faq__q"><button type="button" class="faq__btn" id="faq-b8" aria-expanded="false" aria-controls="faq-p8">New brand, new category. Will it ship?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg></button></h3>
+          <div class="faq__a" id="faq-p8" role="region" aria-labelledby="faq-b8" hidden>
+            <p data-faq-batch>&nbsp;</p>
+            <p>The guarantee is how you test the second half of that question at our risk rather than yours.</p>
+          </div>
+        </div>
+
+        <div class="faq__row">
+          <h3 class="faq__q"><button type="button" class="faq__btn" id="faq-b9" aria-expanded="false" aria-controls="faq-p9">Do I have to change my coffee or wine habits?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg></button></h3>
+          <div class="faq__a" id="faq-p9" role="region" aria-labelledby="faq-b9" hidden>
+            <p>No. That is the entire point. Keep the second cup and the second glass, and add one chew afterward.</p>
+          </div>
+        </div>
+
+        <div class="faq__row">
+          <h3 class="faq__q"><button type="button" class="faq__btn" id="faq-b10" aria-expanded="false" aria-controls="faq-p10">What does it actually taste like?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg></button></h3>
+          <div class="faq__a" id="faq-p10" role="region" aria-labelledby="faq-b10" hidden>
+            <p>Closer to a dessert note than a breath mint. Cool, faintly sweet, and short. It is designed to finish the drink rather than interrupt it.</p>
+          </div>
+        </div>
+
+        <div class="faq__row">
+          <h3 class="faq__q"><button type="button" class="faq__btn" id="faq-b11" aria-expanded="false" aria-controls="faq-p11">When exactly do I take it?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg></button></h3>
+          <div class="faq__a" id="faq-p11" role="region" aria-labelledby="faq-b11" hidden>
+            <p>Within a few minutes of your last sip, while residue is freshest. There is nothing to do afterward.</p>
+          </div>
+        </div>
+
+        <div class="faq__row">
+          <h3 class="faq__q"><button type="button" class="faq__btn" id="faq-b12" aria-expanded="false" aria-controls="faq-p12">What is in the tin, and how do I carry it?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg></button></h3>
+          <div class="faq__a" id="faq-p12" role="region" aria-labelledby="faq-b12" hidden>
+            <p data-faq-tin>&nbsp;</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15 ——————————————————————————— FINAL CTA -->
+  <section class="pad band--deep center" aria-labelledby="final-h">
+    <div class="wrap wrap--narrow">
+      <h2 id="final-h">One chew. One tin. One habit.</h2>
+      <p class="cta-row cta-row--center"><button type="button" class="btn btn--brand btn--wide" data-waitlist-open>Subscribe &amp; Save</button></p>
+      <p class="risk risk--center">Cancel anytime, and <span data-savour="guaranteeDays">&nbsp;</span> days to change your mind.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <!-- 16 ——————————————————————————— FOOTER -->
+  <section class="footer__body" aria-label="Footer">
+    <div class="wrap">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a class="wordmark" href="../../index.html">
+            <svg class="wordmark__mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v17"/></svg>
+            <span>Savour</span>
+          </a>
+          <p class="footer__sign">An eraser, not an air freshener.</p>
+
+          <div class="footer__capture">
+            <p class="footer__captureH">Join the <span data-savour="batchLabel">&nbsp;</span> waitlist.</p>
+            <p class="footer__captureP">One email when it ships. Nothing else.</p>
+            <button type="button" class="btn btn--brand btn--sm" data-waitlist-open>Join the waitlist</button>
+            <p class="risk">No spam, and you can leave the list in one click.</p>
+          </div>
+
+          <ul class="social">
+            <li><a href="#" aria-label="Savour on Instagram"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17 7h.01"/></svg></a></li>
+            <li><a href="#" aria-label="Savour on TikTok"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 4v10.5a4 4 0 1 1-4-4"/><path d="M14 7c1.2 1.6 2.8 2.4 5 2.4"/></svg></a></li>
+            <li><a href="#" aria-label="Email Savour"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="5.5" width="18" height="13" rx="3"/><path d="M4 8l8 5 8-5"/></svg></a></li>
+          </ul>
+        </div>
+
+        <nav class="footer__cols" aria-label="Footer links">
+          <div class="footer__col">
+            <h3 class="footer__h">Shop</h3>
+            <ul>
+              <li><a href="#pricing" data-waitlist-open data-variant="coffee">Post-Coffee</a></li>
+              <li><a href="#pricing" data-waitlist-open data-variant="wine">Post-Wine</a></li>
+              <li><a href="#pricing">The Pair</a></li>
+              <li><a href="#pricing">The Full Set</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h3 class="footer__h">Learn</h3>
+            <ul>
+              <li><a href="#why">Why Savour</a></li>
+              <li><a href="#inside">What&rsquo;s inside</a></li>
+              <li><a href="#how">How it works</a></li>
+              <li><a href="#faq">FAQ</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h3 class="footer__h">Support</h3>
+            <ul>
+              <li><a href="#">Contact</a></li>
+              <li><a href="#">Shipping</a></li>
+              <li><a href="#">Returns</a></li>
+              <li><a href="#">Guarantee</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h3 class="footer__h">Company</h3>
+            <ul>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Ingredients policy</a></li>
+              <li><a href="#">Accessibility</a></li>
+              <li><a href="#">Careers</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      <div class="footer__legal">
+        <p><span class="src">[REGULATORY DISCLAIMER — confirm product classification with counsel]</span> A swallowed daily chew making oral-care claims may carry disclosure obligations. This line stays visible and unwritten until counsel drafts it.</p>
+        <p>Savour is a food product. It is not intended to diagnose, treat, cure, or prevent any condition, and it is not a replacement for brushing or for dental care.</p>
+        <p class="footer__copy">&copy; Savour. All rights reserved. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a> &middot; <a href="../../index.html">Back to all templates</a></p>
+      </div>
+    </div>
+  </section>
+</footer>
+
+<!-- WAITLIST MODAL — markup and skin owned by this template; behavior by shared/waitlist.js -->
+<div class="modal" data-savour-modal hidden role="dialog" aria-modal="true" aria-labelledby="modal-h">
+  <div class="modal__panel" data-savour-modal-panel>
+    <button type="button" class="modal__close" data-savour-modal-close aria-label="Close">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+
+    <p class="eyebrow">Waitlist</p>
+    <h2 id="modal-h">Join the <span data-savour="batchLabel">&nbsp;</span> waitlist.</h2>
+    <p>Savour has not shipped yet. Leave an email and pick a flavor, and you will hear from us once, when it does.</p>
+
+    <form data-savour-modal-form novalidate>
+      <label class="field">
+        <span class="field__label">Email address</span>
+        <input type="email" name="email" autocomplete="email" placeholder="you@work.com" data-savour-modal-email required>
+      </label>
+
+      <label class="field">
+        <span class="field__label">Which one are you waiting for?</span>
+        <select data-savour-modal-variant name="variant">
+          <option value="coffee">Post-Coffee</option>
+          <option value="wine">Post-Wine</option>
+          <option value="both">Both</option>
+        </select>
+      </label>
+
+      <p class="field__error" data-savour-modal-error hidden>Enter an email address we can actually reach.</p>
+
+      <button type="submit" class="btn btn--brand btn--wide">Join the waitlist</button>
+      <p class="risk">One email when it ships. <span data-savour="guaranteeDays">&nbsp;</span>-day money-back guarantee once it does.</p>
+    </form>
+
+    <div class="modal__success" data-savour-modal-success hidden>
+      <svg class="ico ico--xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12.3l2.6 2.6 4.6-5.4"/></svg>
+      <h3>You&rsquo;re on the list.</h3>
+      <p>We will email you once, when <span data-savour="batchLabel">&nbsp;</span> ships.</p>
+      <button type="button" class="btn btn--ghost" data-savour-modal-close>Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="../../shared/config.js"></script>
+<script src="../../shared/pricing.js"></script>
+<script src="../../shared/waitlist.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
