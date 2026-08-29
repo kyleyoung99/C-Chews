@@ -78,9 +78,12 @@ Note: variant accent colors are **not** in config — each template picks its ow
 
 **Self-test:** set `basePricePerTin` to `24.00` and change every bundle price, reload all three, confirm every number updates with zero HTML edits. Document this in the README.
 
-### v1 BUG TO NOT REPEAT
+### A GUARD WORTH KEEPING
 
-All three v1 pages shipped the literal string `${config.launch.batchLabel}` visible in the rendered waitlist modal — a template literal written into static HTML instead of interpolated. **Before committing, run `grep -rn '\${' templates/ index.html` and confirm zero matches in static markup.** Every dynamic value must be injected at runtime by JS or written as a literal.
+Because the config examples above are JS-shaped, it is easy to paste one into markup by mistake and ship a visible
+`${config.launch.batchLabel}`. Before committing, strip `<script>` blocks and grep the remaining markup for `${` — a match
+inside a script's template literal is correct and interpolates at runtime, but a match in static HTML renders as literal
+text on the page. Every dynamic value in markup must be injected by JS at runtime.
 
 ---
 
