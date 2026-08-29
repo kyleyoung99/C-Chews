@@ -1,0 +1,193 @@
+/**
+ * SAVOUR — BASE STYLES
+ * ---------------------------------------------------------------
+ * Reset + shared, purely-functional utilities only. NO template
+ * visual design lives here (no fonts, no color, no brand spacing) —
+ * that all belongs in each template's own style.css. This file only
+ * exists so all three templates behave consistently and so the
+ * waitlist modal (structural, not visual) works everywhere.
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  overflow-x: hidden;
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+  display: block;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+}
+
+/* Baseline visible focus ring; templates may restyle color/offset
+   but must not remove it entirely. */
+:focus-visible {
+  outline: 2px solid #1a73e8;
+  outline-offset: 2px;
+}
+
+/* Visually hide content while keeping it available to assistive tech. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 1000;
+  background: #000;
+  color: #fff;
+  padding: 0.75em 1.25em;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+/* Any wide element (tables, code, diagrams) scrolls in its own box
+   instead of ever pushing the page into horizontal scroll. */
+.scroll-x {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Body lock while the waitlist modal (or any modal) is open. */
+.savour-no-scroll {
+  overflow: hidden;
+}
+
+/* Respect reduced-motion globally; templates only need to add motion
+   inside a `@media (prefers-reduced-motion: no-preference)` block. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --------------------------------------------------------------
+   Waitlist modal — STRUCTURE ONLY. Each template's style.css sets
+   its own colors, type, spacing, and border treatment on these same
+   selectors; nothing below should need to change per template.
+   -------------------------------------------------------------- */
+
+.savour-waitlist-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.savour-waitlist-overlay[hidden] {
+  display: none;
+}
+
+.savour-waitlist-modal {
+  position: relative;
+  width: 100%;
+  max-width: 28rem;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #fff;
+  padding: 2rem;
+}
+
+.savour-waitlist-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  line-height: 1;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+}
+
+.savour-waitlist-label {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.savour-waitlist-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+}
+
+.savour-waitlist-error {
+  color: #b00020;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.savour-waitlist-submit {
+  width: 100%;
+  margin-top: 1.25rem;
+  padding: 0.875rem;
+  border: none;
+  font-weight: 600;
+}
+
+.savour-waitlist-fineprint {
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.savour-waitlist-success {
+  text-align: center;
+}
+
+.savour-waitlist-success-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
