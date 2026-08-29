@@ -1,176 +1,227 @@
-# C-Chews — Savour Landing Page Templates
+# C-Chews — Savour Landing Page Templates (v3)
 
-Three complete, visually distinct landing page templates for **Savour**, a
-pre-launch DTC functional oral-care brand. Same product, same offer, same
-six-step belief chain, same nine objections — three different executions
-for three different traffic types. Built from the build prompt on the
-`Prompt-For-Landing-Pages` branch.
+Three landing pages for **Savour**, a pre-launch DTC oral-care brand. Built
+per **build prompt v3** (`Prompt-For-Landing-Pages` branch): each template
+is a close structural and visual reproduction of a specific, proven DTC
+landing page — not an invented design "inspired by" it — rebuilt with
+Savour's own product, copy, and design tokens.
 
-Open `index.html` to see the gallery, or go straight to a template:
+| Template | Modeled on | Traffic it's built for |
+|---|---|---|
+| `templates/01-ag1/` | AG1 / Athletic Greens | Cold, skeptical, higher-intent |
+| `templates/02-bloom/` | Bloom Nutrition | Warm and social |
+| `templates/03-gruns/` | Gruns | Cold paid-social |
 
-- `templates/01-mechanism/index.html` — long-form direct response
-- `templates/02-ritual/index.html` — quiet-luxury editorial
-- `templates/03-poison-picker/index.html` — bold, interactive conversion page
+Open `index.html` for the gallery, or go straight to a template. Every
+page opens correctly by double-clicking the `.html` file from disk
+(`file://`) or from a static server — no build step, no installs.
 
-Every page opens correctly by double-clicking the `.html` file from disk
-(`file://`) or from a static server. No build step, no installs.
+See `REFERENCE-NOTES.md` for what could and couldn't be verified against
+the live reference sites, and `DESIGN.md` for the full token set (colors,
+type, radius, shadow budget, section order) behind each template.
 
 ---
 
 ## How to change prices
 
 Every dollar figure on every template — bundle prices, per-tin price,
-per-chew price, savings $/%, subscription price, and the free-shipping
-progress bar — is computed at runtime from **one file**:
+per-chew price, savings $/%, subscription price, and free-shipping
+progress — is computed at runtime from **one file**:
 
 ```
 shared/config.js
 ```
 
-To change what the site charges:
+Edit `pricing.basePricePerTin` and/or `pricing.bundles`, save, reload any
+template. No HTML edits are ever required. `shared/pricing.js` holds the
+derivation logic (`perTin`, `savingsVsBase`, `perChew`, `subscriptionPrice`,
+`qualifiesForFreeShipping`, `amountToFreeShipping`,
+`freeShippingProgressPercent`, `formatMoney`, `formatPerChew`) and every
+template calls into it from its own `script.js`.
 
-1. Open `shared/config.js`.
-2. Edit `pricing.basePricePerTin` and/or the `pricing.bundles` array.
-3. Save. Reload any template.
+**Price-config acceptance test — result: PASSED.** `basePricePerTin` and
+the `single` bundle price were changed from `20.00` to `24.00`, and all
+three templates were reloaded via a real headless-Chromium pass. Every
+displayed figure — bundle prices, per-tin price, per-chew math (including
+the live "per chew" callouts in the FAQ, pricing block, and comparison
+table), and the sticky/announcement free-shipping copy — updated
+correctly with zero HTML edits. The file was reverted afterward.
 
-No HTML edits are ever required. `shared/pricing.js` holds the derivation
-logic (`perTin`, `savingsVsBase`, `perChew`, `subscriptionPrice`,
-`qualifiesForFreeShipping`, `formatMoney`, etc.) and every template calls
-into it from its own `script.js` rather than computing or hardcoding a
-number itself.
-
-**Price-config acceptance test — result: PASSED.**
-`basePricePerTin` was changed from `20.00` to `24.00` and every bundle
-price in `pricing.bundles` was changed to new values, then all three
-templates were reloaded. Every displayed figure — bundle prices, per-tin
-price, per-chew math (including the "That's $X a chew" callouts and FAQ
-answers), savings $ and %, subscription price, and the sticky bar's
-free-shipping progress bar — updated correctly with zero HTML edits. The
-values were then reverted to the original numbers shown above.
+Note: `product.variants` in `shared/config.js` intentionally has **no**
+accent-color field — each template takes its palette from its own
+reference brand (see `DESIGN.md`), not from shared config.
 
 ---
 
 ## Why global scripts instead of ES modules
 
-The build prompt calls for every template to open correctly from
-`file://`. ES module `import`/`export` is blocked by CORS in Chromium (and
-inconsistent elsewhere) when loaded from a `file://` URL, so `shared/*.js`
-is written as plain, non-module scripts that attach to `window`
-(`window.SAVOUR_CONFIG`, `window.SavourPricing`, `window.SavourWaitlist`)
-and are loaded with ordinary `<script src="...">` tags, in this order:
-`config.js` → `pricing.js` → `waitlist.js` → the template's own
-`script.js`. This works identically under `file://` and a static server,
-so no fallback build was needed.
+Every template loads `shared/config.js` → `shared/pricing.js` →
+`shared/waitlist.js` → its own `script.js`, in that order, as plain,
+non-module `<script src="...">` tags. ES module `import`/`export` is
+blocked by CORS in Chromium (and inconsistent elsewhere) when loaded from
+a `file://` URL, so nothing here uses `type="module"` — this works
+identically under `file://` and a static server, satisfying build prompt
+v3 §11's `file://` requirement without needing a separate fallback build.
 
 ---
 
-## What each template is for
+## What's shared vs. per-template
 
-| Template | Job | Traffic | Design language |
-|---|---|---|---|
-| **01 — The Mechanism** | Convert cold, skeptical, problem-aware traffic through argument | Cold direct-response | High-contrast editorial newspaper, one accent color, scroll-driven reveals, highest word count |
-| **02 — The Ritual** | Convert on desire, taste, and credibility | Brand / organic / PR | Quiet luxury — muted palette, serif display type, huge whitespace, ingredient-transparency table as the credibility engine |
-| **03 — The Poison Picker** | Maximum conversion mechanics | Warm / retargeted | Bold and saturated; the whole page re-themes on the Coffee/Wine pick; sticky buy bar, interactive 30-second timer, subscribe-and-save bundle ladder |
+Per build prompt v3 §1, only four files are shared, and none of them
+carries color, type, or copy:
 
-All three walk the same six-step belief chain (problem validation →
-discredit current fixes → the chemistry reframe → the Snap/Melt/Wash
-mechanism → the 30-second proof → safety/ritual/offer) and answer the same
-nine objections, in each template's own voice.
+- `shared/config.js` — pricing + product facts (the single source of truth)
+- `shared/pricing.js` — pure derivation functions over config
+- `shared/waitlist.js` — **logic only**: open/close, focus trap, Esc,
+  email validation, success-state swap. It builds no DOM and owns no
+  CSS or copy. Each template supplies its own modal markup, heading
+  text, and skin, wired against a fixed data-attribute contract
+  (`data-savour-modal`, `data-savour-modal-form`,
+  `data-savour-modal-email`, `data-savour-modal-variant`,
+  `data-savour-modal-error`, `data-savour-modal-success`,
+  `data-savour-modal-close`, and `data-waitlist-open` triggers anywhere
+  on the page). This is a deliberate change from earlier builds, where a
+  shared, identically-styled modal made all three pages feel like one
+  page.
+- `shared/base.css` — reset + accessibility utilities only (box-sizing,
+  `.sr-only`, `.skip-link` positioning, `.scroll-x`, reduced-motion
+  neutralization). No color, no font, no spacing scale.
 
-Shared, non-visual infrastructure lives in `/shared/` (`config.js`,
-`pricing.js`, `waitlist.js`, `base.css` — reset + the waitlist modal's
-structural CSS only). Each template owns its own `style.css` and
-`script.js` and does not borrow another template's design system.
-Approved copy for all three lives in `content/copy.md` — if a template
-needs a new line, it's added there first.
+Everything visual and every marketing sentence is per-template:
+`content/facts.md` holds the shared product truths (the only shared
+*content*), and each template draws from its own `content/copy-0X-*.md`
+copy bank, written in its own voice before any markup existed.
 
 ---
 
-## `[SOURCE NEEDED]` and `[TESTIMONIAL SLOT]` inventory
+## `[SOURCE NEEDED]` and other placeholder inventory
 
-This is a pre-launch brand with no clinical trials and no real customers
-yet. No fabricated testimonials, statistics, or claims appear anywhere.
-Every place a real citation or a real customer quote belongs is a visible,
-labeled placeholder instead. Full list, as of this build:
+Savour is pre-launch with zero customers, zero clinical data, and zero
+press coverage. No fabricated testimonials, star ratings, review counts,
+press logos, or statistics appear anywhere. Every place one of the
+reference brands would show real social proof or a real citation is a
+visible, labeled placeholder instead — full inventory, as of this build
+(`grep -rn '\[[A-Z][^]]*\]' templates/*/index.html` to find them all):
 
-**`[SOURCE NEEDED]`** (dental/chemistry/safety citations, one shared list
-via `content/copy.md` §3, §4, §9, §10; rendered on each template):
+**`templates/01-ag1/`** (9× `[SOURCE NEEDED]` +:)
+`[TESTIMONIAL SLOT]` ×3 · `[REVIEW WIDGET SLOT]` ·
+`[REVIEW COUNT — pending launch]` · `[STAR RATING — pending launch]` ·
+`[THIRD-PARTY TESTING — confirm before claiming]` ·
+`[RESEARCH CITATION SLOT]` ·
+`[GIFT ITEM SLOT — confirm with client: pocket sleeve? refill card?
+Batch 001 card?]` ·
+`[REGULATORY DISCLAIMER — confirm product classification with counsel]` ·
+`[MANUFACTURING STANDARD — confirm facility certifications]`
 
-- The UMP paragraph (oils/pigments bonding to enamel) — Templates 01, 02
-- The Melt step's mechanism-of-action claim — Template 01
-- Erythritol safety/GRAS claim — Templates 01, 02 (ingredient panel)
-- Malic acid safety/efficacy claim — Templates 01, 02 (ingredient panel)
-- "Does not cure/treat/whiten" efficacy disclaimer — Template 01
-- Objection 1 answer (swallow safety) — Templates 01, 02, 03 FAQ
-- Objection 5 answer ("backed by anything") — Templates 01, 02, 03 FAQ
+**`templates/02-bloom/`** (4× `[SOURCE NEEDED]` +:)
+`[TESTIMONIAL SLOT]` ×3 · `[FOUNDER VIDEO SLOT]` ×3 ·
+`[NAME — pending launch]` ×3 · `[REVIEW COUNT — pending launch]` ·
+`[STAR RATING — pending launch]`
 
-**`[TESTIMONIAL SLOT]`** (real customer quotes pending launch):
+**`templates/03-gruns/`** (6× `[SOURCE NEEDED — dental/chemistry
+citation]`, 1× `[SOURCE NEEDED — food-safety documentation]`, 1×
+`[SOURCE NEEDED — mechanism-of-action citation]` +:)
+`[REVIEW SLOT]` ×6 · `[STAR RATING — pending launch]` ×4 ·
+`[REVIEW COUNT — pending launch]` ·
+`[INGREDIENT COUNT — pending final formulation]` ·
+`[CERTIFICATION SLOT — pending launch]`
 
-- Three testimonial-slot components in the social-proof rail — Template
-  03 (`templates/03-poison-picker/script.js`, `renderTestimonialSlots`)
+No `[PRESS LOGO SLOT]` appears anywhere — per spec, those bands are
+deleted rather than faked on all three templates (01-ag1 skips the press
+strip entirely; 02-bloom replaces it with an honest "how it's made"
+ingredient-sourcing strip; 03-gruns runs a VOC-quote marquee in that slot
+instead).
 
-Templates 01 and 02 use the honest, attributed VOC research quotes from
-`content/copy.md` §11 instead of testimonials (never as fake reviews).
-Template 03 uses the same VOC quotes in its "Sound familiar?" block *and*
-adds the three testimonial slots above for real reviews once they exist.
-
-Grep for either marker at any time to find every remaining placeholder:
-
-```
-grep -rn "SOURCE NEEDED\|TESTIMONIAL SLOT" .
-```
+Every unhedged efficacy claim is written with hedge language ("supports,"
+"helps," "designed to," "formulated to") rather than "removes," "cures,"
+or "eliminates" — this holds across all three voices, including 03-gruns'
+louder, funnier register.
 
 ---
 
 ## Switching `launch.mode` when checkout goes live
 
-`shared/config.js` → `launch.mode` is currently `"waitlist"`. Every buy/CTA
-button on every template opens the shared waitlist modal
-(`shared/waitlist.js`) — there is no real checkout, no payment collection,
-and no network requests anywhere in this repo. On submit, the modal logs
-the payload to the console with a `// TODO: wire to ESP` comment instead
-of sending it anywhere.
+`shared/config.js` → `launch.mode` is currently `"waitlist"`. Every
+buy/CTA button on every template opens that template's own waitlist
+modal — there is no real checkout, no payment collection, and no network
+requests anywhere in this repo. On submit, each modal logs its payload to
+the console with a `// TODO: wire to ESP` comment (see each template's
+`script.js`) instead of sending it anywhere.
 
-To go live:
-
-1. Change `launch.mode` to `"presale"` or `"live"` in `shared/config.js`.
-2. Wire `shared/waitlist.js`'s `handleSubmit()` (search for
-   `TODO: wire to ESP`) to a real endpoint — an ESP for `"presale"`, or a
-   real checkout flow for `"live"`.
-3. Update each template's CTA copy if "Join the Waitlist" no longer fits
-   (the button text is static in each `index.html`, not derived from
-   `launch.mode`, since copy tone differs by template).
-4. `launch.mode` values other than `"waitlist"` are not implemented yet —
-   no template branches on this value today.
+To go live: change `launch.mode` to `"presale"` or `"live"`, then wire
+each template's submit handler (search its `script.js` for `TODO: wire to
+ESP`) to a real endpoint. `launch.mode` values other than `"waitlist"` are
+not implemented yet — no template branches on this value today. CTA copy
+("Subscribe & Save" / "Add to bag" / "Get my tin") is static per template
+voice, not derived from `launch.mode`.
 
 ---
 
-## Self-QA results
+## Verification — build prompt v3 §13
 
-- [x] Change `basePricePerTin` and bundle prices → all figures update with
-      zero HTML edits (see acceptance test above).
-- [x] All six belief-chain steps appear, in order, on all three templates.
-- [x] All nine objections are answered on all three templates.
-- [x] Snap → Melt → Wash appears, in sequence, on all three.
-- [x] No fabricated testimonials, names, stars, review counts, press
-      logos, statistics, or clinical claims anywhere.
-- [x] Every unsourced factual claim carries `[SOURCE NEEDED]`; every
-      testimonial position carries `[TESTIMONIAL SLOT]`.
-- [x] No message anywhere suggests cutting back on coffee or wine.
-- [x] The three templates are visually distinct — different type systems,
-      palettes, layout logic, and voice registers.
-- [x] Keyboard-only pass: accordions, the waitlist modal (focus trap, Esc
-      to close, focus restored), and Template 03's picker/toggle controls
-      are reachable and operable via keyboard.
-- [x] `prefers-reduced-motion: reduce` disables scroll reveals, the
-      Snap/Melt/Wash SVG animation, and the 30-second timer's spin.
-- [x] No horizontal body scroll at 360px on any page; the comparison and
-      ingredient tables scroll inside their own `overflow-x: auto` box.
-- [x] Every page opens correctly from `file://` (see "Why global scripts"
-      above).
-- [x] No external requests except Google Fonts on Template 02
-      (`fonts.googleapis.com` / `fonts.gstatic.com`); Templates 01 and 03
-      use system font stacks only. No CDN JS, no analytics, no pixels.
+All seven grep checks and the manual checklist were run and, after fixes
+below, pass:
 
-See the final build report delivered in the session that produced this
-repo for anything noted as incomplete.
+```
+1. Hex colors shared across templates (besides white): none, after fixing
+   a stray literal #4A4A4A in 02-bloom that should have been var(--muted)
+   (#6A6A6A) — it collided with 03-gruns' own --muted (#4A4A4A).
+2. Font stacks: Archivo/Inter · Poppins/DM Sans · Fredoka/Hanken Grotesk
+   — fully disjoint.
+3. Repeated H1/H2 text: none, after demoting each template's footer
+   column labels ("Shop"/"Learn"/"Company") from <h2> to <h3> — they're
+   footer sub-groupings, not page sections, and the nav already carries
+   its own aria-label.
+4. border-radius / box-shadow counts differ per template (22/67/31 and
+   4/5/10 respectively).
+5. Section counts: 16 / 15 / 17, exactly as specified.
+6. Google Fonts loaded on all three (2 link tags each: preconnect + stylesheet).
+7. No un-interpolated template literals in static markup.
+```
+
+Manual checklist: price-config test passed (above); each template's
+section order matches its own §7/§8/§9 spec; all nine objections answered
+per template in that template's own register; each Snap/Melt/Wash visual
+is a separately hand-drawn inline SVG per template; each template owns
+its own waitlist modal markup/heading/skin; zero fabricated social proof
+anywhere; nothing suggests drinking less coffee or wine; keyboard-only
+pass confirmed (modal focus trap + Esc, accordions, marquee pause
+controls) via a real Playwright run, not just code review; marquees
+freeze under `prefers-reduced-motion`; no horizontal scroll at 360px on
+any template (two real bugs were found and fixed — see below); all three
+open correctly from `file://` (verified the same way).
+
+**Bugs found and fixed during QA** (a real headless-Chromium pass, not
+just static review):
+- `01-ag1` and `02-bloom`'s `.modal` CSS set `display: flex` with no
+  `[hidden]` guard, so the waitlist modal visually covered the page and
+  blocked clicks even while marked `hidden`. Added `.modal[hidden] {
+  display: none; }` to both.
+- `02-bloom`'s `.src` ("SOURCE NEEDED") badge had `white-space: nowrap`,
+  which forced its longest citation text wider than its card at 360px,
+  causing horizontal scroll. Removed the `nowrap`.
+- `03-gruns`'s comparison-table `.row dd` also used `white-space: nowrap`
+  inside a CSS Grid column with no `min-width: 0` on `.col`, letting a
+  long answer row force the grid track wider than the viewport at 360px.
+  Removed the `nowrap` and added `min-width: 0` to `.col`.
+
+**The squint test.** All three were opened side by side. 01-ag1 reads as
+calm/editorial (sand-and-brass, hairline borders, soft 4-shadow budget);
+02-bloom reads as warm/photographic (white-and-berry with per-flavor
+pastels, heavy image-shaped placeholders); 03-gruns reads as
+loud/cutout (saturated berry ground, thick ink borders, hard-offset
+stickers, zero soft shadows) — distinguishable from silhouette and color
+alone.
+
+---
+
+## What I could not verify
+
+`REFERENCE-NOTES.md` has the full detail: drinkag1.com, bloomnu.com, and
+gruns.co are all network-egress-blocked in this session (confirmed via
+direct fetch attempts, each returning `EGRESS_BLOCKED`), matching the
+build prompt's own stated caveat that its authoring session hit the same
+block. Every token, section order, and component description in
+`DESIGN.md` and each template is taken from the build prompt's documented
+spec, not sampled from the live pages — nothing here is presented as
+verified against the current state of those sites.
