@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Savour — Mints were never going to fix this</title>
+<meta name="description" content="Savour is a swallowable chew for after coffee and red wine. One chew, about thirty seconds, no rinse, no sink. Designed to lift residue instead of covering it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Hanken+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../shared/base.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to the good part</a>
+
+<header class="site-head">
+
+  <!-- ============ 1. ANNOUNCEMENT BAR ============ -->
+  <section class="announce" aria-label="Shipping announcement">
+    <a class="announce__link" href="#pricing">
+      FREE SHIPPING OVER <span data-savour-val="shipThreshold">&hellip;</span>
+      <span class="announce__dot" aria-hidden="true">&middot;</span>
+      SKIP TO THE TIN
+      <svg class="announce__arrow" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </section>
+
+  <!-- ============ 2. STICKY NAV ============ -->
+  <section class="nav-wrap" aria-label="Site navigation">
+    <nav class="nav" aria-label="Primary">
+      <a class="wordmark" href="../../index.html">
+        Savour
+        <svg class="wordmark__swash" viewBox="0 0 120 12" aria-hidden="true" focusable="false" preserveAspectRatio="none"><path d="M2 8c18-7 38 5 58-1s40-4 58 2" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg>
+      </a>
+
+      <ul class="nav__links">
+        <li><a href="#pricing">Shop</a></li>
+        <li><a href="#comparison">Why a chew</a></li>
+        <li><a href="#inside">What's in it</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+
+      <div class="nav__right">
+        <button type="button" class="btn btn--pill btn--brand nav__cta" data-waitlist-open>Get my tin</button>
+        <button type="button" class="cart-btn" aria-label="Cart — nothing in it yet, we haven't launched">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M3 5h3l2.2 10.4a2 2 0 0 0 2 1.6h7.4a2 2 0 0 0 2-1.55L21 8H7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10.5" cy="20" r="1.6" fill="currentColor"/><circle cx="18" cy="20" r="1.6" fill="currentColor"/></svg>
+          <span class="cart-btn__dot" aria-hidden="true">0</span>
+        </button>
+      </div>
+    </nav>
+  </section>
+
+</header>
+
+<main id="main">
+
+  <!-- ============ 3. HERO ============ -->
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="hero__inner wrap">
+
+      <div class="hero__copy">
+        <p class="eyebrow eyebrow--on-brand">Post-coffee &amp; post-wine chews</p>
+        <h1 id="hero-h" class="hero__h">Mints were never going to fix this.</h1>
+        <p class="hero__sub">One chew, about thirty seconds, swallowed. Designed to lift what your coffee just left behind — instead of parking a mint on top of it.</p>
+
+        <div class="hero__ctas">
+          <button type="button" class="btn btn--pill btn--yellow btn--lg" data-waitlist-open>Get my tin</button>
+          <a class="btn btn--pill btn--ghost-light btn--lg" href="#comparison">Show me the receipts</a>
+        </div>
+
+        <ul class="trustrow">
+          <li>30 seconds</li>
+          <li>No rinse</li>
+          <li>Swallow it</li>
+          <li>Fits any pocket</li>
+        </ul>
+      </div>
+
+      <!-- HERO IMAGE: tin + loose chews, cutout knocked out on flat --brand ground,
+           hard saturated studio light, no soft shadow. Coffee bean + grape shapes
+           orbiting the tin at ~2 o'clock and ~7 o'clock. Placeholder art below is
+           inline SVG standing in for the final cutout photography. -->
+      <div class="hero__art" role="img" aria-label="Placeholder illustration: a Savour tin with loose chews, a coffee bean and a grape floating around it.">
+        <svg class="cutout" viewBox="0 0 420 420" aria-hidden="true" focusable="false">
+          <circle cx="210" cy="215" r="168" fill="#FFC53D"/>
+          <!-- starburst -->
+          <g fill="#FF6B35">
+            <path d="M340 78l10 30 28-14-14 28 30 10-30 10 14 28-28-14-10 30-10-30-28 14 14-28-30-10 30-10-14-28 28 14z"/>
+          </g>
+          <!-- tin -->
+          <g>
+            <ellipse cx="210" cy="300" rx="112" ry="30" fill="#8A0F31"/>
+            <rect x="98" y="196" width="224" height="104" rx="18" fill="#C81D4A" stroke="#101010" stroke-width="8"/>
+            <ellipse cx="210" cy="196" rx="112" ry="30" fill="#F4F1EC" stroke="#101010" stroke-width="8"/>
+            <ellipse cx="210" cy="196" rx="72" ry="18" fill="#C81D4A"/>
+            <rect x="98" y="238" width="224" height="18" fill="#101010" opacity="0.14"/>
+          </g>
+          <!-- loose chews -->
+          <g stroke="#101010" stroke-width="7">
+            <rect x="52" y="300" width="70" height="46" rx="16" fill="#F4F1EC" transform="rotate(-11 87 323)"/>
+            <rect x="292" y="288" width="70" height="46" rx="16" fill="#F4F1EC" transform="rotate(9 327 311)"/>
+            <rect x="176" y="330" width="70" height="46" rx="16" fill="#F4F1EC" transform="rotate(-3 211 353)"/>
+          </g>
+          <!-- coffee bean, orbiting -->
+          <g transform="translate(64 112) rotate(-18)">
+            <ellipse cx="0" cy="0" rx="40" ry="28" fill="#101010"/>
+            <path d="M-30 0c14-14 46-14 60 0-14 14-46 14-60 0z" fill="#FFC53D"/>
+          </g>
+          <!-- grape, orbiting -->
+          <g transform="translate(356 210)">
+            <circle cx="0" cy="0" r="30" fill="#8A0F31" stroke="#101010" stroke-width="7"/>
+            <path d="M0-30c6-14 18-18 26-16" fill="none" stroke="#101010" stroke-width="7" stroke-linecap="round"/>
+          </g>
+          <!-- confetti -->
+          <g fill="#101010">
+            <circle cx="120" cy="94" r="7"/><circle cx="256" cy="70" r="5"/><circle cx="46" cy="238" r="6"/><circle cx="386" cy="330" r="7"/>
+          </g>
+        </svg>
+        <p class="art-tag">[PRODUCT CUTOUT — hero tin + chews]</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ 4. THIN PROOF STRIP (VOC MARQUEE) ============ -->
+  <section class="proof" aria-labelledby="proof-h">
+    <div class="proof__head wrap">
+      <h2 id="proof-h" class="proof__label">What people told us — customer research, not reviews</h2>
+      <button type="button" class="pause-btn" data-marquee-toggle="voc" aria-pressed="false">
+        <span class="pause-btn__ico" aria-hidden="true"></span>
+        <span data-marquee-label>Pause</span>
+      </button>
+    </div>
+
+    <div class="marquee" data-marquee="voc">
+      <div class="marquee__track marquee__track--slow">
+        <ul class="voc">
+          <li>&ldquo;I'll go straight from my afternoon coffee into a client call and just pray nobody's close enough to smell it.&rdquo;</li>
+          <li>&ldquo;I keep gum in every bag, every car, every desk drawer — and it still doesn't really fix it.&rdquo;</li>
+          <li>&ldquo;Mint gum after red wine tastes disgusting — it's like the two flavors are fighting each other.&rdquo;</li>
+          <li>&ldquo;I've legitimately skipped ordering a second glass of wine before a work event because I didn't want to deal with it.&rdquo;</li>
+          <li>&ldquo;If something actually worked in the moment, I'd keep it on me at all times — car, purse, desk, everywhere.&rdquo;</li>
+          <li>&ldquo;The second I saw &lsquo;swallow it, no rinse needed&rsquo; I was in — that's the whole reason mouthwash never worked for me on the go.&rdquo;</li>
+        </ul>
+        <ul class="voc" aria-hidden="true">
+          <li>&ldquo;I'll go straight from my afternoon coffee into a client call and just pray nobody's close enough to smell it.&rdquo;</li>
+          <li>&ldquo;I keep gum in every bag, every car, every desk drawer — and it still doesn't really fix it.&rdquo;</li>
+          <li>&ldquo;Mint gum after red wine tastes disgusting — it's like the two flavors are fighting each other.&rdquo;</li>
+          <li>&ldquo;I've legitimately skipped ordering a second glass of wine before a work event because I didn't want to deal with it.&rdquo;</li>
+          <li>&ldquo;If something actually worked in the moment, I'd keep it on me at all times — car, purse, desk, everywhere.&rdquo;</li>
+          <li>&ldquo;The second I saw &lsquo;swallow it, no rinse needed&rsquo; I was in — that's the whole reason mouthwash never worked for me on the go.&rdquo;</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. THE PROBLEM ============ -->
+  <section class="problem" aria-labelledby="problem-h">
+    <div class="wrap">
+      <p class="eyebrow">The ritual</p>
+      <h2 id="problem-h" class="h2">The mint ritual, in three <span class="circled">unflattering</span> acts.</h2>
+
+      <ol class="acts">
+        <li class="act">
+          <span class="act__num" aria-hidden="true">I</span>
+          <svg class="act__ico" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect x="8" y="14" width="32" height="26" rx="8" fill="#FFC53D" stroke="#101010" stroke-width="4"/><path d="M17 14v-3a7 7 0 0 1 14 0v3" fill="none" stroke="#101010" stroke-width="4" stroke-linecap="round"/></svg>
+          <p><strong>A tin in every bag.</strong> Every car. Every desk drawer. Still not enough.</p>
+        </li>
+        <li class="act">
+          <span class="act__num" aria-hidden="true">II</span>
+          <svg class="act__ico" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><circle cx="24" cy="25" r="16" fill="#FF6B35" stroke="#101010" stroke-width="4"/><path d="M24 16v9l6 5" fill="none" stroke="#101010" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <p><strong>Five minutes of cover.</strong> Then it's back, and now you're chewing again.</p>
+        </li>
+        <li class="act">
+          <span class="act__num" aria-hidden="true">III</span>
+          <svg class="act__ico" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M14 8h20l-3 16a7 7 0 0 1-14 0z" fill="#C81D4A" stroke="#101010" stroke-width="4" stroke-linejoin="round"/><path d="M24 31v9M17 40h14" fill="none" stroke="#101010" stroke-width="4" stroke-linecap="round"/></svg>
+          <p><strong>Mint. After a Malbec.</strong> Two flavors, one mouth, no survivors.</p>
+        </li>
+      </ol>
+
+      <p class="kicker">Meanwhile the actual thing — coffee oils and wine pigments bonding to enamel while you're still mid-sentence — goes completely unaddressed. <span class="src">[SOURCE NEEDED — dental/chemistry citation]</span></p>
+    </div>
+  </section>
+
+  <!-- ============ 6. THE COMPARISON — THE ENGINE OF THE PAGE ============ -->
+  <section class="compare" id="comparison" aria-labelledby="compare-h">
+    <div class="wrap">
+      <p class="eyebrow">Head to head</p>
+      <h2 id="compare-h" class="h2">A mint vs. an eraser.</h2>
+      <p class="lede">One covers. One's designed to lift. Only one of them is a plan.</p>
+
+      <div class="cols">
+
+        <!-- WINNER FIRST IN THE DOM so mobile stacks Savour on top; desktop reorders. -->
+        <div class="col col--win">
+          <div class="col__head">
+            <span class="sticker sticker--yellow" aria-hidden="true">The point</span>
+            <h3 class="col__name">Savour</h3>
+          </div>
+          <dl class="rows">
+            <div class="row"><dt>Cover it or lift it</dt><dd><svg class="mk mk--yes" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="11" fill="#FFC53D"/><path d="M6 12.5l4 4 8-9" fill="none" stroke="#101010" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Designed to lift it</dd></div>
+            <div class="row"><dt>Fresh coffee &amp; wine residue</dt><dd><svg class="mk mk--yes" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="11" fill="#FFC53D"/><path d="M6 12.5l4 4 8-9" fill="none" stroke="#101010" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Formulated to help</dd></div>
+            <div class="row"><dt>Sink, spitting, bathroom mirror</dt><dd><svg class="mk mk--yes" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="11" fill="#FFC53D"/><path d="M6 12.5l4 4 8-9" fill="none" stroke="#101010" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Never. Chew and swallow</dd></div>
+            <div class="row"><dt>Clashes with what you just drank</dt><dd><svg class="mk mk--yes" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="11" fill="#FFC53D"/><path d="M6 12.5l4 4 8-9" fill="none" stroke="#101010" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Composed to follow it</dd></div>
+            <div class="row"><dt>How long it takes</dt><dd><svg class="mk mk--yes" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="11" fill="#FFC53D"/><path d="M6 12.5l4 4 8-9" fill="none" stroke="#101010" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>About thirty seconds, done</dd></div>
+            <div class="row"><dt>Cost per use</dt><dd><svg class="mk mk--yes" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="11" fill="#FFC53D"/><path d="M6 12.5l4 4 8-9" fill="none" stroke="#101010" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-savour-val="perChewOneTime">&hellip;</span> a chew</dd></div>
+          </dl>
+        </div>
+
+        <div class="col col--lose">
+          <div class="col__head">
+            <span class="sticker sticker--drab" aria-hidden="true">The habit</span>
+            <h3 class="col__name">A mint</h3>
+          </div>
+          <dl class="rows">
+            <div class="row"><dt>Cover it or lift it</dt><dd><svg class="mk mk--no" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></svg>Covers it</dd></div>
+            <div class="row"><dt>Fresh coffee &amp; wine residue</dt><dd><svg class="mk mk--no" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></svg>Not its job</dd></div>
+            <div class="row"><dt>Sink, spitting, bathroom mirror</dt><dd><svg class="mk mk--no" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></svg>Where this usually ends</dd></div>
+            <div class="row"><dt>Clashes with what you just drank</dt><dd><svg class="mk mk--no" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></svg>Famously</dd></div>
+            <div class="row"><dt>How long it takes</dt><dd><svg class="mk mk--no" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></svg>Five minutes of cover</dd></div>
+            <div class="row"><dt>Cost per use</dt><dd><svg class="mk mk--no" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></svg>Cheap. Also nothing</dd></div>
+          </dl>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7. HOW IT WORKS ============ -->
+  <section class="how" aria-labelledby="how-h">
+    <div class="wrap">
+      <p class="eyebrow">Three steps. That's the whole thing.</p>
+      <h2 id="how-h" class="h2">Snap. Melt. Wash.</h2>
+
+      <ol class="steps">
+        <li class="step">
+          <span class="step__badge step__badge--a">01</span>
+          <!-- STEP ART: bold cutout/sticker illustration, thick ink outline, flat fills. -->
+          <svg class="step__art" viewBox="0 0 160 120" aria-hidden="true" focusable="false">
+            <rect x="10" y="10" width="140" height="100" rx="22" fill="#FFC53D" stroke="#101010" stroke-width="6"/>
+            <path d="M56 34l22 22-14 8 20 22" fill="none" stroke="#101010" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="34" y="46" width="40" height="34" rx="12" fill="#F4F1EC" stroke="#101010" stroke-width="6" transform="rotate(-12 54 63)"/>
+            <rect x="90" y="52" width="36" height="30" rx="11" fill="#C81D4A" stroke="#101010" stroke-width="6" transform="rotate(9 108 67)"/>
+            <g stroke="#101010" stroke-width="5" stroke-linecap="round"><path d="M126 26l10-8M132 40l12-2M118 18l2-10"/></g>
+          </svg>
+          <h3 class="step__h">Snap</h3>
+          <p>Bite it. The shell cracks and the actives get to work while the residue is still fresh.</p>
+        </li>
+
+        <li class="step">
+          <span class="step__badge step__badge--b">02</span>
+          <svg class="step__art" viewBox="0 0 160 120" aria-hidden="true" focusable="false">
+            <rect x="10" y="10" width="140" height="100" rx="22" fill="#C81D4A" stroke="#101010" stroke-width="6"/>
+            <path d="M80 28v64M52 44l56 34M108 44L52 78" fill="none" stroke="#F4F1EC" stroke-width="7" stroke-linecap="round"/>
+            <circle cx="80" cy="60" r="20" fill="#FFC53D" stroke="#101010" stroke-width="6"/>
+            <g fill="#F4F1EC"><circle cx="34" cy="30" r="6"/><circle cx="128" cy="94" r="6"/><circle cx="126" cy="30" r="5"/></g>
+          </svg>
+          <h3 class="step__h">Melt</h3>
+          <p>Erythritol goes cold on contact. The chill is designed to tighten enamel's surface. <span class="src">[SOURCE NEEDED — mechanism-of-action citation]</span></p>
+        </li>
+
+        <li class="step">
+          <span class="step__badge step__badge--c">03</span>
+          <svg class="step__art" viewBox="0 0 160 120" aria-hidden="true" focusable="false">
+            <rect x="10" y="10" width="140" height="100" rx="22" fill="#FF6B35" stroke="#101010" stroke-width="6"/>
+            <path d="M24 76c14-14 28 14 42 0s28 14 42 0 20 6 28 0" fill="none" stroke="#101010" stroke-width="7" stroke-linecap="round"/>
+            <path d="M24 92c14-14 28 14 42 0s28 14 42 0 20 6 28 0" fill="none" stroke="#101010" stroke-width="7" stroke-linecap="round"/>
+            <path d="M80 22c10 14 18 22 18 32a18 18 0 0 1-36 0c0-10 8-18 18-32z" fill="#F4F1EC" stroke="#101010" stroke-width="6" stroke-linejoin="round"/>
+          </svg>
+          <h3 class="step__h">Wash</h3>
+          <p>Malic acid brings on a flood of your own saliva, formulated to help carry oils and pigments off before they settle. Then you swallow it.</p>
+        </li>
+      </ol>
+
+      <p class="kicker kicker--center">Yes, that's it. The simplicity is the point.</p>
+    </div>
+  </section>
+
+  <!-- ============ 8. WHAT'S IN IT ============ -->
+  <section class="inside" id="inside" aria-labelledby="inside-h">
+    <div class="wrap">
+      <p class="eyebrow">The credibility part</p>
+      <h2 id="inside-h" class="h2">Short list. Long explanations.</h2>
+
+      <p class="bignum"><span class="bignum__slot">[INGREDIENT COUNT — pending final formulation]</span></p>
+      <p class="bignum__cap">ingredients. All of them pronounceable.</p>
+    </div>
+
+    <div class="ing-marquee-head wrap">
+      <button type="button" class="pause-btn pause-btn--ink" data-marquee-toggle="ing" aria-pressed="false">
+        <span class="pause-btn__ico" aria-hidden="true"></span>
+        <span data-marquee-label>Pause</span>
+      </button>
+    </div>
+
+    <div class="marquee marquee--ing" data-marquee="ing">
+      <div class="marquee__track">
+        <p class="ing-row">ERYTHRITOL <span aria-hidden="true">&#9733;</span> MALIC ACID <span aria-hidden="true">&#9733;</span> CARDAMOM <span aria-hidden="true">&#9733;</span> SWEET CREAM <span aria-hidden="true">&#9733;</span> DARK CHERRY <span aria-hidden="true">&#9733;</span> SAGE <span aria-hidden="true">&#9733;</span></p>
+        <p class="ing-row" aria-hidden="true">ERYTHRITOL <span>&#9733;</span> MALIC ACID <span>&#9733;</span> CARDAMOM <span>&#9733;</span> SWEET CREAM <span>&#9733;</span> DARK CHERRY <span>&#9733;</span> SAGE <span>&#9733;</span></p>
+      </div>
+      <div class="marquee__track marquee__track--rev">
+        <p class="ing-row ing-row--alt">NO MINT <span aria-hidden="true">&#9733;</span> NO FOAM <span aria-hidden="true">&#9733;</span> NO RINSE <span aria-hidden="true">&#9733;</span> NO SPITTING <span aria-hidden="true">&#9733;</span> NO SINK <span aria-hidden="true">&#9733;</span> NO PLASTIC PEN <span aria-hidden="true">&#9733;</span></p>
+        <p class="ing-row ing-row--alt" aria-hidden="true">NO MINT <span>&#9733;</span> NO FOAM <span>&#9733;</span> NO RINSE <span>&#9733;</span> NO SPITTING <span>&#9733;</span> NO SINK <span>&#9733;</span> NO PLASTIC PEN <span>&#9733;</span></p>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="ings">
+
+        <article class="ing-card">
+          <!-- INGREDIENT CUTOUT: erythritol crystals knocked out on flat yellow, hard light. -->
+          <div class="ing-card__art ing-card__art--y" role="img" aria-label="Placeholder illustration: cooling crystals.">
+            <svg viewBox="0 0 120 100" aria-hidden="true" focusable="false"><path d="M60 12l14 24h28l-14 24 14 24H74L60 88 46 84H18l14-24-14-24h28z" fill="#FFFFFF" stroke="#101010" stroke-width="6" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="ing-card__h">The cooling agent</h3>
+          <p class="ing-card__name">Erythritol</p>
+          <p>The cold snap you feel. It's there to cool the mouth and support enamel's surface, not to taste like a candy cane. <span class="src">[SOURCE NEEDED — dental/chemistry citation]</span></p>
+        </article>
+
+        <article class="ing-card">
+          <!-- INGREDIENT CUTOUT: green apple sliced, knocked out on flat orange, hard light. -->
+          <div class="ing-card__art ing-card__art--o" role="img" aria-label="Placeholder illustration: an apple, the source of malic acid.">
+            <svg viewBox="0 0 120 100" aria-hidden="true" focusable="false"><path d="M60 26c12-12 34-8 38 10 5 22-12 52-24 52-6 0-8-4-14-4s-8 4-14 4c-12 0-29-30-24-52 4-18 26-22 38-10z" fill="#FFFFFF" stroke="#101010" stroke-width="6" stroke-linejoin="round"/><path d="M60 26V10M60 14c8-6 18-6 22-2" fill="none" stroke="#101010" stroke-width="6" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="ing-card__h">The acid</h3>
+          <p class="ing-card__name">Malic acid</p>
+          <p>Found in apples. Designed to trigger a salivary flood that helps carry residue off before it bonds. <span class="src">[SOURCE NEEDED — dental/chemistry citation]</span></p>
+        </article>
+
+        <article class="ing-card">
+          <!-- INGREDIENT CUTOUT: cardamom pods + a sage leaf + a dark cherry, knocked out on flat berry. -->
+          <div class="ing-card__art ing-card__art--b" role="img" aria-label="Placeholder illustration: cardamom pods, a sage leaf and a dark cherry.">
+            <svg viewBox="0 0 120 100" aria-hidden="true" focusable="false"><ellipse cx="36" cy="56" rx="18" ry="28" fill="#FFFFFF" stroke="#101010" stroke-width="6" transform="rotate(-16 36 56)"/><path d="M84 24c18 4 24 24 14 40-14 22-34 14-36-4-2-16 8-38 22-36z" fill="#FFC53D" stroke="#101010" stroke-width="6" stroke-linejoin="round"/><circle cx="88" cy="76" r="14" fill="#8A0F31" stroke="#101010" stroke-width="6"/></svg>
+          </div>
+          <h3 class="ing-card__h">The flavor</h3>
+          <p class="ing-card__name">Built per drink</p>
+          <p>Cardamom and sweet cream after coffee. Dark cherry and sage after wine. Chosen to agree with what's already in your mouth.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 9. WHAT'S NOT IN IT ============ -->
+  <section class="notin" aria-labelledby="notin-h">
+    <div class="wrap">
+      <p class="eyebrow">Subtraction</p>
+      <h2 id="notin-h" class="h2">The list we're proudest of.</h2>
+
+      <ul class="nolist">
+        <li><svg class="mk mk--no" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></svg>No mint</li>
+        <li><svg class="mk mk--no" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></svg>No foam</li>
+        <li><svg class="mk mk--no" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></svg>No rinsing</li>
+        <li><svg class="mk mk--no" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></svg>No spitting</li>
+        <li><svg class="mk mk--no" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></svg>No plastic pen</li>
+      </ul>
+
+      <p class="kicker">Nothing here needs a bathroom, a mirror, or an excuse to leave the table.</p>
+    </div>
+  </section>
+
+  <!-- ============ 10. TASTE ============ -->
+  <section class="taste" aria-labelledby="taste-h">
+    <div class="wrap">
+      <p class="eyebrow">The part nobody else bothers with</p>
+      <h2 id="taste-h" class="h2">Composed to follow your drink, not fight it.</h2>
+
+      <div class="tastes">
+
+        <article class="taste-card">
+          <!-- TASTE MACRO: extreme close-up of the Post-Coffee chew, cutout on flat orange,
+               hard saturated light, cardamom pods scattered. No moody grading. -->
+          <div class="taste-card__art taste-card__art--coffee" role="img" aria-label="Placeholder macro shot: the Post-Coffee chew with cardamom pods.">
+            <svg viewBox="0 0 240 160" aria-hidden="true" focusable="false">
+              <rect x="52" y="42" width="136" height="80" rx="26" fill="#F4F1EC" stroke="#101010" stroke-width="7"/>
+              <path d="M78 82c14-12 28 12 42 0s28 12 42 0" fill="none" stroke="#C81D4A" stroke-width="7" stroke-linecap="round"/>
+              <ellipse cx="34" cy="126" rx="24" ry="16" fill="#101010" transform="rotate(-18 34 126)"/>
+              <ellipse cx="208" cy="34" rx="22" ry="15" fill="#101010" transform="rotate(14 208 34)"/>
+            </svg>
+            <p class="art-tag">[TASTE MACRO — Post-Coffee]</p>
+          </div>
+          <h3 class="taste-card__h">Savour Post-Coffee</h3>
+          <p class="taste-card__flavor">Cardamom &amp; sweet cream</p>
+          <p>Warm, faintly spiced, finishes soft. Reads like the last third of the cup, not a course correction.</p>
+          <button type="button" class="btn btn--pill btn--outline" data-waitlist-open data-variant="coffee">Save me this one</button>
+        </article>
+
+        <article class="taste-card">
+          <!-- TASTE MACRO: extreme close-up of the Post-Wine chew, cutout on flat berry,
+               hard saturated light, a sage leaf and dark cherry scattered. -->
+          <div class="taste-card__art taste-card__art--wine" role="img" aria-label="Placeholder macro shot: the Post-Wine chew with sage and dark cherry.">
+            <svg viewBox="0 0 240 160" aria-hidden="true" focusable="false">
+              <rect x="52" y="42" width="136" height="80" rx="26" fill="#F4F1EC" stroke="#101010" stroke-width="7"/>
+              <path d="M78 82c14-12 28 12 42 0s28 12 42 0" fill="none" stroke="#8A0F31" stroke-width="7" stroke-linecap="round"/>
+              <circle cx="36" cy="120" r="20" fill="#8A0F31" stroke="#101010" stroke-width="7"/>
+              <path d="M198 20c20 6 24 30 10 44-16 16-34 6-34-12 0-16 10-36 24-32z" fill="#FFC53D" stroke="#101010" stroke-width="7" stroke-linejoin="round"/>
+            </svg>
+            <p class="art-tag">[TASTE MACRO — Post-Wine]</p>
+          </div>
+          <h3 class="taste-card__h">Savour Post-Wine</h3>
+          <p class="taste-card__flavor">Dark cherry &amp; sage</p>
+          <p>Fruit up front, herb on the finish. Dessert energy. Zero dental-office energy.</p>
+          <button type="button" class="btn btn--pill btn--outline" data-waitlist-open data-variant="wine">Save me this one</button>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 11. STANDARDS ============ -->
+  <section class="standards" aria-labelledby="standards-h">
+    <div class="wrap">
+      <p class="eyebrow">Boring but load-bearing</p>
+      <h2 id="standards-h" class="h2">We'd rather show our work than shout.</h2>
+
+      <ul class="badges">
+        <li class="badge badge--yellow">
+          <span class="badge__label">Food-grade ingredients</span>
+          <span class="src src--onbadge">[SOURCE NEEDED — food-safety documentation]</span>
+        </li>
+        <li class="badge badge--orange">
+          <span class="badge__label">Formulated to be swallowed</span>
+          <span class="src src--onbadge">[SOURCE NEEDED — dental/chemistry citation]</span>
+        </li>
+        <li class="badge badge--empty">
+          <span class="badge__label">[CERTIFICATION SLOT — pending launch]</span>
+        </li>
+      </ul>
+
+      <p class="kicker kicker--center">Never sober up just to be believed.</p>
+    </div>
+  </section>
+
+  <!-- ============ 12. REVIEWS ============ -->
+  <section class="reviews" aria-labelledby="reviews-h">
+    <div class="wrap">
+      <p class="eyebrow">Proof, eventually</p>
+      <h2 id="reviews-h" class="h2">This is where the reviews go.</h2>
+
+      <div class="agg">
+        <span class="agg__slot">[STAR RATING — pending launch]</span>
+        <span class="agg__slot">[REVIEW COUNT — pending launch]</span>
+      </div>
+
+      <ul class="review-grid">
+        <li class="review-card"><span class="review-card__stars">[STAR RATING — pending launch]</span><span class="review-card__slot">[REVIEW SLOT]</span><span class="review-card__by">[REVIEW SLOT]</span></li>
+        <li class="review-card"><span class="review-card__stars">[STAR RATING — pending launch]</span><span class="review-card__slot">[REVIEW SLOT]</span><span class="review-card__by">[REVIEW SLOT]</span></li>
+        <li class="review-card"><span class="review-card__stars">[STAR RATING — pending launch]</span><span class="review-card__slot">[REVIEW SLOT]</span><span class="review-card__by">[REVIEW SLOT]</span></li>
+      </ul>
+
+      <p class="kicker">We're pre-launch. Nobody has reviewed this yet, so nobody's pretending to. Check back after <span data-savour-val="batchLabel">&hellip;</span>.</p>
+    </div>
+  </section>
+
+  <!-- ============ 13. PRICING BLOCK ============ -->
+  <section class="pricing" id="pricing" aria-labelledby="pricing-h">
+    <div class="wrap">
+      <p class="eyebrow"><span data-savour-val="batchLabel">&hellip;</span> &middot; <span data-savour-val="batchUnits">&hellip;</span> tins</p>
+      <h2 id="pricing-h" class="h2">Pick your rhythm.</h2>
+
+      <form class="plans" data-plan-form>
+        <fieldset class="plans__set">
+          <legend class="sr-only">Choose a purchase plan</legend>
+
+          <label class="plan" data-plan="sub">
+            <input type="radio" name="plan" value="sub" checked data-plan-input>
+            <span class="plan__box">
+              <span class="plan__flag">Most popular</span>
+              <span class="plan__row">
+                <span class="plan__dot" aria-hidden="true"></span>
+                <span class="plan__title">Subscribe</span>
+                <span class="plan__price" data-savour-val="subPrice">&hellip;</span>
+              </span>
+              <span class="plan__meta">
+                <span class="plan__save"><span data-savour-val="subDiscount">&hellip;</span>% off, <span data-savour-val="subInterval">&hellip;</span>. Skip or cancel whenever.</span>
+                <span class="plan__lock" data-savour-val="priceLock">&hellip;</span>
+              </span>
+            </span>
+          </label>
+
+          <label class="plan" data-plan="once">
+            <input type="radio" name="plan" value="once" data-plan-input>
+            <span class="plan__box">
+              <span class="plan__row">
+                <span class="plan__dot" aria-hidden="true"></span>
+                <span class="plan__title">One-time</span>
+                <span class="plan__price" data-savour-val="oncePrice">&hellip;</span>
+              </span>
+              <span class="plan__meta">
+                <span class="plan__save">One tin, <span data-savour-val="chewsPerTin">&hellip;</span> chews, no commitment.</span>
+              </span>
+            </span>
+          </label>
+
+        </fieldset>
+
+        <p class="perchew" data-perchew-callout>
+          <span class="perchew__num" data-perchew-value>&hellip;</span>
+          <span class="perchew__cap">a chew. Roughly what you tip on the coffee that caused the problem.</span>
+        </p>
+
+        <button type="button" class="btn btn--pill btn--brand btn--lg btn--block" data-waitlist-open>Get my tin</button>
+
+        <p class="guar-line"><span data-savour-val="guaranteeDays">&hellip;</span>-day money-back guarantee. Free shipping over <span data-savour-val="shipThreshold">&hellip;</span>.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ 14. GUARANTEE STICKER ============ -->
+  <section class="guar" aria-labelledby="guar-h">
+    <div class="wrap guar__inner">
+      <div class="guar-sticker">
+        <span class="guar-sticker__num" data-savour-val="guaranteeDays">&hellip;</span>
+        <span class="guar-sticker__word">days</span>
+      </div>
+      <div class="guar__copy">
+        <h2 id="guar-h" class="h2 h2--light">Chew it. Judge it.</h2>
+        <p>If it's not for you, we'll refund it. No form to fill in, no essay about why.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 15. FAQ ============ -->
+  <section class="faq" id="faq" aria-labelledby="faq-h">
+    <div class="wrap wrap--narrow">
+      <p class="eyebrow">The objections</p>
+      <h2 id="faq-h" class="h2">Ask us the awkward ones.</h2>
+
+      <div class="acc">
+
+        <div class="acc__item">
+          <h3 class="acc__h"><button type="button" class="acc__btn" id="q1" aria-expanded="false" aria-controls="a1">Is it actually safe to swallow every day?<span class="acc__chev" aria-hidden="true"></span></button></h3>
+          <div class="acc__panel" id="a1" role="region" aria-labelledby="q1" hidden>
+            <p>That's the design brief, not an afterthought. Every ingredient is food-grade and intended to be eaten — erythritol and malic acid both turn up in the produce aisle. Nothing here is meant to be spat out, because nothing here needs a sink. <span class="src">[SOURCE NEEDED — dental/chemistry citation]</span></p>
+          </div>
+        </div>
+
+        <div class="acc__item">
+          <h3 class="acc__h"><button type="button" class="acc__btn" id="q2" aria-expanded="false" aria-controls="a2">Isn't this just an expensive mint?<span class="acc__chev" aria-hidden="true"></span></button></h3>
+          <div class="acc__panel" id="a2" role="region" aria-labelledby="q2" hidden>
+            <p>A mint covers a smell for a few minutes. Savour is formulated to work on the residue itself — a cold snap designed to tighten enamel's surface, then a malic-acid-driven saliva flood designed to help carry coffee oils and wine pigments off before they settle. Different job, different format, same pocket.</p>
+          </div>
+        </div>
+
+        <div class="acc__item">
+          <h3 class="acc__h"><button type="button" class="acc__btn" id="q3" aria-expanded="false" aria-controls="a3">Will it work fast enough to matter mid-meeting or mid-date?<span class="acc__chev" aria-hidden="true"></span></button></h3>
+          <div class="acc__panel" id="a3" role="region" aria-labelledby="q3" hidden>
+            <p>About thirty seconds, start to swallow. No rinsing, no spitting, nowhere to be. You can do it under the table and nobody will clock it — though we'd love it if they did.</p>
+          </div>
+        </div>
+
+        <div class="acc__item">
+          <h3 class="acc__h"><button type="button" class="acc__btn" id="q4" aria-expanded="false" aria-controls="a4">Won't the flavor clash the way mint does?<span class="acc__chev" aria-hidden="true"></span></button></h3>
+          <div class="acc__panel" id="a4" role="region" aria-labelledby="q4" hidden>
+            <p>That's the entire reason there are two of them. Post-Coffee is cardamom and sweet cream. Post-Wine is dark cherry and sage. Both were composed to agree with what you just drank instead of declaring war on it.</p>
+          </div>
+        </div>
+
+        <div class="acc__item">
+          <h3 class="acc__h"><button type="button" class="acc__btn" id="q5" aria-expanded="false" aria-controls="a5">Is this backed by anything?<span class="acc__chev" aria-hidden="true"></span></button></h3>
+          <div class="acc__panel" id="a5" role="region" aria-labelledby="q5" hidden>
+            <p>It's built on established chemistry: coffee oils and wine's anthocyanin pigments bond to enamel within minutes, and volatile sulfur compounds are what actually linger. <span class="src">[SOURCE NEEDED — dental/chemistry citation]</span> We're pre-launch, so we're not going to wave around a clinical trial we haven't run. When there's data, it goes on this page with the citation attached.</p>
+          </div>
+        </div>
+
+        <div class="acc__item">
+          <h3 class="acc__h"><button type="button" class="acc__btn" id="q6" aria-expanded="false" aria-controls="a6">Why two products instead of one?<span class="acc__chev" aria-hidden="true"></span></button></h3>
+          <div class="acc__panel" id="a6" role="region" aria-labelledby="q6" hidden>
+            <p>Because one flavor that suits both coffee and red wine doesn't exist, and building it would mean building something that suits neither. Coffee ends warm and round. Wine ends dark and tannic. Different finishes, different chew.</p>
+          </div>
+        </div>
+
+        <div class="acc__item">
+          <h3 class="acc__h"><button type="button" class="acc__btn" id="q7" aria-expanded="false" aria-controls="a7">Feels expensive — why not just buy gum?<span class="acc__chev" aria-hidden="true"></span></button></h3>
+          <div class="acc__panel" id="a7" role="region" aria-labelledby="q7" hidden>
+            <p>Do the per-chew math. A tin works out to about <strong data-savour-val="perChewOneTime">&hellip;</strong> a chew, which is less than the tip on the coffee that started this. Gum is cheaper, and it's doing something else entirely. You're not comparing prices. You're comparing outcomes.</p>
+          </div>
+        </div>
+
+        <div class="acc__item">
+          <h3 class="acc__h"><button type="button" class="acc__btn" id="q8" aria-expanded="false" aria-controls="a8">New brand, new category — will it ship and does it work?<span class="acc__chev" aria-hidden="true"></span></button></h3>
+          <div class="acc__panel" id="a8" role="region" aria-labelledby="q8" hidden>
+            <p>Fair. We're pre-launch, in <span data-savour-val="batchLabel">&hellip;</span>, capped at <span data-savour-val="batchUnits">&hellip;</span> tins. Join the list and you'll get the ship date from us before you get it anywhere else. Every tin carries a <span data-savour-val="guaranteeDays">&hellip;</span>-day money-back guarantee, which is our way of putting the risk on our side of the table.</p>
+          </div>
+        </div>
+
+        <div class="acc__item">
+          <h3 class="acc__h"><button type="button" class="acc__btn" id="q9" aria-expanded="false" aria-controls="a9">Do I have to change my coffee or wine habits?<span class="acc__chev" aria-hidden="true"></span></button></h3>
+          <div class="acc__panel" id="a9" role="region" aria-labelledby="q9" hidden>
+            <p>No. God, no. That's the whole pitch. Order the second glass. Get the afternoon Americano. Savour is designed to handle the aftermath so the habit stays exactly where you left it.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 16. FINAL CTA BAND ============ -->
+  <section class="final" aria-labelledby="final-h">
+    <div class="wrap final__inner">
+      <div class="final__copy">
+        <h2 id="final-h" class="final__h">Keep the coffee. Keep the wine. Lose the tin of mints.</h2>
+        <button type="button" class="btn btn--pill btn--yellow btn--lg" data-waitlist-open>Get my tin</button>
+        <p class="final__meta"><span data-savour-val="batchLabel">&hellip;</span> &middot; <span data-savour-val="batchUnits">&hellip;</span> tins &middot; <span data-savour-val="guaranteeDays">&hellip;</span>-day money-back guarantee</p>
+      </div>
+
+      <!-- FINAL CTA IMAGE: the tin alone, cutout on flat --brand ground, hard light,
+           tilted +6deg, confetti dots. Loudest product moment on the page. -->
+      <div class="final__art" role="img" aria-label="Placeholder illustration: a Savour tin, tilted.">
+        <svg class="cutout" viewBox="0 0 300 240" aria-hidden="true" focusable="false">
+          <g transform="rotate(6 150 120)">
+            <ellipse cx="150" cy="176" rx="96" ry="26" fill="#8A0F31"/>
+            <rect x="54" y="86" width="192" height="90" rx="16" fill="#F4F1EC" stroke="#101010" stroke-width="8"/>
+            <ellipse cx="150" cy="86" rx="96" ry="26" fill="#FFC53D" stroke="#101010" stroke-width="8"/>
+            <ellipse cx="150" cy="86" rx="58" ry="15" fill="#C81D4A"/>
+          </g>
+          <g fill="#FFC53D"><circle cx="30" cy="42" r="9"/><circle cx="272" cy="60" r="7"/><circle cx="264" cy="206" r="9"/><circle cx="40" cy="212" r="6"/></g>
+        </svg>
+        <p class="art-tag art-tag--light">[PRODUCT CUTOUT — final band]</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <!-- ============ 17. FOOTER ============ -->
+  <section class="foot__section" aria-labelledby="foot-h">
+    <div class="wrap">
+      <h2 id="foot-h" class="sr-only">Footer</h2>
+
+      <div class="foot__top">
+        <div class="foot__brand">
+          <a class="wordmark wordmark--foot" href="../../index.html">Savour</a>
+          <p class="foot__tag">An eraser, not an air freshener.</p>
+        </div>
+
+        <form class="foot__capture" data-foot-form>
+          <label class="foot__label" for="foot-email">Get on the list before the tins go.</label>
+          <div class="foot__inputrow">
+            <input class="foot__input" id="foot-email" type="email" name="email" placeholder="you@wherever.com" autocomplete="email">
+            <button type="submit" class="btn btn--pill btn--yellow">Save me a tin</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="foot__cols">
+        <div class="foot__col">
+          <h3 class="foot__ch">Shop</h3>
+          <ul><li><a href="#pricing">Post-Coffee</a></li><li><a href="#pricing">Post-Wine</a></li><li><a href="#pricing">Subscribe</a></li></ul>
+        </div>
+        <div class="foot__col">
+          <h3 class="foot__ch">Learn</h3>
+          <ul><li><a href="#comparison">Why a chew</a></li><li><a href="#inside">What's in it</a></li><li><a href="#faq">FAQ</a></li></ul>
+        </div>
+        <div class="foot__col">
+          <h3 class="foot__ch">Company</h3>
+          <ul><li><a href="#">About</a></li><li><a href="#">Contact</a></li><li><a href="#">Careers</a></li></ul>
+        </div>
+        <div class="foot__col">
+          <h3 class="foot__ch">Fine print</h3>
+          <ul><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li><li><a href="#">Shipping &amp; returns</a></li></ul>
+        </div>
+      </div>
+
+      <ul class="foot__social">
+        <li><a href="#" aria-label="Savour on Instagram"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="6" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor"/></svg></a></li>
+        <li><a href="#" aria-label="Savour on TikTok"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M14 3v11.2a3.4 3.4 0 1 1-3-3.4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 5.4c1 2 2.6 3.1 5 3.3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></a></li>
+        <li><a href="#" aria-label="Savour by email"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M4 8l8 5 8-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      </ul>
+
+      <p class="foot__legal">Savour is pre-launch. Nothing on this page is a medical claim: Savour is not intended to diagnose, treat, cure or prevent any condition, and it is not a substitute for brushing, flossing or seeing a dentist. Prices, shipping thresholds and guarantee terms shown here are rendered from our published configuration. &copy; Savour.</p>
+    </div>
+  </section>
+</footer>
+
+<!-- ============ WAITLIST MODAL (markup + copy owned by this template) ============ -->
+<div class="modal" data-savour-modal hidden>
+  <div class="modal__panel" data-savour-modal-panel role="dialog" aria-modal="true" aria-labelledby="modal-h">
+    <button type="button" class="modal__x" data-savour-modal-close aria-label="Close">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/></svg>
+    </button>
+
+    <p class="modal__eyebrow"><span data-savour-val="batchLabel">&hellip;</span> &middot; <span data-savour-val="batchUnits">&hellip;</span> tins</p>
+    <h2 class="modal__h" id="modal-h">Save me a tin.</h2>
+    <p class="modal__body">Leave an email and we'll tell you the second it's real. No newsletter, no five-part series about hydration.</p>
+
+    <form class="modal__form" data-savour-modal-form novalidate>
+      <label class="modal__label" for="modal-variant">Which one are you here for?</label>
+      <select class="modal__select" id="modal-variant" data-savour-modal-variant>
+        <option value="coffee">Savour Post-Coffee — cardamom &amp; sweet cream</option>
+        <option value="wine">Savour Post-Wine — dark cherry &amp; sage</option>
+      </select>
+
+      <label class="modal__label" for="modal-email">Your email</label>
+      <input class="modal__input" id="modal-email" type="email" placeholder="you@wherever.com" autocomplete="email" data-savour-modal-email>
+
+      <p class="modal__error" data-savour-modal-error hidden>That email's missing something. Have another go.</p>
+
+      <button type="submit" class="btn btn--pill btn--brand btn--block">Put me on the list</button>
+      <p class="modal__fine"><span data-savour-val="guaranteeDays">&hellip;</span>-day money-back guarantee when we ship. Unsubscribe in one click, no hard feelings.</p>
+    </form>
+
+    <div class="modal__success" data-savour-modal-success hidden>
+      <div class="modal__tick" aria-hidden="true">
+        <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><circle cx="24" cy="24" r="21" fill="#FFC53D" stroke="#101010" stroke-width="5"/><path d="M13 25l7 7 15-16" fill="none" stroke="#101010" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h3 class="modal__successh">You're on the list.</h3>
+      <p>Go finish your coffee. We'll take it from here.</p>
+      <button type="button" class="btn btn--pill btn--outline" data-savour-modal-close>Back to the page</button>
+    </div>
+  </div>
+</div>
+
+<script src="../../shared/config.js"></script>
+<script src="../../shared/pricing.js"></script>
+<script src="../../shared/waitlist.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
