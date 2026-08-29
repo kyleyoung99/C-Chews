@@ -8,6 +8,10 @@
  * To change what the site charges: edit the numbers below, reload
  * any template, and every displayed figure updates. No HTML edits.
  *
+ * Variant accent colors are deliberately NOT here — each template
+ * takes its palette from its own reference brand (see DESIGN.md),
+ * not from a shared config value.
+ *
  * Loaded as a plain global script (not an ES module) so every
  * template opens correctly from file:// as well as a static server —
  * see README.md "Why global scripts instead of ES modules."
@@ -22,22 +26,8 @@ window.SAVOUR_CONFIG = {
   product: {
     chewsPerTin: 30,
     variants: [
-      {
-        id: "coffee",
-        name: "Savour Post-Coffee",
-        flavor: "Cardamom & Sweet Cream",
-        pairing: "pairs with: the third espresso",
-        accent: "#6F4E37",
-        accentDark: "#4A331F",
-      },
-      {
-        id: "wine",
-        name: "Savour Post-Wine",
-        flavor: "Dark Cherry & Sage",
-        pairing: "pairs with: the last pour before the check",
-        accent: "#5B2333",
-        accentDark: "#3A1521",
-      },
+      { id: "coffee", name: "Savour Post-Coffee", flavor: "Cardamom & Sweet Cream" },
+      { id: "wine", name: "Savour Post-Wine", flavor: "Dark Cherry & Sage" },
     ],
   },
 
@@ -47,20 +37,8 @@ window.SAVOUR_CONFIG = {
 
     bundles: [
       { id: "single", tins: 1, price: 20.0, label: "One Tin", badge: null },
-      {
-        id: "duo",
-        tins: 2,
-        price: 36.0,
-        label: "The Pair (Coffee + Wine)",
-        badge: "Most Popular",
-      },
-      {
-        id: "trio",
-        tins: 3,
-        price: 50.0,
-        label: "The Full Set + Spare",
-        badge: "Best Value",
-      },
+      { id: "duo", tins: 2, price: 36.0, label: "The Pair", badge: "Most Popular" },
+      { id: "trio", tins: 3, price: 50.0, label: "The Full Set", badge: "Best Value" },
     ],
 
     subscription: {

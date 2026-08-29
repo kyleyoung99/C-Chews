@@ -1,25 +1,35 @@
 /**
- * SAVOUR — WAITLIST MODAL
+ * SAVOUR — WAITLIST MODAL LOGIC (no markup, no styling, no copy)
  * ---------------------------------------------------------------
- * Shared email-capture modal used by every "buy" / "join" CTA on
- * all three templates. There is no real checkout — config.launch.mode
- * is "waitlist" — so every purchase intent funnels here.
+ * v3 change from earlier builds: this file no longer builds any DOM
+ * or owns any CSS. Each template supplies its own modal markup,
+ * heading text, and skin in its own index.html/style.css. This file
+ * only wires behavior against a fixed data-attribute contract that
+ * every template's modal markup must implement:
  *
- * Usage from a template's own script.js:
- *   SavourWaitlist.init();                    // wires [data-waitlist-open] triggers
- *   SavourWaitlist.open({ variant: "coffee" }); // open programmatically
+ *   [data-savour-modal]          the overlay/dialog root (toggle `hidden`)
+ *   [data-savour-modal-panel]    the focus-trap boundary (optional —
+ *                                 falls back to the root element)
+ *   [data-savour-modal-close]    one or more close buttons/elements
+ *   [data-savour-modal-form]     the email-capture <form>
+ *   [data-savour-modal-email]    the email <input>
+ *   [data-savour-modal-variant]  optional variant <select> to preselect
+ *   [data-savour-modal-error]    element shown on invalid email
+ *   [data-savour-modal-success]  success-state container, hidden by default
  *
- * Exit-intent helpers (used by Template 03):
- *   SavourWaitlist.shouldOfferExitIntent()
- *   SavourWaitlist.markExitIntentOffered()
+ *   [data-waitlist-open]         anywhere on the page: click opens the
+ *                                 modal. Optional data-variant="coffee"
+ *                                 preselects a variant.
+ *
+ * There is no real checkout — config.launch.mode is "waitlist" — so a
+ * valid submit only shows the success state and logs the payload. No
+ * network requests are made anywhere in this file.
  *
  * Loaded as a plain global script exposing window.SavourWaitlist.
- * No network requests are made anywhere in this file.
  */
 (function () {
-  const EXIT_INTENT_KEY = "savour:exitIntentShown";
-
-  let modalEl = null;
+  let modal = null;
+  let panel = null;
   let lastFocusedEl = null;
   let keydownHandler = null;
 
@@ -27,98 +37,12 @@
     return window.SAVOUR_CONFIG;
   }
 
-  function pricingLib() {
-    return window.SavourPricing;
-  }
-
-  function buildModal() {
-    const wrap = document.createElement("div");
-    wrap.className = "savour-waitlist-overlay";
-    wrap.setAttribute("data-savour-waitlist-overlay", "");
-    wrap.hidden = true;
-
-    const config = cfg();
-    const variantOptions = config.product.variants
-      .map((v) => `<option value="${v.id}">${v.name}</option>`)
-      .join("");
-
-    wrap.innerHTML = `
-      <div
-        class="savour-waitlist-modal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="savour-waitlist-title"
-        aria-describedby="savour-waitlist-desc"
-      >
-        <button
-          type="button"
-          class="savour-waitlist-close"
-          data-savour-waitlist-close
-          aria-label="Close waitlist form"
-        >&times;</button>
-
-        <div class="savour-waitlist-body" data-savour-waitlist-body>
-          <h2 id="savour-waitlist-title">Join the ${config.launch.batchLabel} Waitlist</h2>
-          <p id="savour-waitlist-desc" class="savour-waitlist-desc">
-            ${config.launch.priceLockCopy} We'll email you the moment your batch ships —
-            no spam, no third parties.
-          </p>
-
-          <form data-savour-waitlist-form novalidate>
-            <label class="savour-waitlist-label" for="savour-waitlist-email">
-              Email address
-            </label>
-            <input
-              type="email"
-              id="savour-waitlist-email"
-              name="email"
-              class="savour-waitlist-input"
-              placeholder="you@email.com"
-              required
-              autocomplete="email"
-            />
-            <p class="savour-waitlist-error" data-savour-waitlist-error hidden>
-              Enter a valid email address.
-            </p>
-
-            <label class="savour-waitlist-label" for="savour-waitlist-variant">
-              Which one? (optional)
-            </label>
-            <select id="savour-waitlist-variant" name="variant" class="savour-waitlist-input">
-              <option value="undecided">Not sure yet</option>
-              ${variantOptions}
-              <option value="both">Both</option>
-            </select>
-
-            <button type="submit" class="savour-waitlist-submit">
-              Join the Waitlist
-            </button>
-
-            <p class="savour-waitlist-fineprint">
-              ${config.launch.batchLabel} is limited to ${config.launch.foundersBatchUnits} tins.
-            </p>
-          </form>
-
-          <div class="savour-waitlist-success" data-savour-waitlist-success hidden>
-            <p class="savour-waitlist-success-title">You're on the list.</p>
-            <p>
-              We'll email you first when ${config.launch.batchLabel} opens — at your
-              locked-in founders price.
-            </p>
-            <button type="button" class="savour-waitlist-submit" data-savour-waitlist-close>
-              Done
-            </button>
-          </div>
-        </div>
-      </div>
-    `;
-
-    document.body.appendChild(wrap);
-    return wrap;
+  function query(sel) {
+    return modal ? modal.querySelector(sel) : null;
   }
 
   function trapFocus(e) {
-    if (!modalEl || modalEl.hidden) return;
+    if (!modal || modal.hidden) return;
 
     if (e.key === "Escape") {
       close();
@@ -127,7 +51,8 @@
 
     if (e.key !== "Tab") return;
 
-    const focusable = modalEl.querySelectorAll(
+    const scope = panel || modal;
+    const focusable = scope.querySelectorAll(
       'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
     );
     if (focusable.length === 0) return;
@@ -144,46 +69,48 @@
     }
   }
 
+  function overlayClick(e) {
+    if (e.target === modal) close();
+  }
+
   function open(options) {
     options = options || {};
-    if (!modalEl) modalEl = buildModal();
+    if (!modal) return;
 
     lastFocusedEl = document.activeElement;
 
-    const form = modalEl.querySelector("[data-savour-waitlist-form]");
-    const success = modalEl.querySelector("[data-savour-waitlist-success]");
-    form.hidden = false;
-    success.hidden = true;
-    form.reset();
-    modalEl.querySelector("[data-savour-waitlist-error]").hidden = true;
+    const form = query("[data-savour-modal-form]");
+    const success = query("[data-savour-modal-success]");
+    const error = query("[data-savour-modal-error]");
+    if (form) {
+      form.hidden = false;
+      form.reset();
+    }
+    if (success) success.hidden = true;
+    if (error) error.hidden = true;
 
     if (options.variant) {
-      const select = modalEl.querySelector("#savour-waitlist-variant");
+      const select = query("[data-savour-modal-variant]");
       if (select) select.value = options.variant;
     }
 
-    modalEl.hidden = false;
+    modal.hidden = false;
     document.body.classList.add("savour-no-scroll");
 
     keydownHandler = trapFocus;
     document.addEventListener("keydown", keydownHandler);
+    modal.addEventListener("click", overlayClick);
 
-    const emailInput = modalEl.querySelector("#savour-waitlist-email");
+    const emailInput = query("[data-savour-modal-email]");
     if (emailInput) emailInput.focus();
-
-    modalEl.addEventListener("click", overlayClick);
-  }
-
-  function overlayClick(e) {
-    if (e.target === modalEl) close();
   }
 
   function close() {
-    if (!modalEl || modalEl.hidden) return;
-    modalEl.hidden = true;
+    if (!modal || modal.hidden) return;
+    modal.hidden = true;
     document.body.classList.remove("savour-no-scroll");
     if (keydownHandler) document.removeEventListener("keydown", keydownHandler);
-    modalEl.removeEventListener("click", overlayClick);
+    modal.removeEventListener("click", overlayClick);
     if (lastFocusedEl && typeof lastFocusedEl.focus === "function") {
       lastFocusedEl.focus();
     }
@@ -196,20 +123,21 @@
   function handleSubmit(e) {
     e.preventDefault();
     const form = e.target;
-    const email = form.querySelector("#savour-waitlist-email").value.trim();
-    const variant = form.querySelector("#savour-waitlist-variant").value;
-    const errorEl = modalEl.querySelector("[data-savour-waitlist-error]");
+    const emailInput = form.querySelector("[data-savour-modal-email]");
+    const variantSelect = form.querySelector("[data-savour-modal-variant]");
+    const email = emailInput ? emailInput.value.trim() : "";
+    const errorEl = query("[data-savour-modal-error]");
 
     if (!isValidEmail(email)) {
-      errorEl.hidden = false;
-      form.querySelector("#savour-waitlist-email").focus();
+      if (errorEl) errorEl.hidden = false;
+      if (emailInput) emailInput.focus();
       return;
     }
-    errorEl.hidden = true;
+    if (errorEl) errorEl.hidden = true;
 
     const payload = {
       email: email,
-      variant: variant,
+      variant: variantSelect ? variantSelect.value : null,
       batch: cfg().launch.batchLabel,
       source: window.location.pathname,
       submittedAt: new Date().toISOString(),
@@ -219,26 +147,25 @@
     console.log("[Savour waitlist submission]", payload);
 
     form.hidden = true;
-    const success = modalEl.querySelector("[data-savour-waitlist-success]");
-    success.hidden = false;
-    const doneBtn = success.querySelector("button");
-    if (doneBtn) doneBtn.focus();
-  }
-
-  function wireCloseButtons() {
-    modalEl.querySelectorAll("[data-savour-waitlist-close]").forEach((btn) => {
-      btn.addEventListener("click", close);
-    });
-    modalEl
-      .querySelector("[data-savour-waitlist-form]")
-      .addEventListener("submit", handleSubmit);
+    const success = query("[data-savour-modal-success]");
+    if (success) {
+      success.hidden = false;
+      const focusTarget = success.querySelector("button, [href], [tabindex]");
+      if (focusTarget) focusTarget.focus();
+    }
   }
 
   function init() {
-    if (!modalEl) {
-      modalEl = buildModal();
-      wireCloseButtons();
-    }
+    modal = document.querySelector("[data-savour-modal]");
+    if (!modal) return; // template hasn't supplied modal markup — nothing to wire
+    panel = modal.querySelector("[data-savour-modal-panel]");
+
+    modal.querySelectorAll("[data-savour-modal-close]").forEach((btn) => {
+      btn.addEventListener("click", close);
+    });
+
+    const form = query("[data-savour-modal-form]");
+    if (form) form.addEventListener("submit", handleSubmit);
 
     document.querySelectorAll("[data-waitlist-open]").forEach((trigger) => {
       trigger.addEventListener("click", (e) => {
@@ -248,6 +175,8 @@
       });
     });
   }
+
+  const EXIT_INTENT_KEY = "savour:exitIntentShown";
 
   function shouldOfferExitIntent() {
     try {
