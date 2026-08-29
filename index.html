@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Savour — Landing Page Templates</title>
+<meta name="description" content="Three landing page templates for Savour, the 30-second chew built to erase coffee and wine residue." />
+<link rel="stylesheet" href="shared/base.css" />
+<style>
+  :root {
+    --color-ink: #16110d;
+    --color-muted: #6b6259;
+    --color-border: #e7e0d3;
+    --color-bg: #fffdf9;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  body {
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    line-height: 1.55;
+  }
+  .wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin: 0 0 0.5rem;
+  }
+  .lede {
+    color: var(--color-muted);
+    max-width: 60ch;
+    margin: 0 auto;
+  }
+  .config-note {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    margin-top: 0.75rem;
+  }
+  .config-note code {
+    background: #efe9db;
+    padding: 0.1em 0.4em;
+    border-radius: 3px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .card {
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .card h2 {
+    font-size: 1.4rem;
+    margin: 0 0 0.25rem;
+  }
+  .card .tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-muted);
+    margin-bottom: 0.75rem;
+  }
+  .card p {
+    color: var(--color-muted);
+    flex: 1;
+  }
+  .card .traffic {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  .card a.btn {
+    display: inline-block;
+    text-align: center;
+    border: 1px solid var(--color-ink);
+    border-radius: 999px;
+    padding: 0.6em 1.4em;
+    text-decoration: none;
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+  .card a.btn:hover {
+    background: var(--color-ink);
+    color: #fff;
+  }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <h1>Savour</h1>
+    <p class="lede">
+      Three complete landing page templates for the same product and offer —
+      the 30-second chew built to erase coffee and wine residue, not mask it.
+      Same belief chain, same nine objections, radically different execution.
+    </p>
+    <p class="config-note">
+      Prices are controlled from a single file: <code>/shared/config.js</code>.
+      Change one number there and all three templates update.
+    </p>
+  </header>
+
+  <div class="grid">
+    <article class="card">
+      <span class="tag">Template 01</span>
+      <h2>The Mechanism</h2>
+      <p class="traffic">For: cold, skeptical, problem-aware DR traffic</p>
+      <p>
+        Long-form direct response. High-contrast editorial layout, one
+        accent color, and the highest word count of the three — built to
+        win a skeptical reader on argument and mechanism, section by
+        section, culminating in a full comparison table and objection FAQ.
+      </p>
+      <a class="btn" href="templates/01-mechanism/index.html">View template &rarr;</a>
+    </article>
+
+    <article class="card">
+      <span class="tag">Template 02</span>
+      <h2>The Ritual</h2>
+      <p class="traffic">For: brand, organic, and PR-driven traffic</p>
+      <p>
+        Quiet luxury. Muted palette, serif display type, enormous
+        whitespace, and an ingredient-transparency table as the
+        credibility engine — reads like a magazine spread that happens to
+        sell the identity of feeling put together, not just the product.
+      </p>
+      <a class="btn" href="templates/02-ritual/index.html">View template &rarr;</a>
+    </article>
+
+    <article class="card">
+      <span class="tag">Template 03</span>
+      <h2>The Poison Picker</h2>
+      <p class="traffic">For: warm and retargeted traffic</p>
+      <p>
+        Bold, saturated, and maximally interactive. The entire page
+        re-themes around a Coffee/Wine pick, with a sticky buy bar, an
+        interactive 30-second timer, and a full bundle ladder with
+        subscribe-and-save — built for conversion mechanics, not argument.
+      </p>
+      <a class="btn" href="templates/03-poison-picker/index.html">View template &rarr;</a>
+    </article>
+  </div>
+</main>
+</body>
+</html>
