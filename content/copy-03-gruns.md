@@ -97,7 +97,7 @@ Marquee items (quotes 1, 3, 5, 9, 11, 13, verbatim):
 5. "Mint gum after red wine tastes disgusting — it's like the two flavors are fighting each other."
 9. "I've legitimately skipped ordering a second glass of wine before a work event because I didn't want to deal with it."
 11. "If something actually worked in the moment, I'd keep it on me at all times — car, purse, desk, everywhere."
-13. "The second I saw 'swallow it, no rinse needed' I was in — that's the whole reason mouthwash never worked for me on the go."
+13. "The second I saw that it's just as portable as mints were, I was in — that's the whole reason mouthwash never worked for me on the go."
 
 No press logos. Not a logo band. Pause control; frozen entirely under
 `prefers-reduced-motion`.

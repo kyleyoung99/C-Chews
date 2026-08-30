@@ -189,8 +189,8 @@ No names, no ratings, no photos.` VOC **2**, **8**, **10** only:
   teeth anymore because of the wine."`
 - 8 — `"I caught myself covering my mouth when I laughed at dinner because I
   knew the wine had gotten to my teeth."`
-- 10 — `"I was so annoyed scrubbing my teeth in a restaurant bathroom mirror
-  before a date."`
+- 10 — `"I was so annoyed using mint after mint before/during a date just
+  for it to never work."`
 
 ## §11 — Video rail
 

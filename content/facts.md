@@ -85,14 +85,14 @@ reviews with invented names, photos, or star ratings.
    knew the wine had gotten to my teeth."
 9. "I've legitimately skipped ordering a second glass of wine before a
    work event because I didn't want to deal with it."
-10. "I was so annoyed scrubbing my teeth in a restaurant bathroom mirror
-    before a date."
+10. "I was so annoyed using mint after mint before/during a date just for
+    it to never work."
 11. "If something actually worked in the moment, I'd keep it on me at all
     times — car, purse, desk, everywhere."
 12. "I'd pay more for something that actually solved this than for
     another tin of mints that does nothing."
-13. "The second I saw 'swallow it, no rinse needed' I was in — that's the
-    whole reason mouthwash never worked for me on the go."
+13. "The second I saw that it's just as portable as mints were, I was in
+    — that's the whole reason mouthwash never worked for me on the go."
 14. "I like that it feels like a little ritual instead of just 'fixing a
     problem' — it makes me feel more put together, not just less
     embarrassed."
