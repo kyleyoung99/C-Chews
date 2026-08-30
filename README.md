@@ -168,10 +168,13 @@ below, pass:
    (#6A6A6A) — it collided with 03-gruns' own --muted (#4A4A4A).
 2. Font stacks: Archivo/Inter · Poppins/DM Sans · Fredoka/Hanken Grotesk
    — fully disjoint.
-3. Repeated H1/H2 text: none, after demoting each template's footer
-   column labels ("Shop"/"Learn"/"Company") from <h2> to <h3> — they're
-   footer sub-groupings, not page sections, and the nav already carries
-   its own aria-label.
+3. Repeated H1/H2 text: one deliberate exception. All three H1s now read
+   "What your mint wishes it was." — the offer brief's primary hook —
+   installed identically on client instruction after the §13 check was
+   originally run clean. Footer column labels ("Shop"/"Learn"/"Company")
+   are still demoted from <h2> to <h3> as their own fix (they're footer
+   sub-groupings, not page sections, and the nav already carries its own
+   aria-label), so the shared H1 is the only remaining repeat.
 4. border-radius / box-shadow counts differ per template (22/67/31 and
    4/5/10 respectively).
 5. Section counts: 16 / 15 / 17, exactly as specified.

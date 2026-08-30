@@ -70,7 +70,7 @@ Cart icon (label: "Cart — nothing in it yet, we haven't launched")
 
 **Eyebrow:** POST-COFFEE & POST-WINE CHEWS
 
-**H1:** Mints were never going to fix this.
+**H1:** What your mint wishes it was.
 
 **Sub:** One chew, about thirty seconds, swallowed. Designed to lift what
 your coffee just left behind — instead of parking a mint on top of it.

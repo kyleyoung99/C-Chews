@@ -61,7 +61,7 @@ FAQ · Icons: Search, Bag.
 
 ## §3 — Hero (rotating slides, coffee → wine)
 
-- **H1:** `Coffee, wine, and confidence.`
+- **H1:** `What your mint wishes it was.`
 - **Subhead (objection 9):** `One chew after the cup or the glass. Nothing to
   give up, nothing to rinse.`
 - Slide 1 eyebrow: `POST-COFFEE · CARDAMOM & SWEET CREAM`

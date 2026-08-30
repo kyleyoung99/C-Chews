@@ -64,7 +64,7 @@ CTA: **Subscribe & Save**
 
 Eyebrow: AFTER COFFEE. AFTER WINE.
 
-**H1: One chew after coffee and wine.**
+**H1: What your mint wishes it was.**
 
 Subhead: A swallowable tablet, taken in the thirty seconds after your
 last sip, designed to help lift what coffee and wine leave behind.
