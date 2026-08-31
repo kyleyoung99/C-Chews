@@ -300,23 +300,20 @@
    * the "find your flavor" tiles.
    * ------------------------------------------------------------- */
 
-  function variantPlaceholder(variant) {
-    return variant.id === "coffee"
-      ? "[PHOTO — studio: single Post-Coffee tin on flat pastel, chews at base]"
-      : "[PHOTO — studio: single Post-Wine tin on flat pastel, chews at base]";
-  }
+  const variantPhoto = {
+    coffee: { src: "../../assets/photography/coffee-tin-studio.jpg", alt: "Savour Post-Coffee tin, open, on a studio background." },
+    wine: { src: "../../assets/photography/wine-tin-studio.jpg", alt: "Savour Post-Wine tin, open, on a studio background." },
+  };
 
   function productCardHTML(variant, bundle, opts) {
     opts = opts || {};
     const note = opts.note || variant.flavor;
     const noteClass = opts.large ? "pcard__note" : "pcard__flavor";
+    const photo = variantPhoto[variant.id];
     return `
       <li class="pcard pcard--${variant.id}" data-swatch-card>
         <div class="pcard__plate">
-          <span class="pcard__tin" aria-hidden="true"><span>savour</span></span>
-          <span class="pcard__chew pcard__chew--a" aria-hidden="true"></span>
-          <span class="pcard__chew pcard__chew--b" aria-hidden="true"></span>
-          <span class="pcard__ph">${variantPlaceholder(variant)}</span>
+          <img data-swatch-photo src="${photo.src}" alt="${photo.alt}">
         </div>
         <p class="pcard__name" data-swatch-name>${variant.name}</p>
         <p class="${noteClass}" data-swatch-note>${note}</p>
@@ -336,6 +333,7 @@
   function wireSwatchCard(li) {
     const nameEl = li.querySelector("[data-swatch-name]");
     const noteEl = li.querySelector("[data-swatch-note]");
+    const photoEl = li.querySelector("[data-swatch-photo]");
     const addBtn = li.querySelector("[data-quick-add]");
     li.querySelectorAll("[data-swatch-pick]").forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -349,6 +347,11 @@
         });
         if (nameEl) nameEl.textContent = variant.name;
         if (noteEl) noteEl.textContent = variant.flavor;
+        if (photoEl) {
+          const photo = variantPhoto[id];
+          photoEl.src = photo.src;
+          photoEl.alt = photo.alt;
+        }
         if (addBtn) addBtn.setAttribute("data-variant", id);
       });
     });

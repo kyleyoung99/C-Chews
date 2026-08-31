@@ -516,6 +516,18 @@ p { margin: 0 0 16px; }
 .taste-card__art--coffee { background: var(--orange); }
 .taste-card__art--wine { background: var(--brand); }
 .taste-card__art svg { width: 80%; max-width: 220px; }
+.taste-card__art--photo {
+  padding: 0;
+  overflow: hidden;
+  border: 3px solid var(--ink);
+  aspect-ratio: 3 / 2;
+}
+.taste-card__art--photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 .taste-card__h { font-size: var(--h3); margin-bottom: 2px; }
 .taste-card__flavor { font-weight: 600; color: var(--brand); margin-bottom: 10px; }
 
