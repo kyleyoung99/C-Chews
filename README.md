@@ -14,6 +14,8 @@
 
 The design specs in §7–§9 were written **from knowledge, not from fetching the pages** — the authoring session's network policy blocked all three domains. They are directionally right about structure and mechanics, and they carry confidence markers, but exact hex values and current section content are unverified.
 
+**A sampled-token file already exists: `REFERENCE-TOKENS.md`.** It was extracted from saved copies of all three pages and it is the authority wherever it disagrees with §7–§9 below — it already corrects three things the written specs got wrong (AG1 and Bloom both use display serifs; Grüns' type is Inter, not a rounded face). Read it before §7. It also lists what is still missing.
+
 **If you have network access, open all three URLs before you write any code.** For each site record, in `REFERENCE-NOTES.md`:
 
 - Sampled hex values: page background, section backgrounds, primary text, CTA fill and label, accent
