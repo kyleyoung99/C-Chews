@@ -92,3 +92,44 @@
 | AG1's `go-green` value | Token referenced in markup, defined in missing CSS | A screenshot of any AG1 CTA would give it |
 
 None of these block the build. The palettes, type families, radii, section order and real headings are all recovered, which is the substance of what §7–§9 needed.
+
+---
+
+## Screenshot pass — what images confirmed and corrected
+
+Desktop screenshots of all three homepages were reviewed. Values written `≈#XXXXXX` are estimated from the image, not sampled from CSS.
+
+### Grüns — three corrections, one of them large
+
+1. **The page ground is cream, not white.** `≈#FDF3D8`, a warm butter tone. This is the largest single correction in this document: the greens and yellows read as loud *because* they sit on cream. On white the page becomes clinical, which is the opposite of the brand.
+2. **The display face is heavy and rounded after all.** The earlier CSS pass found an Inter variant and concluded the chunky read came from weight alone — the screenshot shows a genuinely rounded, very bold display face. `Fredoka` (or `Baloo 2` / `Nunito` 800) is the right substitute; Inter is the body face. **This reverses the correction made in the CSS pass above.**
+3. **The nav is not a bar.** The logo sits in a rounded warm-grey pill and the right cluster (yellow pill CTA, cart, hamburger) sits in its own rounded grey container, both floating over the cream with a gap above.
+
+Also confirmed: two-tone headlines with the emphasis clause in bright green mid-sentence · a three-stat row of **yellow filled circles** with oversized numerals · two icon micro-reassurances directly under the CTA · a rotated sticky offer tab on the left screen edge with a dismiss × · a black press-logo strip directly under the hero · hero is left-text / right-rounded-photo.
+
+### Bloom — hero archetype corrected
+
+The hero is **not** a lifestyle photograph. It is a full-bleed **promotional banner in a carousel**: a pink→lilac gradient ground, product cans arranged at angles, an oversized **metallic-3D serif headline** with sparkle accents, and a pill CTA with an inner border stroke. Circular white carousel arrows overlay the gradient. That 3D lettering is designed artwork — mark it as an asset slot rather than attempting it in CSS.
+
+Nav confirmed and distinctive: white bar, **left-aligned links**, **centered wordmark**, right cluster of pill CTA plus search / cart / account icons. Section headings are large centered bold serif in the brand green — the serif finding from the CSS pass is confirmed visually.
+
+### AG1 — the accent is now known
+
+The `go-green` token that was missing from the CSS is a **bright lime, `≈#8BE01F`**, and it always carries **black** text, never white. It appears on the announcement bar, the CTA pill, and on angled sticker graphics scattered across the hero photograph.
+
+Confirmed: the announcement bar is lime with **black uppercase monospace** text carrying a promo code · the hero is a full-bleed **photograph** (marble flat-lay, product at an angle) with text overlaid left · the headline is a **large light serif**, confirming the TimesNow finding · the nav is white with only three links and a lime-underlined "Sign In" · the CTA is a lime pill with a black label and a `→`.
+
+The angled sticker graphics — lime rectangles rotated ~12° with black monospace offer text — are the page's most recognizable device and should be built as CSS-rotated elements, not images.
+
+---
+
+## Confidence summary
+
+| Category | Status |
+|---|---|
+| Brand palettes | **Sampled** from CSS, plus screenshot-estimated values for AG1's lime and Grüns' cream |
+| Type families | **Sampled** — all three, with substitutes named |
+| Hero compositions, nav patterns | **Observed** from screenshots |
+| Radii, shadow style | **Sampled** from CSS |
+| Section counts and heading order | **Sampled** from saved markup |
+| Section padding, full type scale | **Unknown** — would need the external stylesheets or a live render |

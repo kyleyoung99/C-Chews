@@ -10,26 +10,17 @@
 
 ---
 
-## 0. FIRST: GO LOOK AT THE THREE SITES
+## 0. SOURCING — READ FIRST
 
-The design specs in §7–§9 were written **from knowledge, not from fetching the pages** — the authoring session's network policy blocked all three domains. They are directionally right about structure and mechanics, and they carry confidence markers, but exact hex values and current section content are unverified.
+The specs in §7–§9 are **not guesses**. Palettes, type families, radii, section counts and real heading order were extracted from saved copies of all three live pages, and hero compositions, nav patterns and component geometry were read off screenshots of all three. `REFERENCE-TOKENS.md` in this repo records what was sampled, what was estimated from an image, and what is still unknown.
 
-**A sampled-token file already exists: `REFERENCE-TOKENS.md`.** It was extracted from saved copies of all three pages and it is the authority wherever it disagrees with §7–§9 below — it already corrects three things the written specs got wrong (AG1 and Bloom both use display serifs; Grüns' type is Inter, not a rounded face). Read it before §7. It also lists what is still missing.
+Values marked *(sampled)* came from the pages' own CSS. Values written as `≈#XXXXXX` were estimated from a screenshot and are close but not exact. Where a table gives both a reference value and a Savour value, the reference value tells you what the target looks like; the Savour value is what you build.
 
-**If you have network access, open all three URLs before you write any code.** For each site record, in `REFERENCE-NOTES.md`:
+**If you have network access, open the three URLs and correct anything that has changed since**, recording the correction in `REFERENCE-NOTES.md`. The pages run promotions, so offers, banner artwork and some headings will differ from what is described here — structure, palette, type and component geometry are the stable parts. If the domains are blocked for you, say so in your final report and build from these specs; do not present unverified values as sampled.
 
-- Sampled hex values: page background, section backgrounds, primary text, CTA fill and label, accent
-- Actual font families (from computed styles or the stylesheet links), weights, and case conventions
-- Button geometry: border-radius, padding, font-size, weight, letter-spacing
-- The real section order, top to bottom, with each section's heading text
-- Sticky elements, and what the announcement bar says
-- How price, subscription, and any bundle or gift stack are presented
+**Still unknown, and worth confirming if you can:** exact section padding in px, the full type scale, and the precise brand-green values behind AG1's `go-green` token. None of these block the build.
 
-**Where your observations differ from §7–§9, your observations win.** Note the correction in `REFERENCE-NOTES.md` so the difference is visible to a reviewer.
-
-If the domains are blocked for you too, say so plainly in your final report and build from the documented specs as written — but do not silently present unverified values as sampled ones.
-
-A note on fidelity and its limits: reproduce **layout, structure, component patterns, proportions, and mechanics**. Do not copy their logos, wordmarks, photography, illustrations, or body copy verbatim, and do not imply any association between Savour and these brands. You are rebuilding a page pattern, not cloning a website.
+**Fidelity and its limits.** Reproduce **layout, structure, component patterns, proportions and mechanics**. Do not copy their logos, wordmarks, photography, illustrations or body copy, and do not imply any association between Savour and these brands. You are rebuilding a page pattern, not cloning a website.
 
 ---
 
@@ -183,195 +174,243 @@ Build the components — the layout mechanics matter and the slots need to exist
 The research quotes in §4 are the one form of real voice available. Present them as customer research, clearly labeled as such — not as product reviews.
 
 List every placeholder occurrence in the README so they're easy to fill before launch.
-## 6b. THE DIFFERENTIATION MATRIX — and one honest caveat
+## 6b. THE DIFFERENTIATION MATRIX
 
-Fill this into `DESIGN.md` before writing CSS. It is already filled in for you below; confirm it against what you observe on the three sites and correct where they differ.
+Copy this into `DESIGN.md` and confirm it as you build. Every column differs from every other column in every row that matters.
 
-| | **01 — AG1** | **02 — Bloom** | **03 — Gruns** |
+| | **01 — AG1** | **02 — Bloom** | **03 — Grüns** |
 |---|---|---|---|
-| Page ground | White + warm sand `#F3EEE4` | White + `#FAF7F2` | White |
-| Dominant band color | Espresso-black `#1E1712` | Rotating pastels | Saturated berry `#C81D4A` |
-| Brand color | `#8C6239` roasted brass | `#6B1030` | `#C81D4A` |
-| Display / body | `Archivo` / `Inter` | `Poppins` / `DM Sans` | `Fredoka` / `Hanken Grotesk` |
-| Card radius | 14px | 12–20px | 20–28px |
-| Shadow budget | ≤4, soft, structural only | 0–4, floating elements only | ≤3, **hard-offset only** |
-| Border language | 1px hairlines | Light hairlines, mostly none | 2–3px solid ink |
-| Hero archetype | Split, product-forward | Full-bleed lifestyle, rotating slides | Cutout on saturated ground |
-| Section count | 16 | 15 | 17 |
+| Page ground | White + photography | White | **Cream `#FBF3E2`** |
+| Dominant color | Espresso `#1E1712` | Deep wine `#6B1030` | Deep wine + bright `#C81D4A` |
+| Signal accent | Amber `#F2B705`, **black label** | Pastel-per-SKU | Yellow `#FFD84D` circles |
+| Display face | **Light serif** (`Instrument Serif`) | **Heavy serif** (`Prata`) | **Heavy rounded sans** (`Fredoka`) |
+| Body face | `Inter` | `Poppins` | `DM Sans` |
+| Third face | **Mono** (`IBM Plex Mono`) | — | — |
+| Nav pattern | White bar, 3 links, underlined Sign In | White bar, left links, **centered wordmark** | **Floating pills**, no bar |
+| Hero | Full-bleed photo, text overlaid left, angled stickers | Gradient banner carousel, oversized 3D serif | Left text / right rounded photo, stat circles |
+| Card radius | 14px | 8–24px | 20–28px |
+| Shadow budget | ≤4 soft | 0–4 soft | ≤3 **hard-offset only** |
+| Section count | 17 | 15 | 17 |
 | Word count | Highest | Medium | Lowest (~900–1,400) |
-| Photography load | Moderate — studio + lifestyle | **Very heavy — 50–65%** | Cutout product on flat color |
-| Recurring component | Benefit card, hedged sentence | Product card with swatches | Comparison column + marquee |
-| Voice | Calm, declarative | Warm, upbeat, second person | Funny, exasperated on your behalf |
-| CTA label | "Subscribe & Save" | "Add to bag" | "Get my tin" |
-| Motion budget | 200–300ms fades only | Card hover, carousels, video | 120–180ms snap, two marquees |
+| Recurring component | Spec table + mono label | Product card with swatches | Comparison column + marquee |
+| Voice | Calm, declarative | Warm, upbeat | Funny, exasperated |
+| CTA | Amber pill, black label, `→` | Wine pill, inner border | Bright pill, white bold, offer stated |
 
-**The caveat, stated plainly:** all three reference brands use a predominantly white page ground and fully-rounded pill buttons. Those two rows genuinely coincide, and forcing them apart would mean departing from the references — which is the opposite of what this build is for. **Distinctness here comes from band color, type personality, density, border language, shadow style, and component vocabulary**, not from the background value. The verification in §13 is written accordingly: it does not require different body backgrounds, and it leans harder on the squint test instead.
-## 7. TEMPLATE 01 — `01-ag1`, modeled on **AG1 / Athletic Greens** (drinkag1.com)
+**Two rows genuinely coincide and should not be forced apart:** all three references use fully-rounded pill CTAs, and two of three use a white page ground. Departing from that would mean departing from the references, which is the opposite of this build's purpose. Distinctness here comes from **type personality (light serif / heavy serif / rounded sans), nav pattern, hero composition, shadow style and density** — which is why §13's verification leans on the squint test rather than requiring different background values.
+## 7. TEMPLATE 01 — `01-ag1`, modeled on **AG1** (drinkag1.com)
 
-**What this page is for:** cold, skeptical, higher-intent traffic. It sells one decision at a premium price by collapsing complexity and making the subscription obviously correct.
+**What this page is for:** cold, skeptical, higher-intent traffic. Premium editorial surface, subscription offer, credibility carried by restraint.
 
-**Why this reference fits Savour better than it looks.** AG1's central argument is *not* "our greens are better than their greens" — it's *"you currently make six confusing purchases and this replaces them."* Savour has exactly that argument available and has never used it: mints in every bag, gum in the car, a whitening pen in the drawer, mouthwash you can't use without a sink. **One chew replaces the drawer.** Build the page on that, not on superiority.
+**The transferable argument.** AG1's pitch is consolidation, not superiority: *you currently make six confusing purchases and this replaces them.* Savour has that argument and has never used it — mints in every bag, gum in the car, a whitening pen in the drawer, mouthwash you can't use without a sink. **One chew replaces the drawer.** Build on that.
 
-### Tokens
+### Tokens — sampled from the live page, mapped to Savour
 
-| Token | Value | Note |
+| Role | AG1 (sampled) | Savour |
 |---|---|---|
-| `--bg` | `#FFFFFF` | Dominant. Most sections sit on plain white. |
-| `--bg-alt` | `#F3EEE4` | Warm sand, for banding alternate sections. |
-| `--deep` | `#1E1712` | Espresso-black. Full-bleed bands, footer, and used as an ink color — headings tint toward it rather than being pure black. |
-| `--brand` | `#8C6239` | Roasted brass. Plays the role AG1's green plays: it *is* the brand, and everything else is neutral scaffolding around it. |
-| `--ink` | `#1E1712` | |
-| `--muted` | `#645B50` | Desaturated warm gray, not neutral gray. |
-| `--rule` | `#E3DFD6` on sand, `#E8E6E2` on white | Hairlines only. |
-| `--font-display` | `Archivo` 600/700 | Tall x-height, squarish, neutral-clinical. |
-| `--font-body` | `Inter` 400/500 | 17–18px, line-height 1.55, measure 60–68ch. |
+| Page ground | `#FFFFFF` | `#FFFFFF` |
+| Dark ground / product field | `#071a24` deep navy-teal | `#1E1712` espresso |
+| **Signal accent** | **bright lime ≈`#8BE01F`** | **amber `#F2B705`** |
+| Accent label color | **black**, never white | **black** |
+| Ink | `#0B0B0B` | `#0B0B0B` |
+| Muted | `#5A6560` | `#645B50` |
+| Rule | `#E5E5E2` | `#E5E3DE` |
 
-**Do not substitute Poppins, Montserrat, or a display serif** — geometric-circular and high-contrast-serif both push this page toward generic wellness, which is precisely what this reference is not.
+**The accent is the whole trick.** A near-neon high-chroma color, used sparingly, always carrying **black** text — on the announcement bar, on the CTA pill, on angled sticker graphics. Everything else on the page is black, white, or photography. Do not tint body copy with it, do not use it as a card background, and do not put white text on it.
 
-**Case:** sentence case for all headings and body; uppercase reserved for eyebrows and small badge labels at 12–13px with `+0.08em`. Headings tracked `-0.02em`. H1 48–64px desktop / 32–36px mobile, two or three lines maximum. H2 32–40px, three to seven words. Large numeric callouts (per-chew price, seconds) set oversized in the display weight with a small unit label.
+**Type — three faces, and the serif is not optional.**
 
-**Radius:** buttons `999px` pill, cards 14px, media 20px. **Shadows: 4 declarations maximum page-wide**, only on the sticky bar, nav panels and the modal. Cards separate by tinted fill and hairline, not elevation. **Zero gradients.** Icons are single-weight line icons, ~1.75px stroke, rounded caps, monochrome — not filled, not duotone.
+| Role | AG1 (sampled) | Substitute to use |
+|---|---|---|
+| Display | `TimesNow` / `TimesNow-Light` — a **light display serif** | `Instrument Serif` 400, or `Fraunces` 300 |
+| Body / UI | `ABC Diatype` — a neutral grotesque | `Inter` 400/500 |
+| Labels, eyebrows, promo codes | `ABC Diatype Mono` | `IBM Plex Mono` 500, uppercase, `+0.08em` |
 
-**Accent discipline:** `--brand` may touch primary buttons, the wordmark, checkmarks and icons, one or two emphasized words in a heading, small badges, and the deep bands. It is **not** a body-text color and **not** a card background. Under-using it is the correct failure mode here.
+Headline: light serif, 48–64px desktop, sentence case, two lines maximum, black. Body: 17–18px `Inter`, measure 60–68ch. Eyebrows and offer codes are **uppercase monospace with wide tracking** — `ENDS SEPTEMBER 30`, `USE CODE BATCH001`. That serif-over-grotesque-over-mono stack is the page's entire personality; drop the serif or the mono and it becomes a generic supplement site.
 
-**Section padding** 96px desktop / 56px mobile. Motion limited to 200–300ms fades, hover states, and accordion expansion. No parallax, no count-ups.
+**Radius:** CTA pill `999px`, cards 14px, media 20px. **Shadows: 4 maximum page-wide.** No gradients. Icons are single-weight line icons.
 
-### Section order — build in this sequence
+### Hero — reproduce this composition exactly
 
-1. **Announcement bar.** ~38px, `--deep`, centered white 13px, 2–3 rotating messages on a ~5s interval with a pause control: free shipping threshold, Batch 001 price lock, the guarantee.
-2. **Nav, sticky.** Wordmark left, links (Why Savour · What's Inside · How It Works · Reviews · FAQ), right cluster with a **solid `--brand` pill CTA** that stays visible at every width. Condenses on scroll with a hairline bottom border.
-3. **Hero.** Split product-forward composition. Short H1 staking the category claim — not a feature, not an ingredient. One-sentence subhead, one pill CTA, and a compact trust strip immediately beneath (the certification/dietary icon row, **not** a star rating — there are no reviews yet).
-4. **Trust strip.** Icon-over-label row, 4–6 across: *swallowable · no rinse · ~30 seconds · pocket tin · food-grade ingredients*. Reappears later in the page. `[PRESS LOGO SLOT]` is **not** populated — delete the band rather than invent outlets.
-5. **"One chew replaces the drawer."** The core reframe and the most important section on this page. Visual is a comparison: the cluttered cluster (mints, gum, whitening pen, mouthwash bottle, travel toothbrush) versus one tin — or a two-column *your current routine vs. Savour* table. Copy is about eliminating the workaround, not about beating any one product.
-6. **What's inside.** The formula, grouped into a small number of comprehensible buckets rather than a scary list: the cooling agent, the acid that does the washing, the flavor system. Full detail behind an accordion — **the complexity is proof, not pitch; available but never in the reader's way.** `[SOURCE NEEDED]` on every mechanism claim.
-7. **Benefits grid.** Four cards, icon + 2–4 word label + one hedged sentence: *fresher breath · less fresh staining · works anywhere · no ritual to remember*. This is the page's most-repeated component.
-8. **Quality and testing.** Food-grade sourcing, manufacturing standards, `[THIRD-PARTY TESTING — confirm before claiming]`, `[RESEARCH CITATION SLOT]`. A `--deep` band with white type. Answers the category's biggest objection: why trust a new thing you put in your mouth.
-9. **How it works.** Three numbered steps — Snap, Melt, Wash — photographic or icon-led, deliberately short. Reduces perceived effort.
-10. **What's in your first order.** AG1's conversion crux, and the mechanic most worth copying. An itemized stack shown *before* the price: both tins (The Pair), plus `[GIFT ITEM SLOT — confirm with client: pocket sleeve? refill card? Batch 001 card?]`, each as a thumbnail card with an "Included" tag. **Do not invent kit contents** — ship labeled slots the client fills in. The point is that the reader sees a full box before they see a number.
-11. **Pricing block.** Subscribe-vs-one-time selector with **subscription pre-selected** and one-time visible but visually secondary. Price stated two ways: the bundle price from config, and the emotionally operative **per-chew cost** as a large numeral with a small unit label. Cadence, cancel-anytime, and the guarantee as micro-copy directly under the button.
-12. **Reviews.** `[REVIEW WIDGET SLOT]` and `[TESTIMONIAL SLOT]`, rendered empty. In their place, a **"what people told us"** block using research quotes 4, 6, 7 and 12 — labeled as pre-launch customer research, no stars, no names.
-13. **Guarantee.** Its own band, `--bg-alt` or `--deep`, one icon, one heading, two sentences. `config.pricing.guaranteeDays` money-back, risk-free.
-14. **FAQ accordion.** 8–12 rows, hairline dividers, chevron affordance, all closed by default. All nine objections plus taste, timing, and safety.
-15. **Final CTA band.** Full-bleed `--deep`, short heading, one pill CTA, one-line restatement of the guarantee beneath it.
-16. **Footer.** Multi-column (Shop / Learn / Support / Company), email capture, social, legal — and a `[REGULATORY DISCLAIMER — confirm product classification with counsel]` line. A swallowed daily chew may carry disclosure obligations; leave the slot visible rather than guessing at the wording.
+Full-bleed **photograph** as the hero ground: a flat-lay on a hard surface (AG1 uses marble) with the product laid at an angle across it. Text sits **left, overlaid on the photo**, not in a separate column:
 
-**Section count: 16.** **Repeat the pill CTA every one to two sections, and never let one appear without its risk-reversal line beneath it.** For a low-trust new category, proximity beats prominence — the objection gets answered in the same eye-fixation as the button.
+1. Uppercase mono eyebrow (a date or offer window)
+2. Large light-serif headline, two lines
+3. Two lines of sans subhead, including the promo code in bold
+4. One accent pill CTA with a `→` arrow
 
-### Voice — and one rule that is not stylistic
+Scattered across the photograph: **angled sticker graphics** — accent-filled rectangles rotated ~12°, black uppercase mono text (`20% OFF — USE CODE …`, `LIMITED TIME OFFER`). Build these as CSS-rotated divs, not images. They are the most recognizable device on the page.
 
-Calm, plain, declarative, second person. Headlines 4–9 words; body sentences 12–22 words, one idea each; paragraphs of one to three sentences. No exclamation points, no hype adjectives, no emoji. The word **"one"** does a lot of work — one chew, one tin, one habit — because the product is framed as a *reduction* of effort.
+**Nav:** white, only three links (Shop · Science · Explore is the pattern — use **Shop · Science · Story**), cart icon and a "Sign In" text link with a **2px accent underline** on the right. No mega-menu, no search field.
 
-**Hedge every claim, the way AG1 does: "supports," "helps," "designed to," "formulated to" — never "removes," "whitens," "eliminates," "prevents," or "cures."** On this page that is compliance, not tone. Savour is a swallowed product making oral-care claims with no clinical evidence behind it; unhedged efficacy language is the single largest legal exposure in this whole build. Carry the hedging into 02 and 03 as well — their voices are louder, but the claims underneath must be equally careful.
+**Announcement bar:** full-width **accent fill**, black uppercase **monospace**, single line, one offer with a code.
 
-**Offer copy is factual, not urgent.** No countdown timers, no "only 3 left." Urgency is replaced by generosity (what's in the box) and safety (the guarantee).
+### Section order
+
+1. Announcement bar (accent, black mono, offer + code)
+2. Nav (white, three links, accent-underlined Sign In)
+3. Hero (photo ground, left text, angled stickers)
+4. Trust strip — icon + micro-label, 4–6 across: *swallowable · no rinse · ~30 seconds · pocket tin*
+5. **One chew replaces the drawer** — the consolidation comparison. The clutter (mints, gum, pen, mouthwash, travel brush) versus one tin, or a two-column *your current routine vs. Savour* table
+6. Compare the two — Post-Coffee vs Post-Wine as a spec table, mono column headers
+7. What's inside — grouped into a few buckets, full detail behind an accordion. `[SOURCE NEEDED]` on every mechanism claim
+8. Snap · Melt · Wash — three numbered steps
+9. Built for your moment — the client call, the dinner photo, the walk back to your desk
+10. Tested and made — food-grade sourcing, standards, `[THIRD-PARTY TESTING — confirm before claiming]`
+11. What's in your first order — the itemized stack shown **before** the price, each item a thumbnail with an "Included" tag. `[GIFT ITEM SLOT — confirm with client]`. Do not invent kit contents
+12. Pricing — subscribe pre-selected, one-time visible but secondary; price stated twice, the second as **per-chew** in an oversized numeral with a small unit label; guarantee and cancel-anytime as micro-copy under the button
+13. What people told us — `[REVIEW WIDGET SLOT]` rendered empty; research quotes 4, 6, 7, 12 labeled as pre-launch research, no stars, no names
+14. Guarantee band
+15. FAQ accordion — all nine objections
+16. Final CTA — full-bleed `--deep`, short heading, accent pill, guarantee line beneath
+17. Footer — multi-column, email capture, legal, and `[REGULATORY DISCLAIMER — confirm classification with counsel]`
+
+**Section count: 17.** Repeat the accent pill every one to two sections, and **never let one appear without its risk-reversal line beneath it** — proximity beats prominence in a low-trust new category.
+
+### Voice, and one rule that is not stylistic
+
+Calm, plain, declarative, second person. Headlines 4–9 words. Body sentences 12–22 words, one idea each. No exclamation points, no hype adjectives, no emoji. The word "one" does a lot of work, because the product is framed as a *reduction* of effort.
+
+**Hedge every claim: "supports," "helps," "designed to," "formulated to" — never "removes," "whitens," "eliminates," "prevents," or "cures."** On this page that is compliance, not tone, and it applies to templates 02 and 03 as well. Savour is a swallowed product making oral-care claims with no clinical evidence; unhedged efficacy language is the largest legal exposure in this build.
+
+**Offer copy is factual, not urgent** — no countdown timers, no "only 3 left." Urgency comes from a dated offer window and generosity, exactly as AG1 does it.
 
 **VOC quotes for this template only:** 4, 6, 7, 12.
 ## 8. TEMPLATE 02 — `02-bloom`, modeled on **Bloom Nutrition** (bloomnu.com)
 
-**What this page is for:** warm and social traffic — people who arrived from a creator post or an ad and are browsing, not researching. It sells by making the range look abundant, appetizing and already-loved.
+**What this page is for:** warm and social traffic — people who arrived from a creator post or an ad and are browsing, not researching. It sells by making the range look abundant and already-loved.
 
-**The one adaptation rule:** Bloom's identity is a single saturated green plus a rotating pastel wardrobe. Reproduce the *system* — white ground, one brand-owning accent, a pastel assigned to each SKU that tints its card, swatch and hero — but in Savour's hues. **Do not paint Savour green.** Everything else about the page (structure, proportions, component vocabulary, photography load) is a close reproduction.
+**The one adaptation rule:** Bloom's identity is one constant deep green plus a rotating pastel wardrobe assigned per SKU. Reproduce the *system* — white chrome, one brand-owning color, a pastel per variant that tints its card, swatch and hero — in Savour's hues. **Do not paint Savour green.**
 
-### Tokens
+### Tokens — sampled from the live page, mapped to Savour
 
-| Token | Value | Note |
+| Role | Bloom (sampled) | Savour |
 |---|---|---|
-| `--bg` | `#FFFFFF` | True white. Resist the cream reflex — Bloom's ground is white, and cream is exactly the default that ruined the previous attempt. |
-| `--bg-tint` | `#FAF7F2` | Faint warm off-white for band separation only. |
-| `--brand` | `#6B1030` | The constant brand color: wordmark, primary CTAs, footer ground, eyebrows, checkmarks, links. Plays the role Bloom's green plays. |
-| `--brand-deep` | `#4A0B21` | Darker step for the footer and full-bleed dark bands. |
-| `--pastel-coffee` | `#EADBC8` | Post-Coffee's assigned color. |
-| `--pastel-wine` | `#F2D4DA` | Post-Wine's assigned color. |
-| `--pastel-3` / `--pastel-4` | `#E0D8F0` / `#D4E4F2` | Reserved for future SKUs; used on the "what's next" tile so the range reads as a system. |
-| `--ink` | `#1E1E1E` | Neutral near-black, not warm brown. |
-| `--muted` | `#6A6A6A` | |
-| `--rule` | `#E6E4E0` | Light hairlines, used sparingly. |
-| `--font-display` | `Poppins` 500/600/700 | |
-| `--font-body` | `DM Sans` 400/500 | |
+| Page ground | `#FFFFFF` | `#FFFFFF` |
+| Band ground | `#FAF7F2` | `#FAF7F2` |
+| **Brand color** | **`#215B32` deep green** | **`#6B1030` deep wine** |
+| Announcement bar | `#1B5E38` dark green, white text | `#4A0B21`, white text |
+| Pastel A | pink `≈#F3A8C0` | Post-Coffee `#EADBC8` |
+| Pastel B | lilac `≈#CBAEE8` | Post-Wine `#F2D4DA` |
+| Pastel C / D | sage `#BFDEB5`, `#EAD4F8` | `#E0D8F0`, `#D4E4F2` (future SKUs) |
+| Star / rating | `#FFCF2A` | `#FFCF2A` |
+| Ink | `#0B0B0B` | `#1E1E1E` |
+| Muted | `#676986` | `#6A6A6A` |
+| Rule | `#DBDDE4` | `#E6E4E0` |
 
-Type scale `12 / 14 / 16 / 18 / 22 / 28 / 40 / 56 / 72`. Body measure 58–66ch; hero headline under 30ch. Headlines in **sentence case or lowercase**, tight tracking. Eyebrows and button labels in **uppercase at 11–13px with +0.06–0.12em tracking** — that macro-lowercase / micro-uppercase contrast is a large part of the look.
+**Type — the display face is a serif.**
 
-**Radius:** pill buttons (`999px`), cards 12–20px, images 12–24px. **Shadows: low — 0 to 4 declarations total**, reserved for floating elements (sticky bar, cart-style drawer, quick-add). Depth comes from color blocking and photography, not elevation. Borders are light hairlines; cards more often sit on a tinted ground than inside a stroke.
+| Role | Bloom (sampled) | Substitute to use |
+|---|---|---|
+| Display | `Timesquare` Bold / `Gazpacho Black` — heavy serifs. `font-family-timesquare-bold` is the **most-used class on the entire page** | `Prata` 400, or `Playfair Display` 700 |
+| Body / UI | `TT Travels DemiBold`, `Poppins` | `Poppins` 400/500 |
 
-**Imagery load is the point.** Aim for 50–65% of the first four screens being photographic. Three modes, all present: studio product on flat pastel, aspirational lifestyle (bright kitchen, morning light, a hand reaching for a tin), and phone-shot vertical video. A text-only section should be rare. Every photo position is a labeled placeholder with art direction in an HTML comment.
+Section headings are **large, centered, bold serif** in the brand color — "Shop our Best Sellers" is set that way. Body and UI are the sans. Eyebrows and button labels: uppercase, 11–13px, `+0.06–0.12em`.
 
-### Section order — build in this sequence
+**Radius:** sampled values are 8 / 12 / 16 / 24 / 50px — softer and more varied than the other two templates. Pill buttons. **Shadows: 0–4**, floating elements only; depth comes from color blocking and photography.
 
-1. **Announcement bar.** Solid `--brand`, 36–44px, small uppercase, **rotating messages** auto-advancing every ~4.5s with pause-on-hover: free-shipping threshold (from config), the Founders Batch line, the guarantee. Keyboard-reachable pause control.
-2. **Nav, sticky.** Wordmark left, links across (Shop, The Two, How It Works, Our Story, FAQ), right side search + cart-style icon opening a **slide-out drawer** with a free-shipping progress bar computed from `pricing.js`.
-3. **Hero.** Full-bleed lifestyle plate with type overlaid left, or 50/50 split with the tin on a pastel ground. Short benefit-led headline, one supporting line, one pill CTA, one secondary text link. Rotating 2–3 slide hero tied to the two variants.
-4. **Trust icon bar.** Thin band under the hero: 4 items, icon in a pastel circle + 2–4 words — *30 seconds · no rinse · swallowable · pocket tin*. Horizontally scrollable on mobile.
-5. **"Start here" rail.** Bloom's bestsellers carousel, honestly renamed — nothing has sold yet. Horizontal rail of product cards, arrows on desktop, swipe on mobile. **This card is the most important component on the page and recurs three more times.** Each card: tin image on its pastel ground, name, flavor descriptor, `[STAR RATING — pending launch]` slot rendered as nothing until real data exists, price from config, swatch row, quick-add pill.
-6. **Shop by moment.** 3 large rounded tiles with centered labels: *After the morning coffee · After the second glass · Keep one everywhere.* Links, not cards with buttons.
-7. **Deep dive: why a chew.** Big product shot on `--pastel-coffee`, benefit rows (icon + bold label + one sentence) covering the mechanism in plain language, then the Snap → Melt → Wash three-step. Answers objections 2, 3, 4.
-8. **"Find your flavor."** The two variants as large appetite-driven tiles, each on its own pastel, with tasting-note copy. Clicking one preselects it in the drawer. This is where the per-SKU color system pays off.
-9. **Our story.** The discovery story from `facts.md` as a first-person band with a photo placeholder. **No founder name unless the client supplies one.**
-10. **Proof band — honest version.** Bloom runs an aggregate rating plus review cards here. Savour has neither. Build the component, render it empty, and put a **"Sound familiar?"** block in the slot instead: three of the research quotes (2, 8, 10 — do not reuse them on another template), labeled as customer research, no stars, no names, no photos.
-11. **Video rail.** Vertical 9:16 autoplay-muted cards. Since there are no customers, these are `[FOUNDER VIDEO SLOT]` — making the product, the taste test, the chemistry — same rail component, honest source. Pause control required; frozen under `prefers-reduced-motion`.
-12. **Quiz band.** Full-bleed pastel: *"Coffee person or wine person?"* → 3-question quiz → recommends a variant and opens the waitlist modal with it preselected.
-13. **Bundles.** Bundle cards from `config.pricing.bundles`, struck-through sum, "Save $X" pill, subscribe-vs-one-time radio with subscription preselected and the % saving visible.
-14. **Email capture.** Discount-free incentive — early access to Batch 001. Single input, pill submit, consent microcopy.
-15. **Footer.** Solid `--brand-deep`, white type, multi-column links, social, legal.
+### Hero — reproduce this composition
 
-**Section count: 15.** **Voice:** warm, direct, second person, upbeat. Headlines 3–7 words, body sentences 8–16 words, often fragments. Talks about how it *feels* and how it *tastes* as much as how it works. Never clinical, never restrictive.
+Not a lifestyle photo. Bloom runs a **full-bleed promotional banner** in a carousel: a **pink→lilac gradient ground**, product cans arranged at angles as if scattered on it, a very large **metallic-3D serif headline** with sparkle accents, and a **pill CTA with an inner border stroke**. Left/right carousel arrows sit as circular white buttons over the gradient.
 
-**Objections land at:** 1 and 5 in the FAQ inside §7; 2, 3, 4 in §7's benefit rows; 6 in §8; 7 in §13's per-chew math; 8 in §9 and §14; 9 in the hero subhead.
+Savour version: gradient ground in the two variant pastels, tins arranged at angles, oversized serif headline, `[HERO BANNER SLOT — designed promotional artwork]` for the 3D type treatment (that lettering is artwork, not CSS — mark it, don't fake it), pill CTA with inner border, carousel arrows.
+
+**Nav:** white bar, brand-color text, **left-aligned links** (Shop · Take The Quiz · Subscribe & Save), **centered wordmark**, right cluster: brand-color pill CTA, search, cart, account. This centered-logo-with-left-links arrangement is distinctive — reproduce it rather than defaulting to logo-left.
+
+**Announcement bar:** dark brand fill, white text, one line, ending in an arrow `→`.
+
+### Section order
+
+1. Announcement bar (dark fill, white, one line + arrow)
+2. Nav (white, left links, centered wordmark, pill CTA, icons)
+3. Hero banner carousel (gradient ground, angled products, oversized serif, pill CTA)
+4. Trust icon bar — 4 items, icon in a pastel circle: *30 seconds · no rinse · swallowable · pocket tin*
+5. **"Start here"** — Bloom's bestsellers rail, honestly renamed since nothing has sold yet. Heading in centered bold serif. Horizontal rail of product cards; **this card is the page's most important component and recurs three more times.** Card: tin on its pastel ground, name, flavor descriptor, price from config, swatch row, quick-add pill, and a `[STAR RATING — pending launch]` slot that renders nothing
+6. Shop by moment — three large rounded tiles: *After the morning coffee · After the second glass · Keep one everywhere*
+7. Why a chew — big product shot on `--pastel-coffee`, benefit rows, then Snap → Melt → Wash. Answers objections 2, 3, 4
+8. Find your flavor — the two variants as appetite-driven tiles, each on its own pastel, tasting notes, click to preselect
+9. Our story — the discovery story as a first-person band. **No founder name unless the client supplies one**
+10. Proof band, honest version — build the aggregate-rating component, render it empty, and put a **"Sound familiar?"** block in the slot: research quotes 2, 8, 10, labeled as research, no stars, no names, no photos
+11. Video rail — vertical 9:16 cards, `[FOUNDER VIDEO SLOT]` rather than customer UGC. Pause control; frozen under `prefers-reduced-motion`
+12. Quiz band — *"Coffee person or wine person?"*, three questions, recommends a variant and opens the modal with it preselected
+13. Bundles — cards from `config.pricing.bundles`, struck-through sum, "Save $X" pill, subscribe-vs-one-time with subscription preselected
+14. Email capture — early access to Batch 001, single input, pill submit
+15. Footer — solid brand-deep ground, white type, multi-column
+
+**Section count: 15.** **Photography load is the point** — aim for 50–65% of the first four screens being image. A text-only section should be rare.
+
+**Voice:** warm, direct, second person, upbeat. Headlines 3–7 words; body 8–16 words, often fragments. Talks about how it *feels* and how it *tastes* as much as how it works. Never clinical, never restrictive. Keep the claim hedging from §7.
+
+**No press logos.** Bloom's "as seen in" band becomes a *how it's made* strip — sourcing, and what erythritol and malic acid actually are.
 
 **VOC quotes for this template only:** 2, 8, 10, 14.
-
-**No press logos.** Bloom's "as seen in" band is replaced by a *how it's made* strip — ingredient sourcing and the food-grade nature of erythritol and malic acid — which does similar trust work honestly.
-## 9. TEMPLATE 03 — `03-gruns`, modeled on **Gruns** (gruns.co)
+## 9. TEMPLATE 03 — `03-gruns`, modeled on **Grüns** (gruns.co)
 
 **What this page is for:** cold paid-social traffic. It wins the argument in the first two scrolls and spends the rest of the page supplying evidence, loudly.
 
-**The one adaptation rule:** Gruns' whole pitch is *format substitution* — you already believe in greens, you just hate drinking them. Savour's is structurally identical: **you already know mints don't work; the format was never built for this.** Keep that spine exactly. The competitor is described by format ("a mint," "gum," "mouthwash"), never by brand name.
+**The transferable spine:** Grüns sells *format substitution* — you already believe in greens, you just hate drinking them. Savour's is structurally identical: **you already know mints don't work; the format was never built for this.** The competitor is described by format ("a mint," "gum," "mouthwash"), never by brand name.
 
-### Tokens
+### Tokens — sampled from the live page, mapped to Savour
 
-| Token | Value | Note |
+| Role | Grüns (sampled) | Savour |
 |---|---|---|
-| `--bg` | `#FFFFFF` | |
-| `--brand` | `#C81D4A` | Vivid berry — plays Gruns' saturated-green role. Loud, not muted. If it starts looking calming, it's wrong. |
-| `--brand-deep` | `#8A0F31` | Depth on stacked blocks, text on light brand fills. |
-| `--ink` | `#101010` | High-contrast near-black. |
-| `--muted` | `#4A4A4A` | |
-| `--accent-yellow` | `#FFC53D` | Starbursts, "BEST VALUE" flags. |
-| `--accent-orange` | `#FF6B35` | Mid-page jolt block, flavor callouts. |
-| `--drab` | `#D9D6D0` | **The loser column's ground in the comparison block.** Deliberately dull. |
-| `--font-display` | `Fredoka` 600/700 | Chunky, rounded, cheerful. |
-| `--font-body` | `Hanken Grotesk` 400/600 | |
+| **Page ground** | **cream `≈#FDF3D8`** — *not white* | **cream `#FBF3E2`** |
+| Announcement bar | deep forest `≈#17512F`, white text | `#3A0F1E`, white text |
+| Deep brand | `#002613` / `#00351B` | `#3A0F1E` |
+| Mid brand (headlines) | `≈#0F3D24` | `#5B1229` |
+| **Bright brand (CTA, emphasis)** | **`≈#1E9E4A`** (sampled `#007E40` in CSS) | **`#C81D4A`** |
+| Accent yellow | `≈#FFD84D` (sampled `#FFCC2F`) | `#FFD84D` |
+| Nav pill grey | warm grey `≈#C9C6BA` | `#CFC7BC` |
+| Mint tint | `#DAECE3` / `#BFDFCF` | `#F6E3E8` |
+| Ink | `#111827` | `#141010` |
 
-Hero `clamp(2.75rem, 7vw, 5.5rem)`, section h2 `clamp(2rem, 4.5vw, 3.5rem)`, card h3 `1.375rem`, body `1.0625rem`, eyebrows `0.75rem` caps. Display headlines in **sentence case, tight tracking (-0.02 to -0.03em)**; ALL-CAPS reserved for eyebrows, badges, button labels and marquee text with **+0.06 to +0.1em** tracking. No serif anywhere on the page.
+**The cream ground is the single most important correction to make.** Grüns is not a white page. Everything sits on warm cream, which is why the greens and yellows read as loud rather than clinical.
 
-**Radius:** pill buttons (`999px`), cards 20–28px. **Shadows: at most 3 declarations, all hard-offset** (`6px 6px 0 var(--ink)`) on stickers and badges. **No soft diffuse shadows anywhere** — that is the single fastest way to make this page read as generic wellness. Thick 2–3px solid ink borders on cards, stickers and secondary buttons. Hairline gray borders are wrong here.
+**Type:** heavy, rounded, high-x-height display sans — the headline face is visibly rounded and very bold. Use **`Fredoka` 600/700** (alternates: `Baloo 2`, `Nunito` 800). Body/UI is a plain grotesque — the page's inline CSS uses an `Inter` variant and `DM Sans`; use **`DM Sans` 400/500**. Headlines are sentence case, tight leading, with **emphasis words set in the bright brand color mid-sentence** — that two-tone headline is a signature device.
 
-**Accent discipline:** `--brand` is a ground and a CTA color. Yellow and orange touch only stickers, badges, marquee stripes, underline swashes and illustration fills — never body text, and never a second section ground more than once on the page.
+**Radius:** pills `999px`, cards and media 20–28px (sampled `rounded-2xl` and a `1.154rem` custom value). **Shadows: 3 maximum, hard-offset only** (`1px 1px 0` appears in the sampled CSS). No soft diffuse shadows anywhere — that is the fastest way to make this page read as generic wellness.
 
-**Graphic devices:** squiggles, starbursts, confetti dots, hand-drawn circles around a word, stickers rotated −4° to +6°. Punctuation, not background texture. Cutout product photography on flat color — the tin and loose chews knocked out and floated on the band, hard-lit and saturated. No moody lifestyle grading.
+### Hero — reproduce this composition exactly
 
-### Section order — build in this sequence
+Two-column: **text left, rounded photograph right** (radius ~24px, roughly 45% of the viewport width).
 
-1. **Announcement bar.** Thin `--brand` strip, ALL CAPS micro-type, under 60 characters, single link to the buy block. Free-shipping threshold from config.
-2. **Nav, sticky.** Wordmark left; short links (Shop, Why a chew, What's in it, FAQ); right side a **pill CTA** — non-optional, it's the always-available conversion path — plus cart icon.
-3. **Hero.** Product-cutout on a saturated `--brand` ground. Eyebrow, big chunky headline landing the format claim in one line, one sub-line, primary pill CTA, tin-plus-loose-chews cutout with coffee-bean and grape cutouts orbiting it. Micro-caps trust row underneath: *30 seconds · no rinse · swallow it · fits any pocket.*
-4. **Thin proof strip.** A marquee of the research quotes rather than press logos — clearly labeled as customer research. `[PRESS LOGO SLOT]` is **not** used here; delete the band rather than fake it.
-5. **The problem.** Short, funny indictment of the mint ritual: the tin in every bag, the five minutes of cover, the mint-after-wine flavor collision. 3-up of icon + line, or one big statement.
-6. **THE COMPARISON — the engine of this page.** Two-column head-to-head, arriving in the second scroll, before any ingredient detail. Left column *A mint* on `--drab` with gray X marks, muted type, no border. Right column *Savour* on `--brand` with a thick ink border, slight scale-up, filled check marks. Rows are **experience attributes, not specs**: does it remove or cover · works on stains · needs a sink · clashes with what you just drank · how long it lasts · what it costs per use. Mobile: stack the two cards, Savour first — never shrink into an unreadable side-by-side.
-7. **How it works.** Three numbered chunky step badges: Snap / Melt / Wash. Deliberately trivial, because the simplicity is the claim.
-8. **What's in it.** The credibility core. Ingredient count at display size, the **ingredient marquee** — two stacked rows scrolling opposite directions, ALL CAPS with star separators, frozen entirely under `prefers-reduced-motion` — plus cutout ingredient photography and a grouped breakdown (the cooling agent / the acid / the flavor).
-9. **What's *not* in it.** Exclusion list reusing the X-mark vocabulary from §6: no mint, no foam, no rinsing, no spitting, no plastic pen.
-10. **Taste.** Do not skip this — taste is the whole reason the format wins. Macro shot per variant, tasting notes, *"composed to follow your drink, not fight it."*
-11. **Standards.** Food-grade ingredient callouts and `[SOURCE NEEDED]` markers, rendered as chunky rotated colored badges rather than gray certification seals. The page never sobers up to be believed.
-12. **Reviews.** `[REVIEW SLOT]` components built and rendered empty. Nothing fabricated.
-13. **Pricing block.** Two selectable radio-cards — **Subscribe (pre-selected, badged "Most popular", % from config) vs. One-time** — with a thick border on the selected state and the **per-chew cost broken out** ("about 53¢ a chew", computed live). Guarantee line directly under the button. This per-use reframe is the key conversion device; keep it.
-14. **Guarantee sticker.** Money-back promise as a rotated sticker on a color band.
-15. **FAQ.** Accordion, all nine objections, answered in the same joking-but-informative voice.
-16. **Final CTA band.** Full-bleed `--brand`, one very large headline, one button, product cutout. The loudest moment on the page.
-17. **Footer.** Deep ground, link columns, email capture, social, legal. The only quiet part.
+Left column, in order:
+1. **Rating line above the headline** — five brand-color stars, then `4.8 stars from 100,000 reviews • 1,000,000+ members` with the numbers bold and colored. **Savour has none of this. Render `[RATING LINE — pending launch]` and ship the line hidden**, not with zeros.
+2. **Huge two-tone headline** — heavy rounded sans, three lines, deep green for most of it and bright green for the emphasis clause. Savour: *"30 Seconds After Your Last Sip"* / *"Everything Mints Never Touched."*
+3. **One big pill CTA**, bright brand fill, white bold label, stating the offer — Grüns uses "Save 55% + Free Shipping"
+4. **Two micro-reassurances directly under the CTA**, each icon + label: *30-day guarantee* · *Cancel anytime*
+5. **A three-stat row** — three **yellow filled circles**, each with an oversized numeral inside (`60+`, `21`, `6g`), a bold label below, and a small sub-label. Savour: `30` chews · `~30s` to work · `2` formulas. Circles are the device; keep them.
 
-**Section count: 17.** **Density: ~900–1,400 words total** — no section over ~45 words of body copy outside the FAQ. This page is scanned, not read.
+**Nav — floating pills, not a bar.** The logo sits inside a rounded warm-grey pill; the right cluster (a **yellow pill CTA**, cart icon, hamburger) sits inside its own rounded grey container. They float over the cream with a gap above. Do not build a full-width nav bar.
 
-**Voice:** confident, funny, faintly exasperated on the reader's behalf. The humor targets **the format and the ritual**, never the customer and never a named brand. Short sentences, fragments, imperatives, the comic turn on the last word. Never wellness-speak. **Write the micro-copy in voice too** — button labels, the announcement bar, form placeholders, the modal's empty and success states. Shipping default "Submit" / "Learn more" labels is where this template most often goes flat.
+**Announcement bar:** deep forest fill, **two centered lines** — a loud first line and a smaller second line.
+
+**Sticky offer tab:** a vertical, rotated pill on the **left screen edge**, brand-fill, white text reading the offer, with a dismiss `×`. Persistent on scroll. Keyboard-dismissible.
+
+### Section order
+
+1. Announcement bar (deep fill, two centered lines)
+2. Floating pill nav
+3. Hero (left text / right rounded photo, rating line, two-tone headline, pill CTA, micro-reassurances, yellow stat circles)
+4. **Press logo strip** — black wordmarks in a row directly under the hero. Savour has no press. **Delete this band rather than faking it**; a `[PRESS LOGO SLOT]` placeholder row is acceptable in the build but must not deploy
+5. The problem — short, funny indictment of the mint ritual: the tin in every bag, five minutes of cover, mint-after-wine flavor collision
+6. **The comparison — the engine of this page.** Two-column head-to-head arriving in the second scroll, before any ingredient detail. Left *A mint* on a drab grey ground with grey X marks and muted type; right *Savour* on the bright brand ground with a thick border, slight scale-up and filled checks. Rows are **experience attributes, not specs**: removes or covers · works on stains · needs a sink · clashes with your drink · how long it lasts · cost per use. On mobile, stack the cards with Savour first — never shrink into an unreadable side-by-side
+7. How it works — three numbered chunky step badges: Snap / Melt / Wash. Deliberately trivial, because the simplicity is the claim
+8. What's in it — the credibility core. Count at display size, an **ingredient marquee** (two stacked rows scrolling opposite directions, uppercase, star separators, **frozen entirely under `prefers-reduced-motion`** with a visible pause control), cutout ingredient photography, grouped breakdown
+9. What's *not* in it — exclusion list reusing the X-mark vocabulary from §6: no mint, no foam, no rinsing, no spitting, no plastic pen
+10. Taste — do not skip; taste is why the format wins. Macro shot per variant, tasting notes, *"composed to follow your drink, not fight it"*
+11. Third-party tested — Grüns states this plainly as a heading. Savour cannot yet: use `[THIRD-PARTY TESTING — confirm before claiming]` and render the badges as chunky rotated stickers, not gray seals. The page never sobers up to be believed
+12. Reviews — `[REVIEW SLOT]` built, rendered empty
+13. Pricing — two selectable radio-cards, **Subscribe pre-selected** and badged, thick border on the selected state, **per-chew cost broken out** ("about 53¢ a chew", computed live), guarantee line directly under the button
+14. Guarantee sticker — rotated, on a color band
+15. FAQ accordion — all nine objections, in voice
+16. Final CTA band — full-bleed bright brand, one very large headline, one button, product cutout
+17. Footer — deep ground, link columns, email capture, legal
+
+**Section count: 17.** **Density: ~900–1,400 words total**, no section over ~45 words of body copy outside the FAQ. This page is scanned, not read.
+
+**Voice:** confident, funny, faintly exasperated on the reader's behalf, aimed at **the format and the ritual** — never the customer, never a named brand. The real Grüns line *"We made daily nutrition, like, ridiculously easy."* is the register: the filler "like" is doing deliberate work. Short sentences, fragments, imperatives.
+
+**Write the micro-copy in voice too** — button labels, announcement bar, form placeholders, the modal's empty and success states. Shipping default "Submit" / "Learn more" labels is where this template goes flat. Keep the claim hedging from §7 even at this volume.
 
 **VOC quotes for this template only:** 1, 3, 5, 9, 11, 13.
 ## 10. IMAGERY
