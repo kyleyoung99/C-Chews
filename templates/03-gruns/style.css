@@ -556,6 +556,7 @@ p { margin: 0 0 16px; }
 .badge--yellow { background: var(--yellow); }
 .badge--orange { background: var(--orange); color: #fff; }
 .badge--empty { background: #fff; border-style: dashed; color: var(--muted); box-shadow: none; }
+.badge--drab { background: var(--drab); }
 .badge__label { text-align: center; }
 
 /* -----------------------------------------------------------------
@@ -563,23 +564,27 @@ p { margin: 0 0 16px; }
    ----------------------------------------------------------------- */
 
 .reviews { padding: var(--pad) 0; text-align: center; }
-.agg { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin: 12px 0 28px; }
-.agg__slot, .review-card__stars, .review-card__slot, .review-card__by {
-  font-family: monospace;
-  font-size: 0.75rem;
-  color: var(--muted);
-}
+.agg { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin: 12px 0 28px; align-items: center; }
 .agg__slot {
-  border: 1.5px dashed var(--muted);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  color: var(--ink);
+  border: 2px solid var(--ink);
   border-radius: var(--r-btn);
   padding: 6px 14px;
+  background: var(--yellow);
 }
+.review-card__stars { font-family: monospace; font-size: 0.8125rem; color: var(--brand); letter-spacing: 1px; }
+.review-card__slot { font-size: 0.9375rem; color: var(--ink); line-height: 1.5; }
+.review-card__by { font-family: monospace; font-size: 0.75rem; color: var(--muted); }
 .review-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: left; }
 .review-card {
-  border: 2px dashed var(--drab);
+  border: 2px solid var(--ink);
   border-radius: var(--r-card);
   padding: 20px;
   display: grid; gap: 8px;
+  box-shadow: var(--hard-sm);
 }
 
 @media (max-width: 760px) {
@@ -816,4 +821,56 @@ p { margin: 0 0 16px; }
 
 @media (prefers-reduced-motion: reduce) {
   .btn--yellow:hover { transform: none; }
+}
+
+/* -----------------------------------------------------------------
+   Bag drawer — real cart state (line items, quantities, live
+   free-shipping bar); checkout itself is a stub.
+   ----------------------------------------------------------------- */
+
+.drawer { position: fixed; inset: 0; z-index: 190; }
+.drawer[hidden] { display: none; }
+.drawer__scrim { position: absolute; inset: 0; background: rgba(16,16,16,.5); }
+.drawer__panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(420px, 100%);
+  background: #fff;
+  border-left: 3px solid var(--ink);
+  box-shadow: var(--hard);
+  padding: 24px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.drawer__top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.drawer__top h2 { margin: 0; font-size: 1.25rem; }
+
+.ship { background: var(--paper); border: 2px solid var(--ink); border-radius: 14px; padding: 12px 14px; margin-bottom: 18px; }
+.ship__msg { font-size: 0.8125rem; margin: 0 0 8px; }
+.ship__track { height: 6px; border-radius: 999px; background: #fff; border: 1.5px solid var(--ink); overflow: hidden; }
+.ship__fill { display: block; height: 100%; width: 0; background: var(--brand); transition: width .3s ease; }
+
+.drawer__lines { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 16px; }
+.line { display: flex; align-items: flex-start; gap: 12px; border-bottom: 2px solid var(--paper); padding-bottom: 14px; }
+.line__body { flex: 1; min-width: 0; }
+.line__name { font-family: var(--font-display); font-weight: 600; font-size: 0.9375rem; margin: 0; }
+.line__meta { font-size: 0.8125rem; color: var(--muted); margin: 2px 0 0; }
+.line__qty { display: flex; align-items: center; gap: 8px; margin-top: 8px; border: 2px solid var(--ink); border-radius: 999px; padding: 3px 8px; width: fit-content; }
+.line__qty button { font-family: var(--font-display); font-weight: 700; width: 16px; }
+.line__price { font-family: var(--font-display); font-weight: 700; font-size: 0.875rem; white-space: nowrap; margin: 0; }
+.line__rm { margin-left: auto; font-size: 0.75rem; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+.line__rm:hover { color: var(--brand); }
+
+.drawer__empty { color: var(--muted); font-size: 0.9375rem; }
+.drawer__foot { margin-top: auto; padding-top: 18px; border-top: 2px solid var(--ink); }
+.drawer__sub {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.0625rem;
+  margin-bottom: 14px;
 }

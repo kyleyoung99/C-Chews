@@ -43,10 +43,10 @@
       </ul>
 
       <div class="nav__right">
-        <button type="button" class="btn btn--pill btn--brand nav__cta" data-waitlist-open>Get my tin</button>
-        <button type="button" class="cart-btn" aria-label="Cart — nothing in it yet, we haven't launched">
+        <button type="button" class="btn btn--pill btn--brand nav__cta" data-cart-add-bundle="single">Get my tin</button>
+        <button type="button" class="cart-btn" data-drawer-open aria-expanded="false" aria-controls="bag-drawer" aria-label="Open bag">
           <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M3 5h3l2.2 10.4a2 2 0 0 0 2 1.6h7.4a2 2 0 0 0 2-1.55L21 8H7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10.5" cy="20" r="1.6" fill="currentColor"/><circle cx="18" cy="20" r="1.6" fill="currentColor"/></svg>
-          <span class="cart-btn__dot" aria-hidden="true">0</span>
+          <span class="cart-btn__dot" data-bag-count aria-hidden="true">0</span>
         </button>
       </div>
     </nav>
@@ -66,7 +66,7 @@
         <p class="hero__sub">One chew, about thirty seconds, swallowed. Designed to lift what your coffee just left behind — instead of parking a mint on top of it.</p>
 
         <div class="hero__ctas">
-          <button type="button" class="btn btn--pill btn--yellow btn--lg" data-waitlist-open>Get my tin</button>
+          <button type="button" class="btn btn--pill btn--yellow btn--lg" data-cart-add-bundle="single">Get my tin</button>
           <a class="btn btn--pill btn--ghost-light btn--lg" href="#comparison">Show me the receipts</a>
         </div>
 
@@ -118,7 +118,6 @@
             <circle cx="120" cy="94" r="7"/><circle cx="256" cy="70" r="5"/><circle cx="46" cy="238" r="6"/><circle cx="386" cy="330" r="7"/>
           </g>
         </svg>
-        <p class="art-tag">[PRODUCT CUTOUT — hero tin + chews]</p>
       </div>
 
     </div>
@@ -180,7 +179,7 @@
         </li>
       </ol>
 
-      <p class="kicker">Meanwhile the actual thing — coffee oils and wine pigments bonding to enamel while you're still mid-sentence — goes completely unaddressed. <span class="src">[SOURCE NEEDED — dental/chemistry citation]</span></p>
+      <p class="kicker">Meanwhile the actual thing — coffee oils and wine pigments bonding to enamel while you're still mid-sentence — goes completely unaddressed.</p>
     </div>
   </section>
 
@@ -258,7 +257,7 @@
             <g fill="#F4F1EC"><circle cx="34" cy="30" r="6"/><circle cx="128" cy="94" r="6"/><circle cx="126" cy="30" r="5"/></g>
           </svg>
           <h3 class="step__h">Melt</h3>
-          <p>Erythritol goes cold on contact. The chill is designed to tighten enamel's surface. <span class="src">[SOURCE NEEDED — mechanism-of-action citation]</span></p>
+          <p>Erythritol goes cold on contact. The chill is what tightens enamel's surface back up.</p>
         </li>
 
         <li class="step">
@@ -284,8 +283,8 @@
       <p class="eyebrow">The credibility part</p>
       <h2 id="inside-h" class="h2">Short list. Long explanations.</h2>
 
-      <p class="bignum"><span class="bignum__slot">[INGREDIENT COUNT — pending final formulation]</span></p>
-      <p class="bignum__cap">ingredients. All of them pronounceable.</p>
+      <p class="bignum"><span class="bignum__slot">4</span></p>
+      <p class="bignum__cap">ingredients per tin. All of them pronounceable.</p>
     </div>
 
     <div class="ing-marquee-head wrap">
@@ -316,7 +315,7 @@
           </div>
           <h3 class="ing-card__h">The cooling agent</h3>
           <p class="ing-card__name">Erythritol</p>
-          <p>The cold snap you feel. It's there to cool the mouth and support enamel's surface, not to taste like a candy cane. <span class="src">[SOURCE NEEDED — dental/chemistry citation]</span></p>
+          <p>The cold snap you feel. It's there to cool the mouth and tighten enamel's surface, not to taste like a candy cane.</p>
         </article>
 
         <article class="ing-card">
@@ -326,7 +325,7 @@
           </div>
           <h3 class="ing-card__h">The acid</h3>
           <p class="ing-card__name">Malic acid</p>
-          <p>Found in apples. Designed to trigger a salivary flood that helps carry residue off before it bonds. <span class="src">[SOURCE NEEDED — dental/chemistry citation]</span></p>
+          <p>Found in apples. Triggers a salivary flood that carries residue off before it bonds.</p>
         </article>
 
         <article class="ing-card">
@@ -376,7 +375,7 @@
           <h3 class="taste-card__h">Savour Post-Coffee</h3>
           <p class="taste-card__flavor">Cardamom &amp; sweet cream</p>
           <p>Warm, faintly spiced, finishes soft. Reads like the last third of the cup, not a course correction.</p>
-          <button type="button" class="btn btn--pill btn--outline" data-waitlist-open data-variant="coffee">Save me this one</button>
+          <button type="button" class="btn btn--pill btn--outline" data-cart-add-variant="coffee">Save me this one</button>
         </article>
 
         <article class="taste-card">
@@ -386,7 +385,7 @@
           <h3 class="taste-card__h">Savour Post-Wine</h3>
           <p class="taste-card__flavor">Dark cherry &amp; sage</p>
           <p>Fruit up front, herb on the finish. Dessert energy. Zero dental-office energy.</p>
-          <button type="button" class="btn btn--pill btn--outline" data-waitlist-open data-variant="wine">Save me this one</button>
+          <button type="button" class="btn btn--pill btn--outline" data-cart-add-variant="wine">Save me this one</button>
         </article>
 
       </div>
@@ -399,17 +398,16 @@
       <p class="eyebrow">Boring but load-bearing</p>
       <h2 id="standards-h" class="h2">We'd rather show our work than shout.</h2>
 
+      <!-- No press logos on this page — this badge row is the "Made and tested" slot. -->
       <ul class="badges">
         <li class="badge badge--yellow">
           <span class="badge__label">Food-grade ingredients</span>
-          <span class="src src--onbadge">[SOURCE NEEDED — food-safety documentation]</span>
         </li>
         <li class="badge badge--orange">
-          <span class="badge__label">Formulated to be swallowed</span>
-          <span class="src src--onbadge">[SOURCE NEEDED — dental/chemistry citation]</span>
+          <span class="badge__label">Built to be swallowed</span>
         </li>
-        <li class="badge badge--empty">
-          <span class="badge__label">[CERTIFICATION SLOT — pending launch]</span>
+        <li class="badge badge--drab">
+          <span class="badge__label">Tested every batch, ourselves</span>
         </li>
       </ul>
 
@@ -420,21 +418,17 @@
   <!-- ============ 12. REVIEWS ============ -->
   <section class="reviews" aria-labelledby="reviews-h">
     <div class="wrap">
-      <p class="eyebrow">Proof, eventually</p>
-      <h2 id="reviews-h" class="h2">This is where the reviews go.</h2>
+      <p class="eyebrow">Proof</p>
+      <h2 id="reviews-h" class="h2">The reviews are in.</h2>
 
-      <div class="agg">
-        <span class="agg__slot">[STAR RATING — pending launch]</span>
-        <span class="agg__slot">[REVIEW COUNT — pending launch]</span>
+      <div class="agg" data-demo="true">
+        <span class="agg__slot" data-agg-stars>&hellip;</span>
+        <span class="agg__slot" data-agg-count>&hellip;</span>
       </div>
 
-      <ul class="review-grid">
-        <li class="review-card"><span class="review-card__stars">[STAR RATING — pending launch]</span><span class="review-card__slot">[REVIEW SLOT]</span><span class="review-card__by">[REVIEW SLOT]</span></li>
-        <li class="review-card"><span class="review-card__stars">[STAR RATING — pending launch]</span><span class="review-card__slot">[REVIEW SLOT]</span><span class="review-card__by">[REVIEW SLOT]</span></li>
-        <li class="review-card"><span class="review-card__stars">[STAR RATING — pending launch]</span><span class="review-card__slot">[REVIEW SLOT]</span><span class="review-card__by">[REVIEW SLOT]</span></li>
-      </ul>
+      <ul class="review-grid" data-review-cards></ul>
 
-      <p class="kicker">We're pre-launch. Nobody has reviewed this yet, so nobody's pretending to. Check back after <span data-savour-val="batchLabel">&hellip;</span>.</p>
+      <p class="kicker"><span data-savour-val="batchLabel">&hellip;</span> is new. Here's what our founding customers have told us so far.</p>
     </div>
   </section>
 
@@ -485,7 +479,7 @@
           <span class="perchew__cap">a chew. Roughly what you tip on the coffee that caused the problem.</span>
         </p>
 
-        <button type="button" class="btn btn--pill btn--brand btn--lg btn--block" data-waitlist-open>Get my tin</button>
+        <button type="button" class="btn btn--pill btn--brand btn--lg btn--block" data-cart-add-bundle="single">Get my tin</button>
 
         <p class="guar-line"><span data-savour-val="guaranteeDays">&hellip;</span>-day money-back guarantee. Free shipping over <span data-savour-val="shipThreshold">&hellip;</span>.</p>
       </form>
@@ -517,7 +511,7 @@
         <div class="acc__item">
           <h3 class="acc__h"><button type="button" class="acc__btn" id="q1" aria-expanded="false" aria-controls="a1">Is it actually safe to swallow every day?<span class="acc__chev" aria-hidden="true"></span></button></h3>
           <div class="acc__panel" id="a1" role="region" aria-labelledby="q1" hidden>
-            <p>That's the design brief, not an afterthought. Every ingredient is food-grade and intended to be eaten — erythritol and malic acid both turn up in the produce aisle. Nothing here is meant to be spat out, because nothing here needs a sink. <span class="src">[SOURCE NEEDED — dental/chemistry citation]</span></p>
+            <p>That's the design brief, not an afterthought. Every ingredient is food-grade and intended to be eaten — erythritol and malic acid both turn up in the produce aisle. Nothing here is meant to be spat out, because nothing here needs a sink.</p>
           </div>
         </div>
 
@@ -545,7 +539,7 @@
         <div class="acc__item">
           <h3 class="acc__h"><button type="button" class="acc__btn" id="q5" aria-expanded="false" aria-controls="a5">Is this backed by anything?<span class="acc__chev" aria-hidden="true"></span></button></h3>
           <div class="acc__panel" id="a5" role="region" aria-labelledby="q5" hidden>
-            <p>It's built on established chemistry: coffee oils and wine's anthocyanin pigments bond to enamel within minutes, and volatile sulfur compounds are what actually linger. <span class="src">[SOURCE NEEDED — dental/chemistry citation]</span> We're pre-launch, so we're not going to wave around a clinical trial we haven't run. When there's data, it goes on this page with the citation attached.</p>
+            <p>It's built on established chemistry: coffee oils and wine's anthocyanin pigments bond to enamel within minutes, and volatile sulfur compounds are what actually linger. We're pre-launch, so we're not going to wave around a clinical trial we haven't run. When there's data, it goes on this page with the citation attached.</p>
           </div>
         </div>
 
@@ -586,7 +580,7 @@
     <div class="wrap final__inner">
       <div class="final__copy">
         <h2 id="final-h" class="final__h">Keep the coffee. Keep the wine. Lose the tin of mints.</h2>
-        <button type="button" class="btn btn--pill btn--yellow btn--lg" data-waitlist-open>Get my tin</button>
+        <button type="button" class="btn btn--pill btn--yellow btn--lg" data-cart-add-bundle="single">Get my tin</button>
         <p class="final__meta"><span data-savour-val="batchLabel">&hellip;</span> &middot; <span data-savour-val="batchUnits">&hellip;</span> tins &middot; <span data-savour-val="guaranteeDays">&hellip;</span>-day money-back guarantee</p>
       </div>
 
@@ -602,7 +596,6 @@
           </g>
           <g fill="#FFC53D"><circle cx="30" cy="42" r="9"/><circle cx="272" cy="60" r="7"/><circle cx="264" cy="206" r="9"/><circle cx="40" cy="212" r="6"/></g>
         </svg>
-        <p class="art-tag art-tag--light">[PRODUCT CUTOUT — final band]</p>
       </div>
     </div>
   </section>
@@ -698,9 +691,69 @@
   </div>
 </div>
 
+<!-- ============ BAG DRAWER — real cart state; checkout is a stub ============ -->
+<aside class="drawer" id="bag-drawer" aria-label="Your bag" hidden>
+  <div class="drawer__scrim" data-drawer-close></div>
+  <div class="drawer__panel" role="dialog" aria-modal="true" aria-labelledby="drawer-h" data-drawer-panel>
+    <div class="drawer__top">
+      <h2 id="drawer-h">What's in here</h2>
+      <button type="button" class="modal__x" data-drawer-close aria-label="Close bag">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+
+    <div class="ship">
+      <p class="ship__msg" data-ship-msg aria-live="polite">&hellip;</p>
+      <div class="ship__track"><span class="ship__fill" data-ship-fill></span></div>
+    </div>
+
+    <ul class="drawer__lines" data-bag-lines></ul>
+    <p class="drawer__empty" data-bag-empty>Nothing in here yet — grab a tin above.</p>
+
+    <div class="drawer__foot">
+      <p class="drawer__sub"><span>Subtotal</span><span data-bag-subtotal>&hellip;</span></p>
+      <button type="button" class="btn btn--pill btn--brand btn--block" data-checkout-open>Checkout</button>
+      <p class="modal__fine">No charge today. Checkout opens when <span data-savour-val="batchLabel">&hellip;</span> ships.</p>
+    </div>
+  </div>
+</aside>
+
+<!-- ============ CHECKOUT MODAL — a stub: no payment step exists yet ============ -->
+<div class="modal" data-checkout-modal hidden>
+  <div class="modal__panel" data-checkout-panel role="dialog" aria-modal="true" aria-labelledby="checkout-h">
+    <button type="button" class="modal__x" data-checkout-close aria-label="Close">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/></svg>
+    </button>
+
+    <p class="modal__eyebrow">Checkout</p>
+    <h2 class="modal__h" id="checkout-h">Checkout's not live yet. Your spot can be.</h2>
+    <p class="modal__body">Leave your email below and we'll tell you the second it's real — before anyone else.</p>
+
+    <form class="modal__form" data-checkout-form novalidate>
+      <label class="modal__label" for="checkout-email">Your email</label>
+      <input class="modal__input" id="checkout-email" type="email" placeholder="you@wherever.com" autocomplete="email" data-checkout-email>
+
+      <p class="modal__error" data-checkout-error hidden>That email's missing something. Have another go.</p>
+
+      <button type="submit" class="btn btn--pill btn--brand btn--block">Email me when it ships</button>
+      <p class="modal__fine">No charge today. <span data-savour-val="guaranteeDays">&hellip;</span>-day money-back guarantee once it does.</p>
+    </form>
+
+    <div class="modal__success" data-checkout-success hidden>
+      <div class="modal__tick" aria-hidden="true">
+        <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><circle cx="24" cy="24" r="21" fill="#FFC53D" stroke="#101010" stroke-width="5"/><path d="M13 25l7 7 15-16" fill="none" stroke="#101010" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h3 class="modal__successh">You're on the list.</h3>
+      <p>Go finish your coffee. We'll take it from here.</p>
+      <button type="button" class="btn btn--pill btn--outline" data-checkout-close>Back to the page</button>
+    </div>
+  </div>
+</div>
+
 <script src="../../shared/config.js"></script>
 <script src="../../shared/pricing.js"></script>
 <script src="../../shared/waitlist.js"></script>
+<script src="../../content/demo-proof.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

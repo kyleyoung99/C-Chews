@@ -134,57 +134,135 @@
   }
 
   /* ---------------------------------------------------------------
-   * Bag drawer — honestly empty (no real cart, no real checkout);
-   * shows live free-shipping progress from $0.
+   * Bag drawer — a real cart (line items, quantities, live free-
+   * shipping progress). Checkout itself is a stub: see initCheckout.
    * ------------------------------------------------------------- */
 
-  function initDrawer() {
+  let cart = [];
+
+  function cartSubtotal() {
+    return cart.reduce((sum, l) => sum + l.unitPrice * l.qty, 0);
+  }
+
+  function addToCart(item) {
+    const existing = cart.find((l) => l.id === item.id);
+    if (existing) existing.qty += 1;
+    else cart.push({ id: item.id, name: item.name, meta: item.meta, thumb: item.thumb, unitPrice: item.unitPrice, qty: 1 });
+    renderCart();
+    openDrawer();
+  }
+
+  function addVariantToCart(variantId) {
+    const variant = Pricing.getVariant(variantId);
+    if (!variant) return;
+    const single = Pricing.getBundle("single") || CFG.pricing.bundles[0];
+    addToCart({
+      id: "variant-" + variantId,
+      name: variant.name,
+      meta: variant.flavor + " · " + CFG.product.chewsPerTin + " chews",
+      thumb: variantId,
+      unitPrice: single.price,
+    });
+  }
+
+  function addBundleToCart(bundle, plan) {
+    const subscribing = plan === "sub";
+    const price = subscribing ? Pricing.subscriptionPrice(bundle) : bundle.price;
+    addToCart({
+      id: bundle.id + "-" + plan,
+      name: bundle.label + (subscribing ? " (Subscription)" : " (One-time)"),
+      meta: bundle.tins + (bundle.tins === 1 ? " tin" : " tins") + " · " + bundle.tins * CFG.product.chewsPerTin + " chews",
+      thumb: bundle.id,
+      unitPrice: price,
+    });
+  }
+
+  function renderCart() {
+    const lines = document.querySelector("[data-bag-lines]");
+    const empty = document.querySelector("[data-bag-empty]");
+    const subtotalEl = document.querySelector("[data-bag-subtotal]");
+    const countEl = document.querySelector("[data-bag-count]");
     const drawer = document.getElementById("bag-drawer");
-    const panel = drawer ? drawer.querySelector("[data-drawer-panel]") : null;
-    const openers = document.querySelectorAll("[data-drawer-open]");
-    const closers = drawer ? drawer.querySelectorAll("[data-drawer-close]") : [];
+    if (!lines || !drawer) return;
+
+    const count = cart.reduce((sum, l) => sum + l.qty, 0);
+    if (countEl) {
+      countEl.textContent = String(count);
+      countEl.hidden = count === 0;
+    }
+    if (empty) empty.hidden = cart.length > 0;
+
+    lines.innerHTML = cart
+      .map(
+        (l) => `
+        <li class="line" data-cart-line="${l.id}">
+          <span class="line__thumb line__thumb--${l.thumb}" aria-hidden="true"></span>
+          <div style="flex:1;min-width:0;">
+            <p class="line__name">${l.name}</p>
+            <p class="line__meta">${l.meta}</p>
+            <div class="line__qty">
+              <button type="button" data-qty-dec aria-label="Decrease quantity">−</button>
+              <span data-qty-value>${l.qty}</span>
+              <button type="button" data-qty-inc aria-label="Increase quantity">+</button>
+            </div>
+          </div>
+          <p class="line__price">${Pricing.formatMoney(l.unitPrice * l.qty)}</p>
+          <button type="button" class="line__rm" data-line-remove>Remove</button>
+        </li>`
+      )
+      .join("");
+
+    const subtotal = cartSubtotal();
+    if (subtotalEl) subtotalEl.textContent = Pricing.formatMoney(subtotal);
+
+    const msg = drawer.querySelector("[data-ship-msg]");
+    const fill = drawer.querySelector("[data-ship-fill]");
+    if (msg && fill) {
+      if (cart.length === 0) {
+        msg.textContent = `Add ${Pricing.formatMoney(CFG.pricing.freeShippingThreshold)} to unlock free shipping.`;
+        fill.style.width = "0%";
+      } else if (Pricing.qualifiesForFreeShipping(subtotal)) {
+        msg.textContent = "Free shipping unlocked.";
+        fill.style.width = "100%";
+      } else {
+        msg.textContent = `Add ${Pricing.formatMoney(Pricing.amountToFreeShipping(subtotal))} more for free shipping.`;
+        fill.style.width = Pricing.freeShippingProgressPercent(subtotal) + "%";
+      }
+    }
+  }
+
+  let drawerLastFocused = null;
+
+  function openDrawer() {
+    const drawer = document.getElementById("bag-drawer");
     if (!drawer) return;
+    drawerLastFocused = document.activeElement;
+    drawer.hidden = false;
+    document.querySelectorAll("[data-drawer-open]").forEach((btn) => btn.setAttribute("aria-expanded", "true"));
+    document.body.classList.add("savour-no-scroll");
+    document.addEventListener("keydown", drawerKeydown);
+    const closeBtn = drawer.querySelector("[data-drawer-close]");
+    if (closeBtn) closeBtn.focus();
+  }
 
-    let lastFocused = null;
+  function closeDrawer() {
+    const drawer = document.getElementById("bag-drawer");
+    if (!drawer || drawer.hidden) return;
+    drawer.hidden = true;
+    document.querySelectorAll("[data-drawer-open]").forEach((btn) => btn.setAttribute("aria-expanded", "false"));
+    document.body.classList.remove("savour-no-scroll");
+    document.removeEventListener("keydown", drawerKeydown);
+    if (drawerLastFocused && typeof drawerLastFocused.focus === "function") drawerLastFocused.focus();
+  }
 
-    function renderShipping() {
-      const msg = drawer.querySelector("[data-ship-msg]");
-      const fill = drawer.querySelector("[data-ship-fill]");
-      const remaining = Pricing.amountToFreeShipping(0);
-      if (msg) {
-        msg.textContent = remaining > 0
-          ? `Add ${Pricing.formatMoney(remaining)} to unlock free shipping.`
-          : "Free shipping unlocked.";
-      }
-      if (fill) fill.style.width = Pricing.freeShippingProgressPercent(0) + "%";
-    }
-
-    function open() {
-      lastFocused = document.activeElement;
-      drawer.hidden = false;
-      openers.forEach((btn) => btn.setAttribute("aria-expanded", "true"));
-      document.body.classList.add("savour-no-scroll");
-      document.addEventListener("keydown", onKeydown);
-      const closeBtn = drawer.querySelector("[data-drawer-close]");
-      if (closeBtn) closeBtn.focus();
-    }
-
-    function close() {
-      drawer.hidden = true;
-      openers.forEach((btn) => btn.setAttribute("aria-expanded", "false"));
-      document.body.classList.remove("savour-no-scroll");
-      document.removeEventListener("keydown", onKeydown);
-      if (lastFocused && typeof lastFocused.focus === "function") lastFocused.focus();
-    }
-
-    function onKeydown(e) {
-      if (e.key === "Escape") {
-        close();
-        return;
-      }
-      if (e.key !== "Tab" || !panel) return;
-      const focusable = panel.querySelectorAll('button, [href], input, select, [tabindex]:not([tabindex="-1"])');
-      if (!focusable.length) return;
+  function drawerKeydown(e) {
+    if (e.key !== "Escape") return;
+    const drawer = document.getElementById("bag-drawer");
+    if (!drawer) return;
+    const panel = drawer.querySelector("[data-drawer-panel]");
+    if (!panel) { closeDrawer(); return; }
+    const focusable = panel.querySelectorAll('button, [href], input, select, [tabindex]:not([tabindex="-1"])');
+    if (e.key === "Tab" && focusable.length) {
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
       if (e.shiftKey && document.activeElement === first) {
@@ -195,10 +273,166 @@
         first.focus();
       }
     }
+    closeDrawer();
+  }
 
-    renderShipping();
-    openers.forEach((btn) => btn.addEventListener("click", open));
-    closers.forEach((el) => el.addEventListener("click", close));
+  function initCart() {
+    document.querySelectorAll("[data-drawer-open]").forEach((btn) => btn.addEventListener("click", openDrawer));
+    document.querySelectorAll("[data-drawer-close]").forEach((btn) => btn.addEventListener("click", closeDrawer));
+
+    document.addEventListener("click", (e) => {
+      const variantTrigger = e.target.closest("[data-cart-add-variant]");
+      if (variantTrigger && !variantTrigger.hasAttribute("data-quick-add")) {
+        e.preventDefault();
+        addVariantToCart(variantTrigger.getAttribute("data-cart-add-variant"));
+      }
+    });
+
+    const lines = document.querySelector("[data-bag-lines]");
+    if (lines) {
+      lines.addEventListener("click", (e) => {
+        const line = e.target.closest("[data-cart-line]");
+        if (!line) return;
+        const id = line.getAttribute("data-cart-line");
+        const item = cart.find((l) => l.id === id);
+        if (!item) return;
+        if (e.target.closest("[data-qty-inc]")) {
+          item.qty += 1;
+          renderCart();
+        } else if (e.target.closest("[data-qty-dec]")) {
+          item.qty -= 1;
+          if (item.qty <= 0) cart = cart.filter((l) => l.id !== id);
+          renderCart();
+        } else if (e.target.closest("[data-line-remove]")) {
+          cart = cart.filter((l) => l.id !== id);
+          renderCart();
+        }
+      });
+    }
+
+    renderCart();
+  }
+
+  function initCheckout() {
+    const modal = document.querySelector("[data-checkout-modal]");
+    if (!modal) return;
+    const form = modal.querySelector("[data-checkout-form]");
+    const success = modal.querySelector("[data-checkout-success]");
+    const error = modal.querySelector("[data-checkout-error]");
+    const email = modal.querySelector("[data-checkout-email]");
+    let lastFocused = null;
+
+    function open() {
+      lastFocused = document.activeElement;
+      if (form) { form.hidden = false; form.reset(); }
+      if (success) success.hidden = true;
+      if (error) error.hidden = true;
+      modal.hidden = false;
+      document.body.classList.add("savour-no-scroll");
+      document.addEventListener("keydown", keydown);
+      if (email) email.focus();
+    }
+
+    function close() {
+      if (modal.hidden) return;
+      modal.hidden = true;
+      document.body.classList.remove("savour-no-scroll");
+      document.removeEventListener("keydown", keydown);
+      if (lastFocused && typeof lastFocused.focus === "function") lastFocused.focus();
+    }
+
+    function keydown(e) {
+      if (e.key === "Escape") close();
+    }
+
+    document.querySelectorAll("[data-checkout-open]").forEach((btn) => btn.addEventListener("click", open));
+    modal.querySelectorAll("[data-checkout-close]").forEach((btn) => btn.addEventListener("click", close));
+    modal.addEventListener("click", (e) => { if (e.target === modal) close(); });
+
+    if (form) {
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const value = email ? email.value.trim() : "";
+        const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        if (!valid) {
+          if (error) error.hidden = false;
+          if (email) email.focus();
+          return;
+        }
+        if (error) error.hidden = true;
+
+        const payload = {
+          email: value,
+          cart: cart.map((l) => ({ id: l.id, name: l.name, qty: l.qty, unitPrice: l.unitPrice })),
+          subtotal: cartSubtotal(),
+          batch: CFG.launch.batchLabel,
+          submittedAt: new Date().toISOString(),
+        };
+        // TODO: wire to ESP and payment provider — no network request is made yet.
+        console.log("[Savour checkout submission]", payload);
+
+        form.hidden = true;
+        if (success) {
+          success.hidden = false;
+          const focusTarget = success.querySelector("button, [href], [tabindex]");
+          if (focusTarget) focusTarget.focus();
+        }
+      });
+    }
+  }
+
+  /* ---------------------------------------------------------------
+   * Reviews — seeded demo proof from content/demo-proof.js, gated
+   * entirely by CFG.launch.showDemoProof.
+   * ------------------------------------------------------------- */
+
+  function starString(rating) {
+    const full = Math.round(rating);
+    let s = "";
+    for (let i = 0; i < 5; i++) s += i < full ? "★" : "☆";
+    return s;
+  }
+
+  function formatReviewDate(iso) {
+    const d = new Date(iso + "T00:00:00");
+    return d.toLocaleDateString(CFG.currency.locale, { month: "short", day: "numeric", year: "numeric" });
+  }
+
+  function renderReviews() {
+    const proof = window.SAVOUR_DEMO_PROOF;
+    const host = document.querySelector("[data-review-cards]");
+    if (!proof || !host) return;
+    const head = document.querySelector(".proof__head");
+
+    if (!CFG.launch.showDemoProof) {
+      if (head) head.hidden = true;
+      host.hidden = true;
+      return;
+    }
+
+    const agg = proof.aggregate;
+    const aggStars = document.querySelector("[data-agg-stars]");
+    const aggCount = document.querySelector("[data-agg-count]");
+    if (aggStars) aggStars.textContent = starString(agg.rating);
+    if (aggCount) aggCount.textContent = `${agg.rating.toFixed(1)} · ${agg.count} reviews`;
+
+    const list = (proof.reviews && proof.reviews["02-bloom"]) || [];
+    host.innerHTML = list
+      .map((r) => {
+        const variant = Pricing.getVariant(r.variant);
+        return `
+        <li class="rcard" data-demo="true">
+          <div class="rating rating--sm" role="img" aria-label="${r.rating} out of 5 stars">
+            <span class="stars" aria-hidden="true">${starString(r.rating)}</span>
+          </div>
+          <p class="rcard__slot">“${r.quote}”</p>
+          <div class="rcard__by">
+            <span class="rcard__avatar" aria-hidden="true"></span>
+            <span class="rcard__name">${r.name} · ${variant ? variant.name : ""} · ${formatReviewDate(r.date)}</span>
+          </div>
+        </li>`;
+      })
+      .join("");
   }
 
   /* ---------------------------------------------------------------
@@ -236,7 +470,7 @@
       dots.forEach((dot, idx) => {
         dot.setAttribute("aria-selected", String(idx === i));
       });
-      if (addBtn) addBtn.setAttribute("data-variant", variant);
+      if (addBtn) addBtn.setAttribute("data-cart-add-variant", variant);
 
       const swap = () => {
         if (eyebrow) eyebrow.textContent = copy[variant].eyebrow;
@@ -317,16 +551,16 @@
         </div>
         <p class="pcard__name" data-swatch-name>${variant.name}</p>
         <p class="${noteClass}" data-swatch-note>${note}</p>
-        <div class="rating rating--empty" role="img" aria-label="Star rating pending launch — no rating yet">
-          <span class="stars" aria-hidden="true"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></span>
-          <span class="rating__ph">[STAR RATING — pending launch]</span>
+        <div class="rating" role="img" aria-label="Aggregate star rating" data-demo="true">
+          <span class="stars" aria-hidden="true" data-agg-stars-mini></span>
+          <span class="rating__ph" data-agg-count-mini>&nbsp;</span>
         </div>
         <p class="pcard__price">${Pricing.formatMoney(bundle.price)} <span class="pcard__unit">/ tin</span></p>
         <div class="pcard__swatches" role="group" aria-label="Choose a flavor for this card">
           <button type="button" class="swatch swatch--coffee" data-swatch-pick="coffee" aria-pressed="${variant.id === "coffee"}"><span class="sr-only">Post-Coffee</span></button>
           <button type="button" class="swatch swatch--wine" data-swatch-pick="wine" aria-pressed="${variant.id === "wine"}"><span class="sr-only">Post-Wine</span></button>
         </div>
-        <button type="button" class="pcard__add" data-quick-add data-waitlist-open data-variant="${variant.id}">Add to bag</button>
+        <button type="button" class="pcard__add" data-quick-add data-cart-add-variant="${variant.id}">Add to bag</button>
       </li>`;
   }
 
@@ -352,16 +586,26 @@
           photoEl.src = photo.src;
           photoEl.alt = photo.alt;
         }
-        if (addBtn) addBtn.setAttribute("data-variant", id);
+        if (addBtn) addBtn.setAttribute("data-cart-add-variant", id);
       });
     });
-    // dynamically-created triggers are not seen by SavourWaitlist.init()'s
-    // startup scan, so wire this one directly.
+    // dynamically-created triggers are not covered by the page-load
+    // delegated cart wiring, so wire this one directly.
     if (addBtn) {
       addBtn.addEventListener("click", (e) => {
         e.preventDefault();
-        window.SavourWaitlist.open({ variant: addBtn.getAttribute("data-variant") });
+        addVariantToCart(addBtn.getAttribute("data-cart-add-variant"));
       });
+    }
+    const miniStars = li.querySelector("[data-agg-stars-mini]");
+    const miniCount = li.querySelector("[data-agg-count-mini]");
+    const proof = window.SAVOUR_DEMO_PROOF;
+    if (proof && CFG.launch.showDemoProof) {
+      if (miniStars) miniStars.textContent = starString(proof.aggregate.rating);
+      if (miniCount) miniCount.textContent = proof.aggregate.rating.toFixed(1) + " (" + proof.aggregate.count + ")";
+    } else {
+      const ratingEl = li.querySelector(".rating");
+      if (ratingEl) ratingEl.hidden = true;
     }
   }
 
@@ -418,7 +662,6 @@
         ${bundle.badge ? `<span class="badge">${bundle.badge}</span>` : ""}
         <div class="pcard__plate">
           ${bundleTinMarkup(bundle)}
-          <span class="pcard__ph">[PHOTO — studio: ${bundle.tins} tin${bundle.tins > 1 ? "s" : ""} stacked on flat pastel]</span>
         </div>
         <p class="pcard__name">${bundle.label}</p>
         <p class="pcard__perchew">${Pricing.formatPerChew(bundle)} / chew</p>
@@ -440,7 +683,9 @@
     grid.querySelectorAll("[data-bundle-add]").forEach((btn) => {
       btn.addEventListener("click", (e) => {
         e.preventDefault();
-        window.SavourWaitlist.open();
+        const bundle = Pricing.getBundle(btn.getAttribute("data-bundle-add"));
+        if (!bundle) return;
+        addBundleToCart(bundle, purchaseMode);
       });
     });
 
@@ -567,7 +812,12 @@
 
     if (addBtn) {
       addBtn.addEventListener("click", () => {
-        window.SavourWaitlist.open({ variant: lastMatch });
+        if (lastMatch === "both") {
+          const duo = Pricing.getBundle("duo");
+          if (duo) addBundleToCart(duo, "onetime");
+        } else {
+          addVariantToCart(lastMatch);
+        }
       });
     }
 
@@ -624,11 +874,13 @@
     populateModalVariants();
     initAnnouncement();
     initSearch();
-    initDrawer();
+    initCart();
+    initCheckout();
     initHero();
     renderStartRail();
     renderFlavorTiles();
     renderBundles();
+    renderReviews();
     initPlanSwitch();
     initRailArrows();
     initVideoPause();

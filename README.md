@@ -1,10 +1,13 @@
-# C-Chews — Savour Landing Page Templates (v3)
+# C-Chews — Savour Landing Page Templates (v3, live-storefront update)
 
 Three landing pages for **Savour**, a pre-launch DTC oral-care brand. Built
-per **build prompt v3** (`Prompt-For-Landing-Pages` branch): each template
-is a close structural and visual reproduction of a specific, proven DTC
-landing page — not an invented design "inspired by" it — rebuilt with
-Savour's own product, copy, and design tokens.
+per **build prompt v3** (`Prompt-For-Landing-Pages` branch), then updated
+to that branch's live-storefront revision: each template is a close
+structural and visual reproduction of a specific, proven DTC landing
+page — not an invented design "inspired by" it — rebuilt with Savour's own
+product, copy, and design tokens, and now shipped as a page that reads as
+a finished, live store rather than a wireframe (see "The live-storefront
+update" below).
 
 | Template | Modeled on | Traffic it's built for |
 |---|---|---|
@@ -94,66 +97,77 @@ copy bank, written in its own voice before any markup existed.
 
 ---
 
-## `[SOURCE NEEDED]` and other placeholder inventory
+## The live-storefront update
 
-Savour is pre-launch with zero customers, zero clinical data, and zero
-press coverage. No fabricated testimonials, star ratings, review counts,
-press logos, or statistics appear anywhere. Every place one of the
-reference brands would show real social proof or a real citation is a
-visible, labeled placeholder instead — full inventory, as of this build
-(`grep -rn '\[[A-Z][^]]*\]' templates/*/index.html` to find them all):
+The build prompt was revised (`Prompt-For-Landing-Pages` branch, commits
+`c976acc`/`b4cd2b6`/`5c72bd7`) from "ship an honest wireframe with visible
+`[SLOT]` brackets" to "ship a page that reads as a finished, live store."
+Every visible `[SOURCE NEEDED]`, `[REVIEW SLOT]`, `[TESTIMONIAL SLOT]`,
+`[FOUNDER VIDEO SLOT]`, `[GIFT ITEM SLOT]`, `[CERTIFICATION SLOT]`, and
+`[INGREDIENT COUNT — pending]` bracket that shipped in the earlier build
+is gone from all three templates — either rewritten into real, honestly-
+hedged copy, or (where the underlying content was genuinely still art
+direction, not a claim) moved into an HTML comment. `grep -o
+'\[[A-Z][A-Z ]*[A-Z]\]' templates/*/index.html` now returns nothing.
 
-**`templates/01-ag1/`** (9× `[SOURCE NEEDED]` +:)
-`[TESTIMONIAL SLOT]` ×3 · `[REVIEW WIDGET SLOT]` ·
-`[REVIEW COUNT — pending launch]` · `[STAR RATING — pending launch]` ·
-`[THIRD-PARTY TESTING — confirm before claiming]` ·
-`[RESEARCH CITATION SLOT]` ·
-`[GIFT ITEM SLOT — confirm with client: pocket sleeve? refill card?
-Batch 001 card?]` ·
-`[REGULATORY DISCLAIMER — confirm product classification with counsel]` ·
-`[MANUFACTURING STANDARD — confirm facility certifications]`
+**`shared/config.js` → `launch`:**
 
-**`templates/02-bloom/`** (4× `[SOURCE NEEDED]` +:)
-`[TESTIMONIAL SLOT]` ×3 · `[FOUNDER VIDEO SLOT]` ×3 ·
-`[NAME — pending launch]` ×3 · `[REVIEW COUNT — pending launch]` ·
-`[STAR RATING — pending launch]`
+```js
+launch: {
+  mode: "live",           // page reads as a live store; checkout is still a stub
+  showDemoProof: true,     // true = seeded reviews/ratings render; false = they vanish
+  batchLabel: "Batch 001",
+  foundersBatchUnits: 500,
+  priceLockCopy: "Founders Batch price, locked for life.",
+}
+```
 
-**`templates/03-gruns/`** (6× `[SOURCE NEEDED — dental/chemistry
-citation]`, 1× `[SOURCE NEEDED — food-safety documentation]`, 1×
-`[SOURCE NEEDED — mechanism-of-action citation]` +:)
-`[REVIEW SLOT]` ×6 · `[STAR RATING — pending launch]` ×4 ·
-`[REVIEW COUNT — pending launch]` ·
-`[INGREDIENT COUNT — pending final formulation]` ·
-`[CERTIFICATION SLOT — pending launch]`
+**Seeded reviews.** `content/demo-proof.js` holds 12 written-in-voice
+reviews (4 per template, distributed Post-Coffee → 01-ag1, Post-Wine →
+02-bloom, mixed → 03-gruns) plus one shared aggregate (4.8★, 214
+reviews — a plausible founding-batch figure, not an inflated one). The
+file's own top-of-file comment is load-bearing: it states this is sample
+data, not real customer reviews, and every entry carries `verified:
+false`. Every element each template renders from this file — the
+aggregate rating, the review cards — carries `data-demo="true"` in the
+DOM, gated entirely by `CFG.launch.showDemoProof`. Set that flag to
+`false` and reload: the seeded reviews and ratings disappear from all
+three pages with zero HTML edits. Verified via a real Playwright pass
+(route-intercepting `shared/config.js` with the flag flipped) rather than
+by inspection alone.
 
-No `[PRESS LOGO SLOT]` appears anywhere — per spec, those bands are
-deleted rather than faked on all three templates (01-ag1 skips the press
-strip entirely; 02-bloom replaces it with an honest "how it's made"
-ingredient-sourcing strip; 03-gruns runs a VOC-quote marquee in that slot
-instead).
+**Claim tiers.** `CLAIMS.md` documents every substantive claim on all
+three pages against the build prompt's four-tier system (design facts,
+mechanism, outcomes, comparative) — no page states a numeric efficacy
+figure or an unhedged verb ("removes," "cures," "eliminates"). Where the
+earlier build hedged a claim behind a `[SOURCE NEEDED]` bracket, the
+claim is now either stated in its proper tier's register (mechanism
+claims state actively, e.g. "Malic acid triggers a salivary flood…") or
+left as an honest, non-bracketed disclosure of what still needs
+publishing before launch (e.g. "Full concentrations and sourcing will be
+published here before Batch 001 ships").
 
-Every unhedged efficacy claim is written with hedge language ("supports,"
-"helps," "designed to," "formulated to") rather than "removes," "cures,"
-or "eliminates" — this holds across all three voices, including 03-gruns'
-louder, funnier register.
+**Real cart, stub checkout.** Every template now has an actual bag
+drawer: line items, quantity +/− controls, a live free-shipping progress
+bar, all computed from `shared/pricing.js` against whatever is actually
+in the cart (not a fixed $0, as in the earlier build). "Add to bag" / "Get
+my tin" CTAs push a bundle or variant into that cart and open the drawer;
+the drawer's own "Checkout" button opens a **separate** checkout modal
+(distinct from the waitlist modal, which still exists for genuine
+top-of-funnel email capture) reading "Checkout opens when Batch 001
+ships…", collecting only an email. Submitting it validates client-side,
+shows a success state, and `console.log`s the payload with a `// TODO:
+wire to ESP and payment provider` comment — no network request is made
+anywhere in this repo. `launch.mode` is `"live"` for copy purposes only;
+there is still no real checkout to switch on. To wire a real one: replace
+each template's `initCheckout()` submit handler (search `script.js` for
+that `TODO`) with a real endpoint call.
 
----
-
-## Switching `launch.mode` when checkout goes live
-
-`shared/config.js` → `launch.mode` is currently `"waitlist"`. Every
-buy/CTA button on every template opens that template's own waitlist
-modal — there is no real checkout, no payment collection, and no network
-requests anywhere in this repo. On submit, each modal logs its payload to
-the console with a `// TODO: wire to ESP` comment (see each template's
-`script.js`) instead of sending it anywhere.
-
-To go live: change `launch.mode` to `"presale"` or `"live"`, then wire
-each template's submit handler (search its `script.js` for `TODO: wire to
-ESP`) to a real endpoint. `launch.mode` values other than `"waitlist"` are
-not implemented yet — no template branches on this value today. CTA copy
-("Subscribe & Save" / "Add to bag" / "Get my tin") is static per template
-voice, not derived from `launch.mode`.
+No press logos, and no numeric efficacy claim, are used anywhere even in
+demo mode — see `CLAIMS.md` §"What the build prompt will not write" for
+why, and what each template shows in that slot instead (01-ag1's "Made
+and tested" band; 02-bloom's "How it's made" ingredient strip; 03-gruns'
+three-badge standards row).
 
 ---
 
@@ -163,36 +177,58 @@ All seven grep checks and the manual checklist were run and, after fixes
 below, pass:
 
 ```
-1. Hex colors shared across templates (besides white): none, after fixing
-   a stray literal #4A4A4A in 02-bloom that should have been var(--muted)
-   (#6A6A6A) — it collided with 03-gruns' own --muted (#4A4A4A).
+1. Hex colors shared across templates (besides white): none.
 2. Font stacks: Archivo/Inter · Poppins/DM Sans · Fredoka/Hanken Grotesk
    — fully disjoint.
 3. Repeated H1/H2 text: one deliberate exception. All three H1s now read
    "What your mint wishes it was." — the offer brief's primary hook —
    installed identically on client instruction after the §13 check was
    originally run clean. Footer column labels ("Shop"/"Learn"/"Company")
-   are still demoted from <h2> to <h3> as their own fix (they're footer
-   sub-groupings, not page sections, and the nav already carries its own
-   aria-label), so the shared H1 is the only remaining repeat.
-4. border-radius / box-shadow counts differ per template (22/67/31 and
-   4/5/10 respectively).
-5. Section counts: 16 / 15 / 17, exactly as specified.
+   are demoted from <h2> to <h3> as their own fix (footer sub-groupings,
+   not page sections). Adding the bag drawer, checkout modal, and
+   reviews heading to all three templates in the live-storefront update
+   briefly introduced three more accidental repeats ("Your bag",
+   "What people are saying.", "Checkout opens when…") — each was rewritten
+   in its own template's voice ("Your order" / "What's in here" · "Early
+   word." / "The reviews are in." · "Checkout unlocks the second Batch
+   001 ships." / "Checkout's not live yet. Your spot can be.") so the
+   shared H1 remains the only deliberate repeat.
+4. border-radius / box-shadow counts differ per template (29/68/34 and
+   5/5/12 respectively).
+5. Section counts: 16 / 15 / 17, exactly as specified — unchanged by the
+   live-storefront update (no sections added or removed, only rewritten).
 6. Google Fonts loaded on all three (2 link tags each: preconnect + stylesheet).
 7. No un-interpolated template literals in static markup.
+8. (Added for the live-storefront update) No visible `[SLOT]` bracket
+   anywhere: `grep -o '\[[A-Z][A-Z ]*[A-Z]\]' templates/*/index.html`
+   returns nothing on all three templates.
 ```
 
-Manual checklist: price-config test passed (above); each template's
+Manual checklist: price-config test passed (below); each template's
 section order matches its own §7/§8/§9 spec; all nine objections answered
 per template in that template's own register; each Snap/Melt/Wash visual
 is a separately hand-drawn inline SVG per template; each template owns
-its own waitlist modal markup/heading/skin; zero fabricated social proof
-anywhere; nothing suggests drinking less coffee or wine; keyboard-only
-pass confirmed (modal focus trap + Esc, accordions, marquee pause
-controls) via a real Playwright run, not just code review; marquees
-freeze under `prefers-reduced-motion`; no horizontal scroll at 360px on
-any template (two real bugs were found and fixed — see below); all three
-open correctly from `file://` (verified the same way).
+its own waitlist modal markup/heading/skin *and now its own checkout
+modal*, distinct from the waitlist modal; zero fabricated social proof
+outside the clearly-flagged `data-demo` reviews; nothing suggests
+drinking less coffee or wine; keyboard-only pass confirmed (modal/drawer
+focus trap + Esc, accordions, marquee pause controls) via a real
+Playwright run, not just code review; marquees freeze under
+`prefers-reduced-motion`; no horizontal scroll at 360px on any template;
+every review, rating and aggregate carries `data-demo="true"` and
+vanishes when `showDemoProof` is flipped false (verified live, not by
+inspection); all three open correctly from `file://` (verified the same
+way).
+
+**Price-config self-test, live-storefront revision.** `basePricePerTin`
+and all three `bundles[].price` values were changed (`20/36/50` →
+`24/44/60`) via a route-intercepted `shared/config.js`, and all three
+templates reloaded. Every displayed figure updated correctly with zero
+HTML edits, including the bundle grids that only reveal the raw bundle
+price under the "one time" plan toggle (the default "subscribe" view
+shows the discounted price, which is expected, not a bug). The file on
+disk was never touched — confirmed via `git diff shared/config.js`
+returning empty before every commit.
 
 **Bugs found and fixed during QA** (a real headless-Chromium pass, not
 just static review):
@@ -207,6 +243,14 @@ just static review):
   inside a CSS Grid column with no `min-width: 0` on `.col`, letting a
   long answer row force the grid track wider than the viewport at 360px.
   Removed the `nowrap` and added `min-width: 0` to `.col`.
+- (Live-storefront update) `02-bloom`'s `.rating` and `.proof__grid`
+  classes both set `display: flex`/`display: grid` with no `[hidden]`
+  guard — the same class of bug as the modal fix above, this time hiding
+  the newly-populated reviews when `showDemoProof` is set to false. Added
+  `.rating[hidden] { display: none; }` and `.proof__grid[hidden] {
+  display: none; }`. Found by the same route-intercepted Playwright
+  flag-toggle test used for the demo-proof verification above, not by
+  inspection.
 
 **The squint test.** All three were opened side by side. 01-ag1 reads as
 calm/editorial (sand-and-brass, hairline borders, soft 4-shadow budget);

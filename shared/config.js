@@ -52,8 +52,14 @@ window.SAVOUR_CONFIG = {
   },
 
   launch: {
-    // "waitlist" | "presale" | "live" — only "waitlist" is implemented.
-    mode: "waitlist",
+    // "waitlist" | "presale" | "live" — the page reads as a live store either way;
+    // checkout itself is always a stub (see shared/waitlist.js and each template's
+    // checkout modal). "live" additionally governs showDemoProof below.
+    mode: "live",
+    // true = seeded reviews/ratings from content/demo-proof.js render, each
+    // carrying data-demo="true". Flip to false to strip every seeded proof
+    // element from all three pages with zero HTML edits.
+    showDemoProof: true,
     batchLabel: "Batch 001",
     // Display only. Never fake a live-decrementing counter from this.
     foundersBatchUnits: 500,

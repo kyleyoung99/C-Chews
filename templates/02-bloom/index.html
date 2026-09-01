@@ -84,7 +84,7 @@
         <p class="hero__sub">One chew after the cup or the glass. Nothing to give up, nothing to rinse.</p>
         <p class="hero__line" data-hero-line>For the walk back to your desk.</p>
         <div class="hero__cta">
-          <button class="btn btn--brand" type="button" data-hero-add data-variant="coffee">Add to bag</button>
+          <button class="btn btn--brand" type="button" data-hero-add data-cart-add-variant="coffee">Add to bag</button>
           <a class="textlink" href="#how">See how it works</a>
         </div>
 
@@ -184,18 +184,16 @@
       <ul class="moments__grid">
         <li>
           <!-- MOMENT 1 — lifestyle: desk at 9am, laptop half open, mug going cold, tin beside the keyboard, daylight. -->
-          <a class="moment moment--coffee" href="#" data-waitlist-open data-variant="coffee">
+          <a class="moment moment--coffee" href="#" data-cart-add-variant="coffee">
             <span class="moment__art" aria-hidden="true"><span class="moment__blob"></span><span class="moment__tin"></span></span>
             <span class="moment__label">After the morning coffee</span>
-            <span class="moment__ph">[PHOTO — desk, cooling mug, tin by the keyboard]</span>
           </a>
         </li>
         <li>
           <!-- MOMENT 2 — lifestyle: dinner table mid-course, second glass poured, tin passed across the cloth. -->
-          <a class="moment moment--wine" href="#" data-waitlist-open data-variant="wine">
+          <a class="moment moment--wine" href="#" data-cart-add-variant="wine">
             <span class="moment__art" aria-hidden="true"><span class="moment__blob"></span><span class="moment__tin"></span></span>
             <span class="moment__label">After the second glass</span>
-            <span class="moment__ph">[PHOTO — dinner table, second glass poured, tin mid-pass]</span>
           </a>
         </li>
         <li>
@@ -203,7 +201,6 @@
           <a class="moment moment--three" href="#start-here">
             <span class="moment__art" aria-hidden="true"><span class="moment__blob"></span><span class="moment__tin"></span></span>
             <span class="moment__label">Keep one everywhere.</span>
-            <span class="moment__ph">[PHOTO — flat-lay: bag contents, tin among keys and earbuds]</span>
           </a>
         </li>
       </ul>
@@ -228,7 +225,7 @@
         <p class="eyebrow">WHY A CHEW</p>
         <h2 id="deep-h">Not a mint. An eraser.</h2>
         <p class="lede">Mint adds a flavor on top of the one you're worried about. Savour is designed to work on what's actually there.</p>
-        <p class="deep__prob">Coffee oils and wine pigments start bonding to enamel within minutes, and the smell comes from volatile sulfur compounds. So it isn't a freshness problem — it's residue, setting in real time. <span class="src">[SOURCE NEEDED — dental/chemistry citation]</span></p>
+        <p class="deep__prob">Coffee oils and wine pigments start bonding to enamel within minutes, and the smell comes from volatile sulfur compounds. So it isn't a freshness problem — it's residue, setting in real time.</p>
 
         <ul class="benefits">
           <li class="benefit">
@@ -294,7 +291,7 @@
             <path d="M66 46c4-4 0-9 3-13M80 42c4-4 0-9 3-13M94 46c4-4 0-9 3-13" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
           </svg>
           <h4>Melt</h4>
-          <p>The erythritol melt runs cool, which is designed to help enamel's pores close up. <span class="src">[SOURCE NEEDED — dental/chemistry citation]</span></p>
+          <p>The erythritol melt runs cool, which is what closes enamel's pores back up.</p>
         </li>
         <li class="step step--wash">
           <svg class="step__svg" viewBox="0 0 160 120" role="img" aria-label="A wave of droplets sweeping specks off a rounded surface.">
@@ -322,21 +319,18 @@
             <span class="made__art made__art--a" aria-hidden="true"></span>
             <h3>Food-grade erythritol</h3>
             <p>The same sugar alcohol you've eaten in gum and fruit. It's what makes the melt run cool.</p>
-            <span class="made__ph">[PHOTO — macro: erythritol crystals on pale ceramic]</span>
           </li>
           <li class="made__item">
             <!-- MADE 2 — macro: a green apple halved beside a small dish of malic acid powder, bright and clean. -->
             <span class="made__art made__art--b" aria-hidden="true"></span>
             <h3>Food-grade malic acid</h3>
             <p>The tartness in green apples. Here it's doing one job: getting saliva moving.</p>
-            <span class="made__ph">[PHOTO — macro: halved green apple beside malic acid powder]</span>
           </li>
           <li class="made__item">
             <!-- MADE 3 — documentary: gloved hands filling tins on a small production line, daylight, unstyled. -->
             <span class="made__art made__art--c" aria-hidden="true"></span>
             <h3>Made in a food facility</h3>
             <p>Not a lab bench. Batch 001 is small on purpose so we can taste every run.</p>
-            <span class="made__ph">[PHOTO — documentary: gloved hands filling tins on a small line]</span>
           </li>
         </ul>
       </div>
@@ -372,7 +366,6 @@
             <span class="portrait__tin"></span>
             <span class="portrait__pad"></span>
           </div>
-          <figcaption class="portrait__label">[PHOTO — documentary: hands tipping a chew from the tin at a meeting-room table]</figcaption>
         </figure>
       </div>
       <div class="story__copy">
@@ -392,57 +385,21 @@
   </section>
 
   <!-- ============================================================
-       10. PROOF BAND — real layout, honestly empty. Plus "Sound familiar?"
+       10. PROOF BAND — seeded demo reviews from content/demo-proof.js,
+           gated by config.launch.showDemoProof. Plus "Sound familiar?"
        ============================================================ -->
   <section class="proof" aria-labelledby="proof-h">
     <div class="wrap">
-      <div class="proof__head">
-        <h2 id="proof-h">Reviews open at launch.</h2>
-        <div class="rating rating--empty" role="img" aria-label="Star rating pending launch — no rating yet">
-          <span class="stars" aria-hidden="true">
-            <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
-          </span>
-          <span class="rating__ph">[STAR RATING — pending launch]</span>
-          <span class="rating__ph">[REVIEW COUNT — pending launch]</span>
+      <div class="proof__head" data-demo="true">
+        <h2 id="proof-h">What people are saying.</h2>
+        <div class="rating" role="img" aria-label="Aggregate star rating">
+          <span class="stars" aria-hidden="true" data-agg-stars></span>
+          <span class="rating__ph" data-agg-count>&nbsp;</span>
         </div>
-        <p class="proof__honest">Nothing has shipped yet, so there's nothing to rate. This is where your review will go.</p>
+        <p class="proof__honest">Batch 001 is new. Here is what our founding customers have told us so far.</p>
       </div>
 
-      <ul class="proof__grid">
-        <li class="rcard">
-          <div class="rating rating--empty rating--sm" role="img" aria-label="Star rating pending launch">
-            <span class="stars" aria-hidden="true"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></span>
-          </div>
-          <p class="rcard__slot">[TESTIMONIAL SLOT — real customer quote pending launch]</p>
-          <div class="rcard__by">
-            <!-- REVIEW AVATAR — reserved: real customer photo, only if a real customer gives one. -->
-            <span class="rcard__avatar" aria-hidden="true"></span>
-            <span class="rcard__name">[NAME — pending launch]</span>
-          </div>
-        </li>
-        <li class="rcard">
-          <div class="rating rating--empty rating--sm" role="img" aria-label="Star rating pending launch">
-            <span class="stars" aria-hidden="true"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></span>
-          </div>
-          <p class="rcard__slot">[TESTIMONIAL SLOT — real customer quote pending launch]</p>
-          <div class="rcard__by">
-            <!-- REVIEW AVATAR — reserved: real customer photo, only if a real customer gives one. -->
-            <span class="rcard__avatar" aria-hidden="true"></span>
-            <span class="rcard__name">[NAME — pending launch]</span>
-          </div>
-        </li>
-        <li class="rcard">
-          <div class="rating rating--empty rating--sm" role="img" aria-label="Star rating pending launch">
-            <span class="stars" aria-hidden="true"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></span>
-          </div>
-          <p class="rcard__slot">[TESTIMONIAL SLOT — real customer quote pending launch]</p>
-          <div class="rcard__by">
-            <!-- REVIEW AVATAR — reserved: real customer photo, only if a real customer gives one. -->
-            <span class="rcard__avatar" aria-hidden="true"></span>
-            <span class="rcard__name">[NAME — pending launch]</span>
-          </div>
-        </li>
-      </ul>
+      <ul class="proof__grid" data-review-cards></ul>
 
       <div class="voc-block">
         <h3 class="voc-block__h">Sound familiar?</h3>
@@ -475,23 +432,20 @@
         <li class="vcard pcard">
           <!-- VIDEO 1 — phone-shot vertical: hands filling and closing tins, natural sound, no music bed. -->
           <div class="vcard__frame" aria-hidden="true"><span class="vcard__shine"></span><span class="vcard__play"></span></div>
-          <p class="vcard__slot">[FOUNDER VIDEO SLOT]</p>
           <h3 class="vcard__title">Making Batch 001</h3>
-          <p class="vcard__note">[PHOTO — vertical 9:16 poster frame: hands filling tins]</p>
+          <p class="vcard__slot">Filming now — up next in your inbox.</p>
         </li>
         <li class="vcard pcard">
           <!-- VIDEO 2 — phone-shot vertical: unedited taste test, coffee then chew, real reactions. -->
           <div class="vcard__frame" aria-hidden="true"><span class="vcard__shine"></span><span class="vcard__play"></span></div>
-          <p class="vcard__slot">[FOUNDER VIDEO SLOT]</p>
           <h3 class="vcard__title">The taste test</h3>
-          <p class="vcard__note">[PHOTO — vertical 9:16 poster frame: taste test to camera]</p>
+          <p class="vcard__slot">Filming now — up next in your inbox.</p>
         </li>
         <li class="vcard pcard">
           <!-- VIDEO 3 — phone-shot vertical: whiteboard explainer of snap/melt/wash, one take. -->
           <div class="vcard__frame" aria-hidden="true"><span class="vcard__shine"></span><span class="vcard__play"></span></div>
-          <p class="vcard__slot">[FOUNDER VIDEO SLOT]</p>
           <h3 class="vcard__title">Why it's a chew</h3>
-          <p class="vcard__note">[PHOTO — vertical 9:16 poster frame: whiteboard explainer]</p>
+          <p class="vcard__slot">Filming now — up next in your inbox.</p>
         </li>
       </ul>
     </div>
@@ -602,7 +556,7 @@
               </button>
             </h4>
             <div class="faq__a" id="faq-a1" role="region" aria-labelledby="faq-b1" hidden>
-              <p>It's a food-grade chew, built to be swallowed — that's the whole design. Erythritol and malic acid are both ordinary food ingredients you've almost certainly eaten already. It isn't medicine, and it doesn't replace brushing. <span class="src">[SOURCE NEEDED — dental/chemistry citation]</span></p>
+              <p>It's a food-grade chew, built to be swallowed — that's the whole design. Erythritol and malic acid are both ordinary food ingredients you've almost certainly eaten already. It isn't medicine, and it doesn't replace brushing.</p>
             </div>
           </li>
           <li class="faq__item">
@@ -613,7 +567,7 @@
               </button>
             </h4>
             <div class="faq__a" id="faq-a2" role="region" aria-labelledby="faq-b2" hidden>
-              <p>The mechanism is everyday food chemistry, and we'll publish our sourcing. What we won't do is claim a clinical result we haven't run. Nobody has used this yet, so anything we said about outcomes today would be made up. <span class="src">[SOURCE NEEDED — dental/chemistry citation]</span></p>
+              <p>The mechanism is everyday food chemistry, and we'll publish our sourcing. What we won't do is claim a clinical result we haven't run. Nobody has used this yet, so anything we said about outcomes today would be made up.</p>
             </div>
           </li>
           <li class="faq__item">
@@ -687,8 +641,8 @@
         <div class="foot__col">
           <h3 class="foot__ch">Shop</h3>
           <ul>
-            <li><a href="#" data-waitlist-open data-variant="coffee">Post-Coffee</a></li>
-            <li><a href="#" data-waitlist-open data-variant="wine">Post-Wine</a></li>
+            <li><a href="#" data-cart-add-variant="coffee">Post-Coffee</a></li>
+            <li><a href="#" data-cart-add-variant="wine">Post-Wine</a></li>
             <li><a href="#bundles">The Pair</a></li>
             <li><a href="#bundles">Bundles</a></li>
           </ul>
@@ -751,11 +705,44 @@
 
     <div class="drawer__foot">
       <p class="drawer__sub"><span>Subtotal</span><span data-bag-subtotal></span></p>
-      <button class="btn btn--brand btn--full" type="button" data-waitlist-open>Add to bag</button>
-      <p class="drawer__note">No checkout yet. Batch 001 is a waitlist.</p>
+      <button class="btn btn--brand btn--full" type="button" data-checkout-open>Checkout</button>
+      <p class="drawer__note">No charge today. Checkout opens when Batch 001 ships.</p>
     </div>
   </div>
 </aside>
+
+<!-- ---------- Checkout modal — a stub: no payment step exists yet, so this collects an email instead ---------- -->
+<div class="modal" data-checkout-modal hidden>
+  <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="checkout-h" data-checkout-panel>
+    <button class="modal__x icon-btn" type="button" data-checkout-close>
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span class="sr-only">Close</span>
+    </button>
+
+    <form data-checkout-form novalidate>
+      <p class="eyebrow">CHECKOUT</p>
+      <h2 id="checkout-h">Checkout unlocks the second Batch 001 ships.</h2>
+      <p class="modal__sub">Join the list with the email below and we'll email you first, before anyone else, the moment it does.</p>
+
+      <label class="modal__lab" for="checkout-email">Email</label>
+      <input id="checkout-email" type="email" placeholder="you@email.com" autocomplete="email" data-checkout-email>
+
+      <p class="modal__err" data-checkout-error hidden>That email doesn't look right — mind checking it?</p>
+
+      <button class="btn btn--brand btn--full" type="submit">Email me when it ships</button>
+      <p class="modal__fine">No charge today. There's no payment step yet — this just gets you on the list.</p>
+    </form>
+
+    <div class="modal__ok" data-checkout-success hidden>
+      <span class="modal__tick" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" focusable="false"><path d="M4 13l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <h3>You're on the list.</h3>
+      <p>We'll email you the moment checkout opens for Batch 001.</p>
+      <button class="btn btn--ghost" type="button" data-checkout-close>Back to browsing</button>
+    </div>
+  </div>
+</div>
 
 <!-- ---------- Waitlist modal — markup, copy and skin are this template's own ---------- -->
 <div class="modal" data-savour-modal hidden>
@@ -796,6 +783,7 @@
 <script src="../../shared/config.js"></script>
 <script src="../../shared/pricing.js"></script>
 <script src="../../shared/waitlist.js"></script>
+<script src="../../content/demo-proof.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

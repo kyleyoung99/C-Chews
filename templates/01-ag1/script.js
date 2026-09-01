@@ -350,6 +350,54 @@
   }
 
   /* ------------------------------------------------------------------
+     12 — Reviews: seeded demo proof from content/demo-proof.js, gated
+     entirely by CFG.launch.showDemoProof. Every rendered node carries
+     data-demo="true" so the flag is a complete, verifiable toggle.
+     ------------------------------------------------------------------ */
+  function starString(rating) {
+    var full = Math.round(rating);
+    var s = "";
+    for (var i = 0; i < 5; i++) s += i < full ? "★" : "☆";
+    return s;
+  }
+
+  function formatReviewDate(iso) {
+    var d = new Date(iso + "T00:00:00");
+    return d.toLocaleDateString(CFG.currency.locale, { month: "short", day: "numeric", year: "numeric" });
+  }
+
+  function renderReviews() {
+    var proof = window.SAVOUR_DEMO_PROOF;
+    var host = document.querySelector("[data-review-cards]");
+    if (!proof || !host) return;
+    var widget = host.closest(".widget");
+
+    if (!CFG.launch.showDemoProof) {
+      if (widget) widget.hidden = true;
+      return;
+    }
+
+    var agg = proof.aggregate;
+    setText("[data-agg-stars]", starString(agg.rating) + " " + agg.rating.toFixed(1));
+    setText("[data-agg-count]", agg.count + " reviews");
+
+    var list = (proof.reviews && proof.reviews["01-ag1"]) || [];
+    host.innerHTML = list
+      .map(function (r) {
+        var variant = P.getVariant(r.variant);
+        var variantName = variant ? variant.name : "";
+        return (
+          '<article class="card rcard" data-demo="true">' +
+          '<p class="stars" aria-label="' + r.rating + ' out of 5 stars">' + starString(r.rating) + "</p>" +
+          "<blockquote>“" + r.quote + "”</blockquote>" +
+          "<footer><span>" + r.name + " · " + variantName + "</span><span>" + formatReviewDate(r.date) + "</span></footer>" +
+          "</article>"
+        );
+      })
+      .join("");
+  }
+
+  /* ------------------------------------------------------------------
      14 — FAQ accordion (aria-expanded / aria-controls, all closed).
      ------------------------------------------------------------------ */
   function initFaq() {
@@ -393,14 +441,265 @@
     io.observe(host);
   }
 
+  /* ------------------------------------------------------------------
+     BAG DRAWER + CHECKOUT — checkout is a stub (config.launch.mode is
+     "live", but there is no payment step yet); the drawer itself is a
+     real cart: line items, quantities, and a live free-shipping bar.
+     ------------------------------------------------------------------ */
+  var cart = [];
+
+  function addToCart(item) {
+    var existing = cart.filter(function (l) { return l.id === item.id; })[0];
+    if (existing) existing.qty += 1;
+    else cart.push({ id: item.id, name: item.name, meta: item.meta, unitPrice: item.unitPrice, qty: 1 });
+    renderCart();
+    openDrawer();
+  }
+
+  function cartSubtotal() {
+    return cart.reduce(function (sum, l) { return sum + l.unitPrice * l.qty; }, 0);
+  }
+
+  function renderCart() {
+    var lines = document.querySelector("[data-bag-lines]");
+    var empty = document.querySelector("[data-bag-empty]");
+    var subtotalEl = document.querySelector("[data-bag-subtotal]");
+    var countEl = document.querySelector("[data-bag-count]");
+    var shipMsg = document.querySelector("[data-ship-msg]");
+    var shipFill = document.querySelector("[data-ship-fill]");
+    if (!lines) return;
+
+    var count = cart.reduce(function (sum, l) { return sum + l.qty; }, 0);
+    if (countEl) {
+      countEl.textContent = String(count);
+      countEl.hidden = count === 0;
+    }
+
+    if (empty) empty.hidden = cart.length > 0;
+
+    lines.innerHTML = cart
+      .map(function (l) {
+        return (
+          '<li class="line" data-cart-line="' + l.id + '">' +
+          '<div class="line__body"><p class="line__name">' + l.name + "</p>" +
+          '<p class="line__meta">' + l.meta + "</p></div>" +
+          '<div class="line__qty">' +
+          '<button type="button" data-qty-dec aria-label="Decrease quantity">−</button>' +
+          '<span data-qty-value>' + l.qty + "</span>" +
+          '<button type="button" data-qty-inc aria-label="Increase quantity">+</button>' +
+          "</div>" +
+          '<p class="line__price">' + P.formatMoney(l.unitPrice * l.qty) + "</p>" +
+          '<button type="button" class="line__rm" data-line-remove>Remove</button>' +
+          "</li>"
+        );
+      })
+      .join("");
+
+    var subtotal = cartSubtotal();
+    if (subtotalEl) subtotalEl.textContent = P.formatMoney(subtotal);
+
+    if (shipMsg && shipFill) {
+      if (cart.length === 0) {
+        shipMsg.textContent = "Add " + P.formatMoney(CFG.pricing.freeShippingThreshold) + " for free shipping.";
+        shipFill.style.width = "0%";
+      } else if (P.qualifiesForFreeShipping(subtotal)) {
+        shipMsg.textContent = "Free shipping unlocked.";
+        shipFill.style.width = "100%";
+      } else {
+        shipMsg.textContent = "Add " + P.formatMoney(P.amountToFreeShipping(subtotal)) + " more for free shipping.";
+        shipFill.style.width = P.freeShippingProgressPercent(subtotal) + "%";
+      }
+    }
+  }
+
+  var drawerLastFocused = null;
+
+  function openDrawer() {
+    var drawer = document.getElementById("bag-drawer");
+    if (!drawer) return;
+    drawerLastFocused = document.activeElement;
+    drawer.hidden = false;
+    document.body.classList.add("savour-no-scroll");
+    document.addEventListener("keydown", drawerKeydown);
+    var closeBtn = drawer.querySelector("[data-drawer-close]");
+    if (closeBtn) closeBtn.focus();
+  }
+
+  function closeDrawer() {
+    var drawer = document.getElementById("bag-drawer");
+    if (!drawer || drawer.hidden) return;
+    drawer.hidden = true;
+    document.body.classList.remove("savour-no-scroll");
+    document.removeEventListener("keydown", drawerKeydown);
+    if (drawerLastFocused && typeof drawerLastFocused.focus === "function") drawerLastFocused.focus();
+  }
+
+  function drawerKeydown(e) {
+    if (e.key === "Escape") closeDrawer();
+  }
+
+  function bundleLineItem(bundle, plan) {
+    var subscribing = plan === "subscribe";
+    var price = subscribing ? P.subscriptionPrice(bundle) : bundle.price;
+    return {
+      id: bundle.id + "-" + plan,
+      name: bundle.label + (subscribing ? " (Subscription)" : " (One-time)"),
+      meta: bundle.tins + (bundle.tins === 1 ? " tin" : " tins") + " · " + bundle.tins * CFG.product.chewsPerTin + " chews",
+      unitPrice: price
+    };
+  }
+
+  function quickAddItem(key) {
+    var variant = P.getVariant(key);
+    if (variant) {
+      var single = P.getBundle("single") || CFG.pricing.bundles[0];
+      return {
+        id: "variant-" + key,
+        name: variant.name,
+        meta: variant.flavor + " · " + CFG.product.chewsPerTin + " chews",
+        unitPrice: single.price
+      };
+    }
+    var bundle = P.getBundle(key);
+    if (bundle) return bundleLineItem(bundle, "onetime");
+    return null;
+  }
+
+  function initCart() {
+    Array.prototype.forEach.call(document.querySelectorAll("[data-cart-add-bundle]"), function (btn) {
+      btn.addEventListener("click", function () {
+        addToCart(bundleLineItem(currentBundle(), state.plan));
+      });
+    });
+
+    Array.prototype.forEach.call(document.querySelectorAll("[data-cart-add-quick]"), function (link) {
+      link.addEventListener("click", function (e) {
+        var item = quickAddItem(link.getAttribute("data-cart-add-quick"));
+        if (!item) return;
+        e.preventDefault();
+        addToCart(item);
+      });
+    });
+
+    var openers = document.querySelectorAll("[data-drawer-open]");
+    Array.prototype.forEach.call(openers, function (btn) {
+      btn.addEventListener("click", openDrawer);
+    });
+    var closers = document.querySelectorAll("[data-drawer-close]");
+    Array.prototype.forEach.call(closers, function (btn) {
+      btn.addEventListener("click", closeDrawer);
+    });
+
+    var lines = document.querySelector("[data-bag-lines]");
+    if (lines) {
+      lines.addEventListener("click", function (e) {
+        var line = e.target.closest("[data-cart-line]");
+        if (!line) return;
+        var id = line.getAttribute("data-cart-line");
+        var item = cart.filter(function (l) { return l.id === id; })[0];
+        if (!item) return;
+        if (e.target.closest("[data-qty-inc]")) {
+          item.qty += 1;
+          renderCart();
+        } else if (e.target.closest("[data-qty-dec]")) {
+          item.qty -= 1;
+          if (item.qty <= 0) cart = cart.filter(function (l) { return l.id !== id; });
+          renderCart();
+        } else if (e.target.closest("[data-line-remove]")) {
+          cart = cart.filter(function (l) { return l.id !== id; });
+          renderCart();
+        }
+      });
+    }
+
+    renderCart();
+    initCheckout();
+  }
+
+  function initCheckout() {
+    var modal = document.querySelector("[data-checkout-modal]");
+    if (!modal) return;
+    var form = modal.querySelector("[data-checkout-form]");
+    var success = modal.querySelector("[data-checkout-success]");
+    var error = modal.querySelector("[data-checkout-error]");
+    var email = modal.querySelector("[data-checkout-email]");
+    var lastFocused = null;
+
+    function open() {
+      lastFocused = document.activeElement;
+      if (form) { form.hidden = false; form.reset(); }
+      if (success) success.hidden = true;
+      if (error) error.hidden = true;
+      modal.hidden = false;
+      document.body.classList.add("savour-no-scroll");
+      document.addEventListener("keydown", keydown);
+      if (email) email.focus();
+    }
+
+    function close() {
+      if (modal.hidden) return;
+      modal.hidden = true;
+      document.body.classList.remove("savour-no-scroll");
+      document.removeEventListener("keydown", keydown);
+      if (lastFocused && typeof lastFocused.focus === "function") lastFocused.focus();
+    }
+
+    function keydown(e) {
+      if (e.key === "Escape") close();
+    }
+
+    Array.prototype.forEach.call(document.querySelectorAll("[data-checkout-open]"), function (btn) {
+      btn.addEventListener("click", open);
+    });
+    Array.prototype.forEach.call(modal.querySelectorAll("[data-checkout-close]"), function (btn) {
+      btn.addEventListener("click", close);
+    });
+    modal.addEventListener("click", function (e) {
+      if (e.target === modal) close();
+    });
+
+    if (form) {
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var value = email ? email.value.trim() : "";
+        var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        if (!valid) {
+          if (error) error.hidden = false;
+          if (email) email.focus();
+          return;
+        }
+        if (error) error.hidden = true;
+
+        var payload = {
+          email: value,
+          cart: cart.map(function (l) { return { id: l.id, name: l.name, qty: l.qty, unitPrice: l.unitPrice }; }),
+          subtotal: cartSubtotal(),
+          batch: CFG.launch.batchLabel,
+          submittedAt: new Date().toISOString()
+        };
+        // TODO: wire to ESP and payment provider — no network request is made yet.
+        console.log("[Savour checkout submission]", payload);
+
+        form.hidden = true;
+        if (success) {
+          success.hidden = false;
+          var focusTarget = success.querySelector("button, [href], [tabindex]");
+          if (focusTarget) focusTarget.focus();
+        }
+      });
+    }
+  }
+
   /* ------------------------------------------------------------------ */
   document.addEventListener("DOMContentLoaded", function () {
     fillTokens();
     initAnnounce();
     initNav();
     initPricing();
+    renderReviews();
     initFaq();
     initSteps();
+    initCart();
     if (window.SavourWaitlist) window.SavourWaitlist.init();
   });
 })();
