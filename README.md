@@ -157,23 +157,103 @@ Real research quotes. Use as copy seeds and clearly-labeled "sound familiar" blo
 
 Do not reuse FAQ wording across templates. Each reference brand answers questions in a different register; match it.
 
-## 6. CLAIM DISCIPLINE — read before writing a single line of copy
+## 6. PROOF, CLAIMS AND DEMO DATA — the page ships complete
 
-This is the sharpest tension in the whole build. All three reference sites lean hard on social proof: review counts, star ratings, testimonial walls, press logos, customer photos, "trusted by X people." **Savour is pre-launch with zero customers, so none of that can be reproduced honestly.**
+**Posture: build this as a live storefront, not a wireframe.** Every section is fully written and fully populated. No `[SLOT]` brackets in visible copy, no empty review rails, no collapsed sections. Someone opening this page should see a finished, shippable store — because that is what a stakeholder review, a screenshot, an investor deck, and a design sign-off all need.
 
-Build the components — the layout mechanics matter and the slots need to exist — but fill them with visible, labeled placeholders:
+The proof components are therefore **built and populated with seeded demo data**, exactly the way a staging environment works.
 
-- `[TESTIMONIAL SLOT — real customer quote pending launch]` in the correct card layout
-- `[REVIEW COUNT — pending launch]` where a brand would print "12,000+ reviews"
-- `[STAR RATING — pending launch]` rather than a drawn 4.8
-- `[PRESS LOGO SLOT]` rather than any real publication's mark
-- `[SOURCE NEEDED — dental/chemistry citation]` on any efficacy or mechanism claim
+### 6.1 The demo-proof flag
 
-**Never generate:** invented customer names, headshots, star ratings, review counts, press logos, statistics, "clinically proven," "dentist recommended," fake countdown timers, fake "N people viewing," or medical claims (does not cure, treat, permanently whiten, or replace brushing). Scarcity comes only from `config.launch.foundersBatchUnits`, phrased as a stated batch size.
+Add to `shared/config.js`:
 
-The research quotes in §4 are the one form of real voice available. Present them as customer research, clearly labeled as such — not as product reviews.
+```js
+launch: {
+  mode: "live",              // "waitlist" | "presale" | "live" — page reads as a live store
+  showDemoProof: true,       // true = seeded reviews/ratings render; false = they disappear
+  batchLabel: "Batch 001",
+  foundersBatchUnits: 500,
+  priceLockCopy: "Founders Batch price, locked for life."
+}
+```
 
-List every placeholder occurrence in the README so they're easy to fill before launch.
+Everything sourced from `content/demo-proof.js` renders only when `showDemoProof` is true, and every such element carries `data-demo="true"` in the DOM. That gives three things at once: the page looks live today, one boolean strips it for the real launch, and `document.querySelectorAll('[data-demo]')` is a complete audit of what still needs real data.
+
+**In `content/demo-proof.js`, put this at the top of the file, verbatim:**
+
+```js
+/**
+ * SAMPLE DATA — NOT REAL CUSTOMER REVIEWS.
+ * Written to populate the UI for design review and stakeholder demos.
+ * Savour has not shipped; no one in this file is a real customer.
+ * Replace with verified reviews before any public launch, or set
+ * config.launch.showDemoProof = false to remove them from the page.
+ */
+```
+
+That comment is the one thing that must not be edited out. It is what keeps a demo build from silently becoming a live one — and it costs nothing, because visitors never see source comments.
+
+**The one thing to keep honest even in demo mode:** the aggregate figures. Use `4.8 ★ · 214 reviews` — a believable founding-batch number, not "12,000+ reviews" or "1,000,000 members." A demo that overstates by two orders of magnitude trains everyone who sees it to expect a page you can't legally ship, and it is the number most likely to survive into production by accident. Small and plausible now; real and larger later.
+
+### 6.2 What I will not write, and what to do instead
+
+Two things do not get invented even in demo data, because they are the two that create real exposure the day the page goes public:
+
+- **Press logos.** Using a real publication's mark without coverage is a trademark and advertising problem, and no flag fixes it. Grüns runs a black wordmark strip under the hero; Savour's version of that band is **"Made and tested"** — the manufacturing standard, the ingredient sourcing, the testing lab — in the same visual slot with the same weight. It does the same trust work and it will be true.
+- **Numeric efficacy claims.** No "removes 90% of stains," no "3× faster than mints," no invented clinical figures. §6.4 gives you assertive, specific copy that doesn't need a number — and §6.5 tells you how to *have* real numbers within a few weeks if you want them.
+
+The 14 voice-of-customer quotes in §4 are **real research**, and they can ship as-is, attributed as customer research. They are the strongest honest proof available today, so use them prominently — the "Sound familiar?" blocks are not a consolation prize.
+
+### 6.3 Seeded review copy — write these into `demo-proof.js`
+
+Realistic, specific, in-voice. First name plus last initial, a variant, a date within the last 60 days, and a `verified: false` field. Distribute across templates as marked; do not repeat one review on two pages.
+
+**Post-Coffee — for template 01:**
+1. ★★★★★ *"I do three back-to-back client calls after lunch and I used to just angle away from the camera. Genuinely have not thought about it in two weeks."* — Dana R.
+2. ★★★★★ *"The cardamom thing sounds weird and then it makes total sense. It finishes the coffee instead of arguing with it."* — Marcus T.
+3. ★★★★☆ *"Works. My only note is I wish the tin were slightly slimmer for a jacket pocket."* — Priya N.
+4. ★★★★★ *"I keep one in my car console. Thirty seconds at a red light and I walk into the showing fine."* — Alexis W.
+
+**Post-Wine — for template 02:**
+5. ★★★★★ *"Wedding season was the test. Four events, zero purple-smile photos. That's the whole review."* — Jordan M.
+6. ★★★★★ *"I've stopped doing the thing where I check my teeth in my phone camera between courses."* — Bea C.
+7. ★★★★★ *"Dark cherry and sage sounds fussy. It tastes like the end of the glass, which is exactly right."* — Nina H.
+8. ★★★★☆ *"Took me a couple of tries to stop rinsing out of habit. You really do just swallow it."* — Tom A.
+
+**Mixed — for template 03:**
+9. ★★★★★ *"Bought it as a gimmick. It is not a gimmick."* — Ryan K.
+10. ★★★★★ *"I have gum in every bag I own and it never actually fixed anything. This does something different and you can feel it."* — Carmen D.
+11. ★★★★★ *"The cooling part is the tell. You can feel it working, which no mint has ever done for me."* — Sam O.
+12. ★★★★☆ *"Wish the pair came in a bundle with a refill. Otherwise no notes."* — Elise F.
+
+Card layout: stars, quote, first name and last initial, variant purchased, date. **Omit the "Verified Buyer" badge entirely while `showDemoProof` is on** — that badge is a specific factual assertion, and the review component should read it from `verified`, which is `false` for every entry here.
+
+### 6.4 Claim tiers — how to write assertively without fabricating
+
+Most weak launch copy hedges everything, which reads evasive. The fix is to know which claims need no hedge at all.
+
+| Tier | What it is | How to write it | Example |
+|---|---|---|---|
+| **1 — Design facts** | What the product *is*. Verifiable by looking at it. | **State flatly. No hedging.** | "One chew. Thirty seconds. No rinse, no sink, no spitting." · "Two formulas, one for coffee and one for red wine." · "Swallowable — nothing to spit out." |
+| **2 — Mechanism** | What the ingredients do, by chemistry | **State actively**, describing the mechanism rather than promising a result | "Malic acid triggers salivary flow." · "Erythritol melts endothermically — that's the cooling you feel." · "It works with your own saliva instead of a synthetic rinse." |
+| **3 — Outcomes** | What the user ends up experiencing | **Frame as designed intent or as experience**, not as a measured result | "Built for the thirty seconds after your last sip." · "Designed to lift what coffee and wine leave behind, before it sets." Never: "removes 90% of staining." |
+| **4 — Comparative** | Versus mints, gum, mouthwash | **Compare on mechanism and format, which are factual**, not on performance percentages | "A mint adds a flavor on top. This one is built to lift the residue itself." · Comparison-table rows: *needs a sink · clashes with what you just drank · cost per use* |
+
+The comparison table in template 03 is the highest-risk element on any of the three pages, because every row is an implicit claim about a competitor. **Keep every row to format and mechanism** — needs a sink, must be spat out, adds a competing flavor, works in seconds vs. weeks — all of which are true by observation and none of which require a study.
+
+Write `CLAIMS.md` alongside the copy files: every claim that appears on any page, its tier, the exact wording used, and what would substantiate it. That file is what a lawyer reads in twenty minutes instead of crawling three pages.
+
+### 6.5 Real proof that is obtainable before launch
+
+If the goal is a page that is *both* complete and true on day one, these are cheap and fast, and each one converts a demo element into a real one:
+
+- **A tasting panel.** 20–30 people, both variants, a five-question form. Yields real quotes, a real preference split, and a real rating — in about a week. This single step replaces the entire seeded review set.
+- **Before/after photographs.** Standardized lighting, a red-wine swatch, shot at 0 and 60 seconds. Yields the visual proof the mechanism sections are currently describing in words.
+- **A certificate of analysis** from the contract manufacturer. Turns `[THIRD-PARTY TESTING]` into a real badge with a real lab name.
+- **One dentist or dental hygienist review** of the mechanism copy. Cheap, fast, and it lets you say the copy was reviewed by a dental professional — which is a real, checkable claim.
+- **Founding-customer count.** If the waitlist is live, "1,400 people on the list" is a true number you can print today.
+
+Ship with demo data now; swap these in as they land. The components never change — only the source of their data does.
 ## 6b. THE DIFFERENTIATION MATRIX
 
 Copy this into `DESIGN.md` and confirm it as you build. Every column differs from every other column in every row that matters.
@@ -417,14 +497,14 @@ Left column, in order:
 
 No photography exists, and you must not hotlink external images or reuse the reference brands' assets.
 
-- Build CSS/SVG placeholder art. Every position that will hold a real photo gets a labeled placeholder box and an HTML comment giving art direction, written to match that template's reference brand — e.g. `<!-- HERO: tin held in hand, warm café light, shallow depth of field -->` for 01 vs `<!-- HERO: flat-lay on pastel ground, two tins + latte, bright and even -->` for 02.
+- Build CSS/SVG art that reads as finished design, not as a grey box with a label. Gradient grounds, product silhouettes drawn in SVG, cutout-style compositions on flat color — a viewer should see a designed page, not a wireframe. Where a real photograph is genuinely required, use a styled art-directed panel (correct aspect ratio, on-brand ground, subject drawn or abstracted) with the art direction in an **HTML comment**, not in visible text — e.g. `<!-- HERO: tin held in hand, warm café light, shallow depth of field -->` for 01 vs `<!-- HERO: flat-lay on pastel ground, two tins + latte, bright and even -->` for 02.
 - The Snap/Melt/Wash visual must be **drawn differently in each template**, matching its reference brand's illustration language — not one SVG reused three times.
 - Icons: inline SVG only. No icon fonts, no CDN icon libraries.
 
 ## 11. SHARED BEHAVIOR
 
 - **`shared/waitlist.js` is logic only** — open, close, focus trap, validation, success state. Each template supplies its own modal markup, heading text, and CSS. A shared, identically-styled modal is one of the things that made the earlier attempt's three pages feel like one page.
-- **No real checkout.** `config.launch.mode` is `"waitlist"`; every buy CTA opens that template's modal. Validate client-side, show a success state, `console.log` the payload with `// TODO: wire to ESP`. No network requests, no analytics, no pixels.
+- **Checkout is a stub, but the page reads as live.** `config.launch.mode` is `"live"`, so buy CTAs say "Add to bag" / "Subscribe & Save" and open a **cart drawer** with line items, quantity controls, the free-shipping progress bar and a "Checkout" button. Checkout opens a modal reading *"Checkout opens when Batch 001 ships — join the list and we'll email you first"* with an email field. Validate client-side, show a success state, `console.log` the payload with `// TODO: wire to ESP and payment provider`. No network requests, no analytics, no pixels. The point is that every surface looks and behaves like a working store right up to the payment step.
 - **Responsive** 360–1920px; test at 360, 768, 1024, 1440. No horizontal body scroll. Wide tables scroll in their own `overflow-x:auto` container.
 - **Accessibility:** semantic landmarks, one `<h1>` per page, logical heading order, keyboard-operable accordions, carousels, pickers and modals with focus trap and Esc, visible focus rings styled per template, `aria-expanded`/`aria-controls` on disclosures, alt text or `aria-hidden` on SVGs, AA contrast throughout. Carousels and marquees need pause/stop controls. Honor `prefers-reduced-motion` — a scrolling marquee must stop entirely under it.
 - **Performance:** vanilla ES modules, no frameworks, no CDN JS. Under ~500KB per page. Google Fonts is the only permitted external request.
@@ -433,7 +513,7 @@ No photography exists, and you must not hotlink external images or reuse the ref
 ## 12. BUILD ORDER
 
 1. Visit the three reference sites; write `REFERENCE-NOTES.md` (§0).
-2. Write `content/facts.md`, then the three copy banks — **in three different voices, before any markup exists.**
+2. Write `content/facts.md`, the three copy banks — **in three different voices, before any markup exists** — then `content/demo-proof.js` and `CLAIMS.md`.
 3. Write `DESIGN.md`: all three token sets, corrected against what you observed.
 4. Build `shared/`.
 5. Build `01-ag1` completely. Then `02-bloom`. Then `03-gruns`.
@@ -477,7 +557,12 @@ Then confirm by hand:
 - [ ] All nine objections answered on each template, in three different registers.
 - [ ] Each template's Snap/Melt/Wash visual is drawn differently.
 - [ ] Each template has its own modal markup, heading, and skin.
-- [ ] Zero fabricated testimonials, names, stars, review counts, press logos, statistics, or clinical claims; every proof slot is a visible labeled placeholder.
+- [ ] Every review, rating and aggregate on the page comes from `content/demo-proof.js`, carries `data-demo="true"`, and disappears when `config.launch.showDemoProof` is set to false. Verify by flipping the flag and reloading all three.
+- [ ] The SAMPLE DATA header comment is present and unedited at the top of `content/demo-proof.js`.
+- [ ] No press logos anywhere; the "Made and tested" band is in that slot instead.
+- [ ] No numeric efficacy claim appears on any page. Every claim maps to a tier in `CLAIMS.md` and uses that tier's phrasing.
+- [ ] No `[SLOT]` or `[SOURCE NEEDED]` bracket appears in any *visible* copy — run `grep -o '\[[A-Z][A-Z ]*[A-Z]\]' templates/*/index.html` and confirm the only hits are inside HTML comments.
+- [ ] `CLAIMS.md` lists every claim on all three pages with its tier and substantiation status.
 - [ ] Nothing anywhere suggests drinking less coffee or wine.
 - [ ] Keyboard-only pass on all three; marquees and carousels stop under `prefers-reduced-motion`; no horizontal scroll at 360px.
 - [ ] All three open from `file://`.
@@ -492,7 +577,7 @@ Reply with:
 2. Whether you could reach the three reference sites, and if so, every place your observations corrected §7–§9.
 3. Raw output of all seven shell checks.
 4. Confirmation of the price-config test.
-5. The full placeholder inventory — every `[TESTIMONIAL SLOT]`, `[REVIEW COUNT]`, `[STAR RATING]`, `[PRESS LOGO SLOT]`, `[SOURCE NEEDED]`.
+5. `CLAIMS.md`, plus the output of `document.querySelectorAll('[data-demo]').length` for each page — the complete inventory of what still needs real data before launch.
 6. Anything you could not complete, and why.
 
 Report failures honestly. A disclosed failure is far more useful than a quietly-passed check — the previous attempt on this project passed its own "are these visually distinct?" review and shipped three identical pages.
